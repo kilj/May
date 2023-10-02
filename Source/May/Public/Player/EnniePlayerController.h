@@ -4,7 +4,7 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
-#include "MayPlayerController.generated.h"
+#include "EnniePlayerController.generated.h"
 
 class UNiagaraSystem;
 class UInputMappingContext;
@@ -13,12 +13,12 @@ struct FInputActionValue;
 class IHighlightInterface;
 
 UCLASS()
-class AMayPlayerController : public APlayerController
+class AEnniePlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	AMayPlayerController();
+	AEnniePlayerController();
 
 	/** Time Threshold to know if it was a short press */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)

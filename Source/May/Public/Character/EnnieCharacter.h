@@ -2,14 +2,14 @@
 
 #include "CoreMinimal.h"
 #include "MayCharacterBase.h"
-#include "PlayerCharacter.generated.h"
+#include "EnnieCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class APlayerCharacter : public AMayCharacterBase {
+class AEnnieCharacter : public AMayCharacterBase {
 	GENERATED_BODY()
 
 public:
-	APlayerCharacter();
+	AEnnieCharacter();
 
 	virtual void Tick(float DeltaSeconds) override;
 

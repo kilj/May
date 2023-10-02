@@ -1,9 +1,9 @@
 #include "Core/MayGameMode.h"
-#include "Character/MayPlayerController.h"
+#include "..\..\Public\Player\EnniePlayerController.h"
 #include "UObject/ConstructorHelpers.h"
 
 AMayGameMode::AMayGameMode() {
-	PlayerControllerClass = AMayPlayerController::StaticClass();
+	PlayerControllerClass = AEnniePlayerController::StaticClass();
 
 	// // set default pawn class to our Blueprinted character
 	// static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/May/Assets/TopDown/Blueprints/BP_TopDownCharacter"));

@@ -1,4 +1,4 @@
-#include "Character/MayPlayerController.h"
+#include "..\..\Public\Player\EnniePlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "NiagaraFunctionLibrary.h"
@@ -7,11 +7,11 @@
 #include "EnhancedInputSubsystems.h"
 #include "Core/Interfaces/HighlightInterface.h"
 
-AMayPlayerController::AMayPlayerController() {
+AEnniePlayerController::AEnniePlayerController() {
 	bReplicates = true;
 }
 
-void AMayPlayerController::BeginPlay() {
+void AEnniePlayerController::BeginPlay() {
 	Super::BeginPlay();
 
 	check(DefaultMappingContext);
@@ -29,7 +29,7 @@ void AMayPlayerController::BeginPlay() {
 	SetInputMode(InputModeData);
 }
 
-void AMayPlayerController::Move(const FInputActionValue& Value) {
+void AEnniePlayerController::Move(const FInputActionValue& Value) {
 	const FVector2D InputAxisVector = Value.Get<FVector2D>();
 	const FRotator YawRotation = FRotator(0.0f, GetControlRotation().Yaw, 0.0f);
 
@@ -42,7 +42,7 @@ void AMayPlayerController::Move(const FInputActionValue& Value) {
 	}
 }
 
-void AMayPlayerController::CursorTrace() {
+void AEnniePlayerController::CursorTrace() {
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 	if (Hit.bBlockingHit) {
@@ -59,16 +59,16 @@ void AMayPlayerController::CursorTrace() {
 	}
 }
 
-void AMayPlayerController::PlayerTick(float DeltaTime) {
+void AEnniePlayerController::PlayerTick(float DeltaTime) {
 	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
 }
 
-void AMayPlayerController::SetupInputComponent() {
+void AEnniePlayerController::SetupInputComponent() {
 	Super::SetupInputComponent();
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent)) {
-		EnhancedInputComponent->BindAction(IAMoveAction, ETriggerEvent::Triggered, this, &AMayPlayerController::Move);
+		EnhancedInputComponent->BindAction(IAMoveAction, ETriggerEvent::Triggered, this, &AEnniePlayerController::Move);
 	}
 }
