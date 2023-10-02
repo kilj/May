@@ -10,6 +10,7 @@ class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IHighlightInterface;
 
 UCLASS()
 class AMayPlayerController : public APlayerController
@@ -33,6 +34,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* IAMoveAction;
 
+	virtual void PlayerTick(float DeltaTime) override;
 protected:
 	virtual void SetupInputComponent() override;
 	
@@ -40,6 +42,11 @@ protected:
 
 private:
 	void Move(const FInputActionValue& Value);
+
+	void CursorTrace();
+
+	IHighlightInterface* LastFrameHighlightedActor; 
+	IHighlightInterface* ThisFrameHighlightedActor; 
 };
 
 

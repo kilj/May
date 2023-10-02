@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Core/Interfaces/HighlightInterface.h"
 
 AMayPlayerController::AMayPlayerController() {
 	bReplicates = true;
@@ -39,6 +40,29 @@ void AMayPlayerController::Move(const FInputActionValue& Value) {
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
+}
+
+void AMayPlayerController::CursorTrace() {
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+	if (Hit.bBlockingHit) {
+		LastFrameHighlightedActor = ThisFrameHighlightedActor;
+		ThisFrameHighlightedActor = Cast<IHighlightInterface>(Hit.GetActor());
+
+		if (ThisFrameHighlightedActor != LastFrameHighlightedActor) {
+			if (ThisFrameHighlightedActor)
+				ThisFrameHighlightedActor->HighlightActor();
+
+			if (LastFrameHighlightedActor)
+				LastFrameHighlightedActor->UnHighlightActor();
+		}
+	}
+}
+
+void AMayPlayerController::PlayerTick(float DeltaTime) {
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
 }
 
 void AMayPlayerController::SetupInputComponent() {
