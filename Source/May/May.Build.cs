@@ -17,11 +17,11 @@ public class May : ModuleRules
 	        "NavigationSystem", 
 	        "AIModule", 
 	        "Niagara", 
-	        "EnhancedInput"
+	        "EnhancedInput",
+	        "GameplayAbilities"
         });
         
         PrivateDependencyModuleNames.AddRange(new string[] {
-	        "GameplayAbilities",
 	        "GameplayTags",
 	        "GameplayTasks"
         });

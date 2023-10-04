@@ -1,9 +1,18 @@
 ﻿#include "Character/EnemyCharacter.h"
 
+#include "AbilitySystem/MayAbilitySystemComponent.h"
+#include "AbilitySystem/MayAttributeSet.h"
+
 AEnemyCharacter::AEnemyCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+	AbilitySystemComponent = CreateDefaultSubobject<UMayAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	AttributeSet = CreateDefaultSubobject<UMayAttributeSet>("AttributeSet");
 }
 
 void AEnemyCharacter::HighlightActor() {
@@ -26,6 +35,8 @@ void AEnemyCharacter::UnHighlightActor() {
 
 void AEnemyCharacter::BeginPlay() {
 	Super::BeginPlay();
+
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
 
 void AEnemyCharacter::Tick(float DeltaTime) {

@@ -11,6 +11,10 @@ AMayCharacterBase::AMayCharacterBase() {
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
+	return AbilitySystemComponent;
+}
+
 void AMayCharacterBase::BeginPlay() {
 	Super::BeginPlay();
 }

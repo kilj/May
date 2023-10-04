@@ -1,4 +1,7 @@
-#include "..\..\Public\Character\EnnieCharacter.h"
+#include "Character/EnnieCharacter.h"
+
+#include "AbilitySystem/MayAbilitySystemComponent.h"
+#include "AbilitySystem/MayAttributeSet.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -7,6 +10,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
+#include "GameFramework/PlayerState.h"
+#include "Player/EnniePlayerState.h"
 
 AEnnieCharacter::AEnnieCharacter() {
 	// Set size for player capsule
@@ -43,4 +48,26 @@ AEnnieCharacter::AEnnieCharacter() {
 
 void AEnnieCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
+}
+
+void AEnnieCharacter::PossessedBy(AController* NewController) {
+	Super::PossessedBy(NewController);
+
+	InitAbilityActorInfo();	//server version
+}
+
+void AEnnieCharacter::OnRep_PlayerState() {
+	Super::OnRep_PlayerState();
+
+	InitAbilityActorInfo(); //client version
+}
+
+void AEnnieCharacter::InitAbilityActorInfo() {
+	if (const auto PS = GetPlayerState<AEnniePlayerState>()) {
+		AttributeSet = PS->GetAttributeSet();
+		AbilitySystemComponent = PS->GetAbilitySystemComponent();
+
+		if (AbilitySystemComponent)
+			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+	}
 }
