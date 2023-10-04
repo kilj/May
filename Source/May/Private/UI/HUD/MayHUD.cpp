@@ -2,16 +2,26 @@
 
 #include "Blueprint/UserWidget.h"
 #include "UI/Widget/MayUserWidget.h"
-#include "Utils/MayLogChannels.h"
+#include "UI/WIdgetController/OverlayWidgetController.h"
 
 
-void AMayHUD::BeginPlay() {
-	Super::BeginPlay();
+UOverlayWidgetController* AMayHUD::GetOverlayWidgetController(const FWidgetControllerParams& Params) {
+	if (OverlayWidgetController == nullptr) {
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetWidgetControllerParams(Params);
+	}
 
-	OverlayWidget = CreateWidget<UMayUserWidget>(GetWorld(), OverlayWidgetClass);
+	return OverlayWidgetController;
+}
+
+void AMayHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS) {
+	checkf(OverlayWidgetClass, TEXT("Overlay widget class uninited."));
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay widget controller class uninited."));
 	
-	if (OverlayWidget)
-		OverlayWidget->AddToViewport();
-	else
-		MAY_ULOGERROR(TEXT("OverlayWidget is null. Set link to proper overlay class in MayHUD blueprint."))
+	OverlayWidget = CreateWidget<UMayUserWidget>(GetWorld(), OverlayWidgetClass);
+
+	const FWidgetControllerParams Params(PC, PS, ASC, AS);
+	OverlayWidget->SetWidgetController(GetOverlayWidgetController(Params));
+	
+	OverlayWidget->AddToViewport();
 }

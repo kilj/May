@@ -1,7 +1,5 @@
-#include "..\..\Public\Player\EnniePlayerController.h"
+#include "Player/EnniePlayerController.h"
 #include "GameFramework/Pawn.h"
-#include "Blueprint/AIBlueprintHelperLibrary.h"
-#include "NiagaraFunctionLibrary.h"
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -13,7 +11,7 @@ AEnniePlayerController::AEnniePlayerController() {
 
 void AEnniePlayerController::BeginPlay() {
 	Super::BeginPlay();
-
+	
 	check(DefaultMappingContext);
 	
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer())) {

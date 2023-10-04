@@ -45,8 +45,8 @@ private:
 
 	void CursorTrace();
 
-	IHighlightInterface* LastFrameHighlightedActor; 
-	IHighlightInterface* ThisFrameHighlightedActor; 
+	TObjectPtr<IHighlightInterface> LastFrameHighlightedActor; 
+	TObjectPtr<IHighlightInterface> ThisFrameHighlightedActor; 
 };
 
 

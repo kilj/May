@@ -4,7 +4,12 @@
 #include "GameFramework/HUD.h"
 #include "MayHUD.generated.h"
 
+class UAttributeSet;
+class UAbilitySystemComponent;
+struct FWidgetControllerParams;
+class UOverlayWidgetController;
 class UMayUserWidget;
+
 /**
  * 
  */
@@ -16,10 +21,17 @@ public:
 	UPROPERTY()
 	TObjectPtr<UMayUserWidget> OverlayWidget;
 
-protected:
-	virtual void BeginPlay() override;
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& Params);
+
+	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 
 private:
+	UPROPERTY()
+	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UMayUserWidget> OverlayWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 };

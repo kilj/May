@@ -11,7 +11,9 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerState.h"
+#include "Player/EnniePlayerController.h"
 #include "Player/EnniePlayerState.h"
+#include "UI/HUD/MayHUD.h"
 
 AEnnieCharacter::AEnnieCharacter() {
 	// Set size for player capsule
@@ -66,8 +68,12 @@ void AEnnieCharacter::InitAbilityActorInfo() {
 	if (const auto PS = GetPlayerState<AEnniePlayerState>()) {
 		AttributeSet = PS->GetAttributeSet();
 		AbilitySystemComponent = PS->GetAbilitySystemComponent();
+		AbilitySystemComponent->InitAbilityActorInfo(PS, this);
 
-		if (AbilitySystemComponent)
-			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+		// player controller will be null on non-locally controlled client
+		if (const auto PC = Cast<AEnniePlayerController>(GetController())) {
+			const auto HUD = Cast<AMayHUD>(PC->GetHUD());
+			HUD->InitOverlay(PC, PS, AbilitySystemComponent, AttributeSet);
+		}
 	}
 }
