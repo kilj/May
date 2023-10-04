@@ -18,7 +18,8 @@ public class May : ModuleRules
 	        "AIModule", 
 	        "Niagara", 
 	        "EnhancedInput",
-	        "GameplayAbilities"
+	        "GameplayAbilities",
+	        "UMG"
         });
         
         PrivateDependencyModuleNames.AddRange(new string[] {
