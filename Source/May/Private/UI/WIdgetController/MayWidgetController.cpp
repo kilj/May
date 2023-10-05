@@ -6,3 +6,9 @@ void UMayWidgetController::SetWidgetControllerParams(const FWidgetControllerPara
 	AbilitySystemComponent = Params.AbilitySystemComponent;
 	AttributeSet = Params.AttributeSet;
 }
+
+void UMayWidgetController::BroadcastInitialValues() {
+}
+
+void UMayWidgetController::BindCallbacksToDependencies() {
+}

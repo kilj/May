@@ -15,6 +15,7 @@ void AHealthPotionTestItem::OnBeginOverlap(UPrimitiveComponent* OverlappedCompon
 
 		auto cMAS = const_cast<UMayAttributeSet*>(MayAttributeSet);
 		cMAS->SetHealth(cMAS->GetHealth() - 10.f);
+		cMAS->SetMana(cMAS->GetMana() - 5.f);
 	}
 }
 

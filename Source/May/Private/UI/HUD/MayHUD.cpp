@@ -21,7 +21,11 @@ void AMayHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 	OverlayWidget = CreateWidget<UMayUserWidget>(GetWorld(), OverlayWidgetClass);
 
 	const FWidgetControllerParams Params(PC, PS, ASC, AS);
-	OverlayWidget->SetWidgetController(GetOverlayWidgetController(Params));
+	const auto OWC = GetOverlayWidgetController(Params);
+
+	OverlayWidget->SetWidgetController(OWC);
+	OWC->BroadcastInitialValues();
+	OWC->BindCallbacksToDependencies();
 	
 	OverlayWidget->AddToViewport();
 }
