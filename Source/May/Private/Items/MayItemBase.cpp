@@ -27,7 +27,7 @@ FActiveGameplayEffectHandle AMayItemBase::ApplyEffectToTarget(AActor* TargetActo
 	FGameplayEffectContextHandle EffectContext = TargetASC->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
 
-	const FGameplayEffectSpecHandle EffectSpec = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContext);
+	const FGameplayEffectSpecHandle EffectSpec = TargetASC->MakeOutgoingSpec(GameplayEffectClass, Level, EffectContext);
 	return TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpec.Data.Get());
 }
 
