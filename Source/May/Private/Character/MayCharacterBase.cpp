@@ -18,3 +18,6 @@ UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
 void AMayCharacterBase::BeginPlay() {
 	Super::BeginPlay();
 }
+
+void AMayCharacterBase::InitAbilityActorInfo() {
+}

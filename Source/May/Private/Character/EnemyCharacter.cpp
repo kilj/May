@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/MayAttributeSet.h"
+#include "Utils/MayLogChannels.h"
 
 AEnemyCharacter::AEnemyCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
@@ -36,7 +37,17 @@ void AEnemyCharacter::UnHighlightActor() {
 void AEnemyCharacter::BeginPlay() {
 	Super::BeginPlay();
 
+	InitAbilityActorInfo();
+}
+
+void AEnemyCharacter::InitAbilityActorInfo() {
+	Super::InitAbilityActorInfo();
+
+	MAY_ULOG(TEXT("Init ability actor info on enemy: %s"), *GetActorNameOrLabel());
+	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	Cast<UMayAbilitySystemComponent>(AbilitySystemComponent)->OnAbilityActorInfoSet();
 }
 
 void AEnemyCharacter::Tick(float DeltaTime) {

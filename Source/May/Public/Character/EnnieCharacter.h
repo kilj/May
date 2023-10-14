@@ -29,6 +29,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
 
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 
 };

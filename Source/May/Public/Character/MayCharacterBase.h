@@ -30,5 +30,7 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta=(AllowPrivateAccess="true"))
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+	
+	virtual void InitAbilityActorInfo();
 
 };

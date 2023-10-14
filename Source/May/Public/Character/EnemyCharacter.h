@@ -17,11 +17,14 @@ public:
 	virtual void UnHighlightActor() override;
 	//end of IHighlightInterface
 
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 protected:
 	virtual void BeginPlay() override;
 
 	bool IsHighlighted = false;
-public:
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void InitAbilityActorInfo() override;
+
 };

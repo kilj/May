@@ -65,10 +65,14 @@ void AEnnieCharacter::OnRep_PlayerState() {
 }
 
 void AEnnieCharacter::InitAbilityActorInfo() {
+	Super::InitAbilityActorInfo();
+	
 	if (const auto PS = GetPlayerState<AEnniePlayerState>()) {
 		AttributeSet = PS->GetAttributeSet();
 		AbilitySystemComponent = PS->GetAbilitySystemComponent();
 		AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+
+		Cast<UMayAbilitySystemComponent>(AbilitySystemComponent)->OnAbilityActorInfoSet();
 
 		// player controller will be null on non-locally controlled client
 		if (const auto PC = Cast<AEnniePlayerController>(GetController())) {
