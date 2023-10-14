@@ -25,21 +25,21 @@ void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 void UMayAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) {
 	Super::PreAttributeChange(Attribute, NewValue);
 
-	if (Attribute == GetHealthAttribute()) {
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
-		MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Health: %f"), NewValue);
-	}
-
-	if (Attribute == GetMaxHealthAttribute())
-		MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Health: %f"), NewValue);
-
-	if (Attribute == GetManaAttribute()) {
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
-		MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Mana: %f"), NewValue);
-	}
-	
-	if (Attribute == GetMaxManaAttribute())
-		MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Mana: %f"), NewValue);
+	// if (Attribute == GetHealthAttribute()) {
+	// 	NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Health: %f"), NewValue);
+	// }
+	//
+	// if (Attribute == GetMaxHealthAttribute())
+	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Health: %f"), NewValue);
+	//
+	// if (Attribute == GetManaAttribute()) {
+	// 	NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Mana: %f"), NewValue);
+	// }
+	//
+	// if (Attribute == GetMaxManaAttribute())
+	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Mana: %f"), NewValue);
 }
 
 void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) {
