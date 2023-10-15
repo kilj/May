@@ -25,21 +25,13 @@ void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 void UMayAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) {
 	Super::PreAttributeChange(Attribute, NewValue);
 
-	// if (Attribute == GetHealthAttribute()) {
-	// 	NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
-	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Health: %f"), NewValue);
-	// }
-	//
-	// if (Attribute == GetMaxHealthAttribute())
-	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Health: %f"), NewValue);
-	//
-	// if (Attribute == GetManaAttribute()) {
-	// 	NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
-	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Mana: %f"), NewValue);
-	// }
-	//
-	// if (Attribute == GetMaxManaAttribute())
-	// 	MAY_ULOGWARNING_WITHOWNER(GetOwningActor(), TEXT("Max Mana: %f"), NewValue);
+	ClampAttributeValues(Attribute, NewValue);
+}
+
+void UMayAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const {
+	Super::PreAttributeBaseChange(Attribute, NewValue);
+
+	ClampAttributeValues(Attribute, NewValue);
 }
 
 void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) {
@@ -47,6 +39,13 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 	FEffectProperties Properties;
 	SetEffectProperties(Data, Properties);
+
+	// this code will call AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate twice, but somehow there are some people who recommends such approach
+	// if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	// 	SetHealth(FMath::Clamp(GetHealth(), 0.0f, GetMaxHealth()));
+	//
+	// if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	// 	SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
 }
 
 void UMayAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const {
@@ -88,4 +87,12 @@ void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData&
 		Properties.TargetCharacter = Cast<ACharacter>(Properties.TargetAvatarActor);
 		Properties.TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Properties.TargetAvatarActor);
 	}
+}
+
+void UMayAttributeSet::ClampAttributeValues(const FGameplayAttribute& Attribute, float& NewValue) const {
+	if (Attribute == GetHealthAttribute())
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	
+	if (Attribute == GetManaAttribute())
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
 }
