@@ -5,6 +5,7 @@
 #include "AbilitySystemInterface.h"
 #include "MayCharacterBase.generated.h"
 
+class UGameplayEffect;
 class UAttributeSet;
 class UAbilitySystemComponent;
 
@@ -33,4 +34,8 @@ protected:
 	
 	virtual void InitAbilityActorInfo();
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
+	TSubclassOf<UGameplayEffect> DefaultAttributes;
+
+	void InitAttributes() const;
 };

@@ -16,10 +16,17 @@ UMayAttributeSet::UMayAttributeSet() {
 void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	//Vital attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Mana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
+
+	//Primary attributes
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Strength, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Intelligence, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Resilience, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Vigor, COND_None, REPNOTIFY_Always);
 }
 
 void UMayAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) {
@@ -62,6 +69,22 @@ void UMayAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const {
 
 void UMayAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxMana, OldMaxMana);
+}
+
+void UMayAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldStrength) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Strength, OldStrength);
+}
+
+void UMayAttributeSet::OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Intelligence, OldIntelligence);
+}
+
+void UMayAttributeSet::OnRep_Resilience(const FGameplayAttributeData& OldResilience) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Resilience, OldResilience);
+}
+
+void UMayAttributeSet::OnRep_Vigor(const FGameplayAttributeData& OldVigor) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Vigor, OldVigor);
 }
 
 void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Properties) {

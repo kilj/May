@@ -16,7 +16,6 @@
 #include "UI/HUD/MayHUD.h"
 
 AEnnieCharacter::AEnnieCharacter() {
-	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// Don't rotate character to camera direction
@@ -24,13 +23,11 @@ AEnnieCharacter::AEnnieCharacter() {
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 640.f, 0.f);
 	GetCharacterMovement()->bConstrainToPlane = true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 
-	// Create a camera boom...
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->SetUsingAbsoluteRotation(true); // Don't want arm to rotate when character does
@@ -56,6 +53,7 @@ void AEnnieCharacter::PossessedBy(AController* NewController) {
 	Super::PossessedBy(NewController);
 
 	InitAbilityActorInfo();	//server version
+	InitAttributes(); //init default attributes on server, so they will be replicated to clients
 }
 
 void AEnnieCharacter::OnRep_PlayerState() {

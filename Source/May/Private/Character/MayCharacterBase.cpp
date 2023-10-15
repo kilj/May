@@ -1,4 +1,5 @@
 ﻿#include "Character/MayCharacterBase.h"
+#include "AbilitySystemComponent.h"
 
 AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -20,4 +21,17 @@ void AMayCharacterBase::BeginPlay() {
 }
 
 void AMayCharacterBase::InitAbilityActorInfo() {
+}
+
+void AMayCharacterBase::InitAttributes() const {
+	check(DefaultAttributes);
+	
+	const auto ASC = GetAbilitySystemComponent();
+	check(ASC);
+	
+	auto EffectContext = ASC->MakeEffectContext();
+	EffectContext.AddSourceObject(this);
+
+	const auto Spec = ASC->MakeOutgoingSpec(DefaultAttributes, 1.0f, EffectContext);
+	ASC->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(), ASC);
 }
