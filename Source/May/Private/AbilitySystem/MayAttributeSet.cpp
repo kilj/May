@@ -18,15 +18,26 @@ void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 
 	//Vital attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Health, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Mana, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 
 	//Primary attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Strength, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Intelligence, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Resilience, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Vigor, COND_None, REPNOTIFY_Always);
+
+	//Secondary attributes
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Armor, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, ArmorPenetration, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, BlockChance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, CriticalHitChance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, CriticalHitDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, CriticalHitResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, HealthRegeneration, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, ManaRegeneration, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
+
 }
 
 void UMayAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) {
@@ -59,16 +70,8 @@ void UMayAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) con
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Health, OldHealth);
 }
 
-void UMayAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxHealth, OldMaxHealth);
-}
-
 void UMayAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Mana, OldMana);
-}
-
-void UMayAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxMana, OldMaxMana);
 }
 
 void UMayAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldStrength) const {
@@ -85,6 +88,46 @@ void UMayAttributeSet::OnRep_Resilience(const FGameplayAttributeData& OldResilie
 
 void UMayAttributeSet::OnRep_Vigor(const FGameplayAttributeData& OldVigor) const {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Vigor, OldVigor);
+}
+
+void UMayAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldArmor) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, Armor, OldArmor);
+}
+
+void UMayAttributeSet::OnRep_ArmorPenetration(const FGameplayAttributeData& OldArmorPenetration) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, ArmorPenetration, OldArmorPenetration);
+}
+
+void UMayAttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, BlockChance, OldBlockChance);
+}
+
+void UMayAttributeSet::OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, CriticalHitChance, OldCriticalHitChance);
+}
+
+void UMayAttributeSet::OnRep_CriticalHitDamage(const FGameplayAttributeData& OldCriticalHitDamage) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, CriticalHitDamage, OldCriticalHitDamage);
+}
+
+void UMayAttributeSet::OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, CriticalHitResistance, OldCriticalHitResistance)
+}
+
+void UMayAttributeSet::OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, HealthRegeneration, OldHealthRegeneration)
+}
+
+void UMayAttributeSet::OnRep_ManaRegeneration(const FGameplayAttributeData& OldManaRegeneration) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, ManaRegeneration, OldManaRegeneration)
+}
+
+void UMayAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxHealth, OldMaxHealth);
+}
+
+void UMayAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxMana, OldMaxMana);
 }
 
 void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Properties) {
