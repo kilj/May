@@ -7,10 +7,8 @@
 #include "GameFramework/Character.h"
 
 UMayAttributeSet::UMayAttributeSet() {
-	InitHealth(50.f);
-	InitMaxHealth(100.f);
-	InitMana(10.f);
-	InitMaxMana(100.f);
+	//InitHealth(50.f);
+	//InitMana(10.f);
 }
 
 void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

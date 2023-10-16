@@ -1,3 +1,5 @@
+// Red Beat, 2023
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,6 +15,10 @@ class AEnnieCharacter : public AMayCharacterBase {
 
 public:
 	AEnnieCharacter();
+
+	//ILevelInterface
+	virtual int32 GetLevel() override;
+	//end of ILevelInterface
 
 	virtual void Tick(float DeltaSeconds) override;
 

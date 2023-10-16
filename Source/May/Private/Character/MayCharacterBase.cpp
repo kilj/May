@@ -23,8 +23,8 @@ void AMayCharacterBase::BeginPlay() {
 void AMayCharacterBase::InitAbilityActorInfo() {
 }
 
-void AMayCharacterBase::InitAttributes() const {
-	check(DefaultAttributes);
+void AMayCharacterBase::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> AttributesEffectClass, const float Level) const {
+	check(AttributesEffectClass);
 	
 	const auto ASC = GetAbilitySystemComponent();
 	check(ASC);
@@ -32,6 +32,6 @@ void AMayCharacterBase::InitAttributes() const {
 	auto EffectContext = ASC->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
 
-	const auto Spec = ASC->MakeOutgoingSpec(DefaultAttributes, 1.0f, EffectContext);
+	const auto Spec = ASC->MakeOutgoingSpec(AttributesEffectClass, Level, EffectContext);
 	ASC->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(), ASC);
 }

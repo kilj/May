@@ -45,6 +45,13 @@ AEnnieCharacter::AEnnieCharacter() {
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
+int32 AEnnieCharacter::GetLevel() {
+	if (const auto PS = GetPlayerState<AEnniePlayerState>())
+		return PS->GetPlayerLevel();
+
+	return 0;
+}
+
 void AEnnieCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 }
@@ -53,7 +60,13 @@ void AEnnieCharacter::PossessedBy(AController* NewController) {
 	Super::PossessedBy(NewController);
 
 	InitAbilityActorInfo();	//server version
-	InitAttributes(); //init default attributes on server, so they will be replicated to clients
+	InitDefaultAttributes(DefaultPrimaryAttributes); //init default primary attributes on server, so they will be replicated to clients...
+	InitDefaultAttributes(DefaultSecondaryAttributes); //... and do the same with secondary attributes
+
+	if (auto AS = Cast<UMayAttributeSet>(AttributeSet)) {
+		AS->SetHealth(AS->GetMaxHealth() * 0.5f);
+		AS->SetMana(AS->GetMaxMana() * 0.5f);
+	}
 }
 
 void AEnnieCharacter::OnRep_PlayerState() {

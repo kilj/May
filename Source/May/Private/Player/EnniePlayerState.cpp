@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/MayAttributeSet.h"
+#include "Net/UnrealNetwork.h"
 
 AEnniePlayerState::AEnniePlayerState() {
 	AbilitySystemComponent = CreateDefaultSubobject<UMayAbilitySystemComponent>("AbilitySystemComponent");
@@ -11,6 +12,16 @@ AEnniePlayerState::AEnniePlayerState() {
 	AttributeSet = CreateDefaultSubobject<UMayAttributeSet>("AttributeSet");
 	
 	NetUpdateFrequency = 100.f;
+}
+
+void AEnniePlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AEnniePlayerState, Level);
+}
+
+void AEnniePlayerState::OnRep_Level(int32 OldLevel) {
+	Level = OldLevel;
 }
 
 UAbilitySystemComponent* AEnniePlayerState::GetAbilitySystemComponent() const {

@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/MayAttributeSet.h"
+#include "Net/UnrealNetwork.h"
 #include "Utils/MayLogChannels.h"
 
 AEnemyCharacter::AEnemyCharacter() {
@@ -32,6 +33,10 @@ void AEnemyCharacter::UnHighlightActor() {
 	GetMesh()->CustomDepthStencilValue = 0;
 	Weapon->SetRenderCustomDepth(false);
 	Weapon->CustomDepthStencilValue = 0;
+}
+
+int32 AEnemyCharacter::GetLevel() {
+	return Level;
 }
 
 void AEnemyCharacter::BeginPlay() {

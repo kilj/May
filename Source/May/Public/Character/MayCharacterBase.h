@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Core/Interfaces/LevelInterface.h"
 #include "MayCharacterBase.generated.h"
 
 class UGameplayEffect;
@@ -10,7 +11,7 @@ class UAttributeSet;
 class UAbilitySystemComponent;
 
 UCLASS(Abstract)
-class MAY_API AMayCharacterBase : public ACharacter, public IAbilitySystemInterface {
+class MAY_API AMayCharacterBase : public ACharacter, public IAbilitySystemInterface, public ILevelInterface {
 	GENERATED_BODY()
 
 public:
@@ -35,7 +36,10 @@ protected:
 	virtual void InitAbilityActorInfo();
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
-	TSubclassOf<UGameplayEffect> DefaultAttributes;
+	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
 
-	void InitAttributes() const;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
+	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
+
+	void InitDefaultAttributes(TSubclassOf<UGameplayEffect> AttributesEffectClass, float Level = 1.0f) const;
 };
