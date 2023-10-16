@@ -16,12 +16,12 @@ float UMMCMaxHealth::CalculateBaseMagnitude_Implementation(const FGameplayEffect
 	const FGameplayTagContainer* SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	const FGameplayTagContainer* TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
 
-	FAggregatorEvaluateParameters EvaluationParameters;
-	EvaluationParameters.SourceTags = SourceTags;
-	EvaluationParameters.TargetTags = TargetTags;
+	FAggregatorEvaluateParameters Params;
+	Params.SourceTags = SourceTags;
+	Params.TargetTags = TargetTags;
 
 	float Vigor = 0.0f;
-	GetCapturedAttributeMagnitude(VigorDef, Spec, EvaluationParameters, Vigor);
+	GetCapturedAttributeMagnitude(VigorDef, Spec, Params, Vigor);
 	Vigor = FMath::Max<float>(Vigor, 0.0f);
 
 	auto ILI = Cast<ILevelInterface>(Spec.GetContext().GetSourceObject());

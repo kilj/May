@@ -1,23 +1,23 @@
-// Red Beat, 2023
+﻿// Red Beat, 2023
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameplayModMagnitudeCalculation.h"
-#include "MMCMaxHealth.generated.h"
+#include "MMCMaxMana.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MAY_API UMMCMaxHealth : public UGameplayModMagnitudeCalculation {
+class MAY_API UMMCMaxMana : public UGameplayModMagnitudeCalculation {
 	GENERATED_BODY()
 
 public:
-	UMMCMaxHealth();
+	UMMCMaxMana();
 
 	virtual float CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const override;
 
 private:
-	FGameplayEffectAttributeCaptureDefinition VigorDef;
+	FGameplayEffectAttributeCaptureDefinition IntelligenceDef;
 };
