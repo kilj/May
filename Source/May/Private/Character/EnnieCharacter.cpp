@@ -62,11 +62,7 @@ void AEnnieCharacter::PossessedBy(AController* NewController) {
 	InitAbilityActorInfo();	//server version
 	InitDefaultAttributes(DefaultPrimaryAttributes); //init default primary attributes on server, so they will be replicated to clients...
 	InitDefaultAttributes(DefaultSecondaryAttributes); //... and do the same with secondary attributes
-
-	if (auto AS = Cast<UMayAttributeSet>(AttributeSet)) {
-		AS->SetHealth(AS->GetMaxHealth() * 0.5f);
-		AS->SetMana(AS->GetMaxMana() * 0.5f);
-	}
+	InitDefaultAttributes(DefaultVitalAttributes); //... in the end we should set initial values for Health/Mana
 }
 
 void AEnnieCharacter::OnRep_PlayerState() {

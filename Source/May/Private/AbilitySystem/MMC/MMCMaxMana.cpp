@@ -27,5 +27,4 @@ float UMMCMaxMana::CalculateBaseMagnitude_Implementation(const FGameplayEffectSp
 	const int32 Level = ILI->GetLevel();
 
 	return 50.0f + 2.0f * Intelligence + 5.0f * Level;
-	
 }

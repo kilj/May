@@ -1,5 +1,6 @@
 ﻿#include "Character/MayCharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "Utils/MayLogChannels.h"
 
 AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -23,8 +24,11 @@ void AMayCharacterBase::BeginPlay() {
 void AMayCharacterBase::InitAbilityActorInfo() {
 }
 
-void AMayCharacterBase::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> AttributesEffectClass, const float Level) const {
-	check(AttributesEffectClass);
+void AMayCharacterBase::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> AttributesEffectClass, const float Level) {
+	if (AttributesEffectClass == nullptr) {
+		MAY_ULOGERROR(TEXT("Can't init default attributes, because Attribute TSubclasOf is null"));
+		return;
+	}
 	
 	const auto ASC = GetAbilitySystemComponent();
 	check(ASC);
