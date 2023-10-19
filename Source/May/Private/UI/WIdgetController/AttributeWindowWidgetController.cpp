@@ -1,10 +1,15 @@
 ﻿// Red Beat, 2023
 
-
 #include "UI/WIdgetController/AttributeWindowWidgetController.h"
 #include "AbilitySystem/MayAttributeSet.h"
 #include "AbilitySystem/MayGameplayTags.h"
 #include "AbilitySystem/Data/AttributeInfo.h"
+
+//just fucking WOW!
+#define BROADCAST_ATTRIBUTE(AttributeName, AttributeTag) \
+	auto Info##AttributeName## = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().##AttributeTag##, true); \
+	Info##AttributeName##.Value = AS->Get##AttributeName(); \
+	AttributeInfoDelegate.Broadcast(Info##AttributeName##); \
 
 void UAttributeWindowWidgetController::BroadcastInitialValues() {
 	Super::BroadcastInitialValues();
@@ -14,24 +19,13 @@ void UAttributeWindowWidgetController::BroadcastInitialValues() {
 	check(AttributeInfo);
 
 	//primary
-	auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryStrength, true);
-	Info.Value = AS->GetStrength();
-	AttributeInfoDelegate.Broadcast(Info);
-
-	Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryIntelligence, true);
-	Info.Value = AS->GetIntelligence();
-	AttributeInfoDelegate.Broadcast(Info);
-
-	Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryResilience, true);
-	Info.Value = AS->GetResilience();
-	AttributeInfoDelegate.Broadcast(Info);
-
-	Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryVigor, true);
-	Info.Value = AS->GetVigor();
-	AttributeInfoDelegate.Broadcast(Info);
+	BROADCAST_ATTRIBUTE(Strength, AttributesPrimaryStrength);
+	BROADCAST_ATTRIBUTE(Intelligence, AttributesPrimaryIntelligence);
+	BROADCAST_ATTRIBUTE(Resilience, AttributesPrimaryResilience);
+	BROADCAST_ATTRIBUTE(Vigor, AttributesPrimaryVigor);
 
 	//secondary
-	Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesSecondaryArmor, true);
+	auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesSecondaryArmor, true);
 	Info.Value = AS->GetArmor();
 	AttributeInfoDelegate.Broadcast(Info);
 
@@ -78,33 +72,10 @@ void UAttributeWindowWidgetController::BindCallbacksToDependencies() {
 	const auto AS = CastChecked<UMayAttributeSet>(AttributeSet);
 
 	//primary attribute bindings
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetStrengthAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
-	{
-		auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryStrength, true);
-		Info.Value = AS->GetStrength();
-		AttributeInfoDelegate.Broadcast(Info);
-	});
-
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetIntelligenceAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
-	{
-		auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryIntelligence, true);
-		Info.Value = AS->GetIntelligence();
-		AttributeInfoDelegate.Broadcast(Info);
-	});
-
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetResilienceAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
-	{
-		auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryResilience, true);
-		Info.Value = AS->GetResilience();
-		AttributeInfoDelegate.Broadcast(Info);
-	});
-
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetVigorAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
-	{
-		auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesPrimaryVigor, true);
-		Info.Value = AS->GetVigor();
-		AttributeInfoDelegate.Broadcast(Info);
-	});
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetStrengthAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data){ BROADCAST_ATTRIBUTE(Strength, AttributesPrimaryStrength); });
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetIntelligenceAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data){ BROADCAST_ATTRIBUTE(Intelligence, AttributesPrimaryIntelligence); });
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetResilienceAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data){ BROADCAST_ATTRIBUTE(Resilience, AttributesPrimaryResilience);	});
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetVigorAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data){ BROADCAST_ATTRIBUTE(Vigor, AttributesPrimaryVigor); });
 
 	//secondary attribute bindings
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetArmorAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
@@ -170,13 +141,5 @@ void UAttributeWindowWidgetController::BindCallbacksToDependencies() {
 		AttributeInfoDelegate.Broadcast(Info);
 	});
 
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetMaxManaAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data)
-	{
-		auto Info = AttributeInfo->FindAttributeInfo(FMayGameplayTags::Get().AttributesSecondaryMaxMana, true);
-		Info.Value = AS->GetMaxMana();
-		AttributeInfoDelegate.Broadcast(Info);
-	});
-
-
-
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetMaxManaAttribute()).AddLambda([this, AS](const FOnAttributeChangeData& Data){ BROADCAST_ATTRIBUTE(MaxMana, AttributesSecondaryMaxMana); });
 }
