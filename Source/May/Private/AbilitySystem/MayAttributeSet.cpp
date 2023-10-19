@@ -154,6 +154,10 @@ void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData&
 }
 
 void UMayAttributeSet::ClampAttributeValues(const FGameplayAttribute& Attribute, float& NewValue) const {
+	//all our attributes should be greater than zero, so at first check this
+	if (NewValue < 0.f)
+		NewValue = 0.f;
+	
 	if (Attribute == GetHealthAttribute())
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 	

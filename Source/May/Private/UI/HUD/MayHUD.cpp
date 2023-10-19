@@ -2,6 +2,7 @@
 
 #include "Blueprint/UserWidget.h"
 #include "UI/Widget/MayUserWidget.h"
+#include "UI/WIdgetController/AttributeWindowWidgetController.h"
 #include "UI/WIdgetController/OverlayWidgetController.h"
 
 
@@ -9,9 +10,22 @@ UOverlayWidgetController* AMayHUD::GetOverlayWidgetController(const FWidgetContr
 	if (OverlayWidgetController == nullptr) {
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(Params);
+		OverlayWidgetController->BindCallbacksToDependencies();
+
 	}
 
 	return OverlayWidgetController;
+}
+
+UAttributeWindowWidgetController* AMayHUD::GetAttributeWindowWidgetController(const FWidgetControllerParams& Params) {
+	if (AttributeWindowWidgetController == nullptr) {
+		AttributeWindowWidgetController = NewObject<UAttributeWindowWidgetController>(this, AttributeWindowWidgetControllerClass);
+		AttributeWindowWidgetController->SetWidgetControllerParams(Params);
+		AttributeWindowWidgetController->BindCallbacksToDependencies();
+
+	}
+
+	return AttributeWindowWidgetController;
 }
 
 void AMayHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS) {
@@ -25,7 +39,6 @@ void AMayHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 
 	OverlayWidget->SetWidgetController(OWC);
 	OWC->BroadcastInitialValues();
-	OWC->BindCallbacksToDependencies();
 	
 	OverlayWidget->AddToViewport();
 }
