@@ -3,7 +3,6 @@
 #include "GameFramework/Actor.h"
 
 DEFINE_LOG_CATEGORY(LogMay);
-DEFINE_LOG_CATEGORY(LogMayExperience);
 DEFINE_LOG_CATEGORY(LogMayAbilitySystem);
 
 FString GetClientServerContextString(UObject* ContextObject) {

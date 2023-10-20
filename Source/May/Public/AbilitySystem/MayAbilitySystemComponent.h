@@ -4,6 +4,7 @@
 #include "AbilitySystemComponent.h"
 #include "MayAbilitySystemComponent.generated.h"
 
+class UMayGameplayAbility;
 DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
 
 /**
@@ -18,6 +19,8 @@ public:
 	void OnAbilityActorInfoSet();
 
 	FEffectAssetTags EffectAssetTagsDelegate;
+
+	void AddStartupAbilities(const TArray<TSubclassOf<UGameplayAbility>>& Abilities);
 
 protected:
 	void EffectApplied(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle);

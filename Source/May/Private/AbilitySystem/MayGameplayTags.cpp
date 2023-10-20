@@ -29,4 +29,12 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.MessageHealthPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthPotion"));
 	Instance.MessageManaCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaCrystal"));
 	Instance.MessageManaPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaPotion"));
+
+	//input
+	Instance.InputKeyLMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.LMB"));
+	Instance.InputKeyRMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.RMB"));
+	Instance.InputKey1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.1"));
+	Instance.InputKey2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.2"));
+	Instance.InputKey3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.3"));
+	Instance.InputKey4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.4"));
 }

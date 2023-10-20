@@ -1,5 +1,6 @@
 ﻿#include "Character/MayCharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "Utils/MayLogChannels.h"
 
 AMayCharacterBase::AMayCharacterBase() {
@@ -38,4 +39,15 @@ void AMayCharacterBase::InitDefaultAttributes(const TSubclassOf<UGameplayEffect>
 
 	const auto Spec = ASC->MakeOutgoingSpec(AttributesEffectClass, Level, EffectContext);
 	ASC->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(), ASC);
+}
+
+void AMayCharacterBase::AddStartupAbilities() {
+	if (!HasAuthority()) {
+		MAY_ULOGWARNING(TEXT("Calling AMayCharacterBase::AddStartupAbilities from client!"));
+		return;
+	}
+
+	const auto ASC = CastChecked<UMayAbilitySystemComponent>(AbilitySystemComponent);
+	ASC->AddStartupAbilities(StartupAbilities);
+	
 }

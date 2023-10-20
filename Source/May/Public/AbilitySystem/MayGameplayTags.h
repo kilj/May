@@ -9,36 +9,46 @@
  * Singleton
  */
 struct FMayGameplayTags {
-public:
- static const FMayGameplayTags& Get() { return Instance; }
+	static const FMayGameplayTags& Get() { return Instance; }
 
- static void InitNativeGameplayTags();
+	static void InitNativeGameplayTags();
 
- FGameplayTag AttributesPrimaryStrength;
- FGameplayTag AttributesPrimaryIntelligence;
- FGameplayTag AttributesPrimaryResilience;
- FGameplayTag AttributesPrimaryVigor;
+	//attributes.primary
+	FGameplayTag AttributesPrimaryStrength;
+	FGameplayTag AttributesPrimaryIntelligence;
+	FGameplayTag AttributesPrimaryResilience;
+	FGameplayTag AttributesPrimaryVigor;
 
- FGameplayTag AttributesSecondaryArmor;
- FGameplayTag AttributesSecondaryArmorPenetration;
- FGameplayTag AttributesSecondaryBlockChance;
- FGameplayTag AttributesSecondaryCriticalHitChance;
- FGameplayTag AttributesSecondaryCriticalHitDamage;
- FGameplayTag AttributesSecondaryCriticalHitResistance;
- FGameplayTag AttributesSecondaryHealthRegeneration;
- FGameplayTag AttributesSecondaryManaRegeneration;
- FGameplayTag AttributesSecondaryMaxHealth;
- FGameplayTag AttributesSecondaryMaxMana;
- 
- FGameplayTag AttributesVitalHealth;
- FGameplayTag AttributesVitalMana;
- 
- FGameplayTag MessageHealthCrystal;
- FGameplayTag MessageHealthPotion;
- FGameplayTag MessageManaCrystal;
- FGameplayTag MessageManaPotion;
- 
-protected:
+	//attributes.secondary
+	FGameplayTag AttributesSecondaryArmor;
+	FGameplayTag AttributesSecondaryArmorPenetration;
+	FGameplayTag AttributesSecondaryBlockChance;
+	FGameplayTag AttributesSecondaryCriticalHitChance;
+	FGameplayTag AttributesSecondaryCriticalHitDamage;
+	FGameplayTag AttributesSecondaryCriticalHitResistance;
+	FGameplayTag AttributesSecondaryHealthRegeneration;
+	FGameplayTag AttributesSecondaryManaRegeneration;
+	FGameplayTag AttributesSecondaryMaxHealth;
+	FGameplayTag AttributesSecondaryMaxMana;
+
+	//attributes.vital
+	FGameplayTag AttributesVitalHealth;
+	FGameplayTag AttributesVitalMana;
+
+	//message
+	FGameplayTag MessageHealthCrystal;
+	FGameplayTag MessageHealthPotion;
+	FGameplayTag MessageManaCrystal;
+	FGameplayTag MessageManaPotion;
+
+	//input
+	FGameplayTag InputKeyLMB;
+	FGameplayTag InputKeyRMB;
+	FGameplayTag InputKey1;
+	FGameplayTag InputKey2;
+	FGameplayTag InputKey3;
+	FGameplayTag InputKey4;
+
 private:
- static FMayGameplayTags Instance;
+	static FMayGameplayTags Instance;
 };

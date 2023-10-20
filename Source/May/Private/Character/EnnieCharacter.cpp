@@ -63,6 +63,8 @@ void AEnnieCharacter::PossessedBy(AController* NewController) {
 	InitDefaultAttributes(DefaultPrimaryAttributes); //init default primary attributes on server, so they will be replicated to clients...
 	InitDefaultAttributes(DefaultSecondaryAttributes); //... and do the same with secondary attributes
 	InitDefaultAttributes(DefaultVitalAttributes); //... in the end we should set initial values for Health/Mana
+
+	AddStartupAbilities();
 }
 
 void AEnnieCharacter::OnRep_PlayerState() {
