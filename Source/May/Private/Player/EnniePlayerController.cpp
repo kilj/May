@@ -1,13 +1,22 @@
 #include "Player/EnniePlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "GameFramework/Pawn.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagContainer.h"
+#include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "Core/Interfaces/HighlightInterface.h"
 #include "Input/MayInputComponent.h"
-#include "Utils/MayLogChannels.h"
 
 AEnniePlayerController::AEnniePlayerController() {
 	bReplicates = true;
+}
+
+UMayAbilitySystemComponent* AEnniePlayerController::GetASC() {
+	if (AbilitySystemComponent == nullptr)
+		AbilitySystemComponent = Cast<UMayAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
+
+	return AbilitySystemComponent;
 }
 
 void AEnniePlayerController::BeginPlay() {
@@ -42,12 +51,18 @@ void AEnniePlayerController::OnIAMove(const FInputActionValue& Value) {
 }
 
 void AEnniePlayerController::OnAbilityInputTagPressed(FGameplayTag Tag) {
+	if (GetASC())
+		GetASC()->OnAbilityInputTagPressed(Tag);
 }
 
 void AEnniePlayerController::OnAbilityInputTagReleased(FGameplayTag Tag) {
+	if (GetASC())
+		GetASC()->OnAbilityInputTagReleased(Tag);
 }
 
 void AEnniePlayerController::OnAbilityInputTagHeld(FGameplayTag Tag) {
+	if (GetASC())
+		GetASC()->OnAbilityInputTagHeld(Tag);
 }
 
 void AEnniePlayerController::CursorTrace() {

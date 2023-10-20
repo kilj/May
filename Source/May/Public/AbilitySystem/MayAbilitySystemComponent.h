@@ -22,6 +22,10 @@ public:
 
 	void AddStartupAbilities(const TArray<TSubclassOf<UGameplayAbility>>& Abilities);
 
+	void OnAbilityInputTagPressed(FGameplayTag& Tag);
+	void OnAbilityInputTagHeld(FGameplayTag& Tag);
+	void OnAbilityInputTagReleased(FGameplayTag& Tag);
+
 protected:
 	void EffectApplied(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle);
 	

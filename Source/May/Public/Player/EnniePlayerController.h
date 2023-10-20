@@ -7,12 +7,13 @@
 #include "EnniePlayerController.generated.h"
 
 struct FGameplayTag;
+struct FInputActionValue;
 class UMayInputConfig;
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
-struct FInputActionValue;
 class IHighlightInterface;
+class UMayAbilitySystemComponent;
 
 UCLASS()
 class AEnniePlayerController : public APlayerController
@@ -21,6 +22,8 @@ class AEnniePlayerController : public APlayerController
 
 public:
 	AEnniePlayerController();
+
+	UMayAbilitySystemComponent* GetASC();
 
 	/** FX Class that we will spawn when clicking */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -40,6 +43,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY()
+	TObjectPtr<UMayAbilitySystemComponent> AbilitySystemComponent;
+
 	void OnIAMove(const FInputActionValue& Value);
 
 	void OnAbilityInputTagPressed(FGameplayTag Tag);
@@ -52,7 +58,7 @@ private:
 	TObjectPtr<UMayInputConfig> InputConfig;
 
 	IHighlightInterface* LastFrameHighlightedActor; 
-	IHighlightInterface* ThisFrameHighlightedActor; 
+	IHighlightInterface* ThisFrameHighlightedActor;
 };
 
 
