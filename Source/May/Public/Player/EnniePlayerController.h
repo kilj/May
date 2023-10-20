@@ -6,6 +6,8 @@
 #include "InputActionValue.h"
 #include "EnniePlayerController.generated.h"
 
+struct FGameplayTag;
+class UMayInputConfig;
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
@@ -20,10 +22,6 @@ class AEnniePlayerController : public APlayerController
 public:
 	AEnniePlayerController();
 
-	/** Time Threshold to know if it was a short press */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	float ShortPressThreshold;
-
 	/** FX Class that we will spawn when clicking */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UNiagaraSystem* FXCursor;
@@ -32,18 +30,26 @@ public:
 	UInputMappingContext* DefaultMappingContext;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* IAMoveAction;
-
+	UInputAction* IAMove;
+	
 	virtual void PlayerTick(float DeltaTime) override;
+	
 protected:
 	virtual void SetupInputComponent() override;
 	
 	virtual void BeginPlay() override;
 
 private:
-	void Move(const FInputActionValue& Value);
+	void OnIAMove(const FInputActionValue& Value);
+
+	void OnAbilityInputTagPressed(FGameplayTag Tag);
+	void OnAbilityInputTagReleased(FGameplayTag Tag);
+	void OnAbilityInputTagHeld(FGameplayTag Tag);
 
 	void CursorTrace();
+
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UMayInputConfig> InputConfig;
 
 	IHighlightInterface* LastFrameHighlightedActor; 
 	IHighlightInterface* ThisFrameHighlightedActor; 

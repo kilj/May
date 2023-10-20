@@ -1,9 +1,10 @@
 #include "Player/EnniePlayerController.h"
 #include "GameFramework/Pawn.h"
-#include "Engine/World.h"
-#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameplayTagContainer.h"
 #include "Core/Interfaces/HighlightInterface.h"
+#include "Input/MayInputComponent.h"
+#include "Utils/MayLogChannels.h"
 
 AEnniePlayerController::AEnniePlayerController() {
 	bReplicates = true;
@@ -27,7 +28,7 @@ void AEnniePlayerController::BeginPlay() {
 	SetInputMode(InputModeData);
 }
 
-void AEnniePlayerController::Move(const FInputActionValue& Value) {
+void AEnniePlayerController::OnIAMove(const FInputActionValue& Value) {
 	const FVector2D InputAxisVector = Value.Get<FVector2D>();
 	const FRotator YawRotation = FRotator(0.0f, GetControlRotation().Yaw, 0.0f);
 
@@ -38,6 +39,15 @@ void AEnniePlayerController::Move(const FInputActionValue& Value) {
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
+}
+
+void AEnniePlayerController::OnAbilityInputTagPressed(FGameplayTag Tag) {
+}
+
+void AEnniePlayerController::OnAbilityInputTagReleased(FGameplayTag Tag) {
+}
+
+void AEnniePlayerController::OnAbilityInputTagHeld(FGameplayTag Tag) {
 }
 
 void AEnniePlayerController::CursorTrace() {
@@ -66,7 +76,9 @@ void AEnniePlayerController::PlayerTick(float DeltaTime) {
 void AEnniePlayerController::SetupInputComponent() {
 	Super::SetupInputComponent();
 
-	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent)) {
-		EnhancedInputComponent->BindAction(IAMoveAction, ETriggerEvent::Triggered, this, &AEnniePlayerController::Move);
+	if (UMayInputComponent* MayInputComponent = CastChecked<UMayInputComponent>(InputComponent)) {
+		MayInputComponent->BindAction(IAMove, ETriggerEvent::Triggered, this, &ThisClass::OnIAMove);
+		
+		MayInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::OnAbilityInputTagPressed, &ThisClass::OnAbilityInputTagReleased, &ThisClass::OnAbilityInputTagHeld);
 	}
 }
