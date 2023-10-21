@@ -41,6 +41,9 @@ struct FMayGameplayTags {
 	FGameplayTag MessageManaCrystal;
 	FGameplayTag MessageManaPotion;
 
+	//events.montage
+	FGameplayTag EventMontageFirebolt;
+
 	//input
 	FGameplayTag InputKeyLMB;
 	FGameplayTag InputKeyRMB;

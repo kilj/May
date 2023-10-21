@@ -20,5 +20,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AMayProjectile> ProjectileClass;
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnProjectile();
 	
 };
