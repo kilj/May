@@ -55,7 +55,7 @@ protected:
 	void AddStartupAbilities();
 
 	//ICombatActorInterface
-	virtual FVector GetProjectileSpawnPosition() override;
+	virtual FVector GetProjectileSpawnLocation() override;
 	//end of ICombatActorInterface
 
 private:

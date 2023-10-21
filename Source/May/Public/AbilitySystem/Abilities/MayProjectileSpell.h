@@ -22,6 +22,6 @@ protected:
 	TSubclassOf<AMayProjectile> ProjectileClass;
 
 	UFUNCTION(BlueprintCallable)
-	void SpawnProjectile();
+	void SpawnProjectile(const FVector& TargetLocation);
 	
 };

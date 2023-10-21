@@ -7,7 +7,7 @@
 #include "CombatActorInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE()
+UINTERFACE(BlueprintType)
 class UCombatActorInterface : public UInterface {
 	GENERATED_BODY()
 };
@@ -19,5 +19,8 @@ class MAY_API ICombatActorInterface {
 	GENERATED_BODY()
 
 public:
-	virtual FVector GetProjectileSpawnPosition() = 0;
+	virtual FVector GetProjectileSpawnLocation() = 0;
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void UpdateFacingTarget(const FVector& Target);
 };

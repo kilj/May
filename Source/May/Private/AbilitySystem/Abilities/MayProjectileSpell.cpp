@@ -9,13 +9,20 @@ void UMayProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 }
 
-void UMayProjectileSpell::SpawnProjectile() {
+void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 	//if server
 	if (const auto Owner = GetOwningActorFromActorInfo(); Owner->HasAuthority()) {
 		checkf(ProjectileClass, TEXT("Can't spawn projectile because of Projectile class on GA is null"));
 		
 		ICombatActorInterface* CombatActor = Cast<ICombatActorInterface>(GetAvatarActorFromActorInfo());
-		const FTransform SpawnTransform = FTransform(CombatActor != nullptr ? CombatActor->GetProjectileSpawnPosition() : FVector());
+
+		const FVector SpawnLocation = CombatActor != nullptr ? CombatActor->GetProjectileSpawnLocation() : FVector();
+		FRotator Rotation = (TargetLocation - SpawnLocation).Rotation();
+		Rotation.Pitch = 0.f; //making projectiles flies in parallel to the ground
+
+		FTransform SpawnTransform;
+		SpawnTransform.SetLocation(SpawnLocation);
+		SpawnTransform.SetRotation(Rotation.Quaternion());
 
 		const auto Projectile = GetWorld()->SpawnActorDeferred<AMayProjectile>(ProjectileClass, SpawnTransform, Owner, Cast<APawn>(Owner), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 		//TODO: give projectile GESpec for damage

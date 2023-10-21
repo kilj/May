@@ -1,6 +1,7 @@
 ﻿// Red Beat, 2023
 
 #include "Core/MayAssetManager.h"
+#include "AbilitySystemGlobals.h"
 #include "AbilitySystem/MayGameplayTags.h"
 
 const UMayAssetManager& UMayAssetManager::Get() {
@@ -13,4 +14,5 @@ void UMayAssetManager::StartInitialLoading() {
 	Super::StartInitialLoading();
 
 	FMayGameplayTags::InitNativeGameplayTags();
+	UAbilitySystemGlobals::Get().InitGlobalData();
 }

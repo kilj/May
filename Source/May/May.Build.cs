@@ -19,12 +19,12 @@ public class May : ModuleRules
 	        "Niagara", 
 	        "EnhancedInput",
 	        "GameplayAbilities",
-	        "UMG"
+	        "UMG",
+	        "GameplayTasks"
         });
         
         PrivateDependencyModuleNames.AddRange(new string[] {
 	        "GameplayTags",
-	        "GameplayTasks"
         });
     }
 }
