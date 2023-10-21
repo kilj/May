@@ -51,18 +51,15 @@ void AEnniePlayerController::OnIAMove(const FInputActionValue& Value) {
 }
 
 void AEnniePlayerController::OnAbilityInputTagPressed(FGameplayTag Tag) {
-	if (GetASC())
-		GetASC()->OnAbilityInputTagPressed(Tag);
+	if (GetASC()) GetASC()->OnAbilityInputTagPressed(Tag);
 }
 
 void AEnniePlayerController::OnAbilityInputTagReleased(FGameplayTag Tag) {
-	if (GetASC())
-		GetASC()->OnAbilityInputTagReleased(Tag);
+	if (GetASC()) GetASC()->OnAbilityInputTagReleased(Tag);
 }
 
 void AEnniePlayerController::OnAbilityInputTagHeld(FGameplayTag Tag) {
-	if (GetASC())
-		GetASC()->OnAbilityInputTagHeld(Tag);
+	if (GetASC()) GetASC()->OnAbilityInputTagHeld(Tag);
 }
 
 void AEnniePlayerController::CursorTrace() {

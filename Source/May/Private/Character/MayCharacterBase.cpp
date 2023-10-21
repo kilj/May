@@ -6,9 +6,6 @@
 AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
 
-	// WeaponSocket = CreateDefaultSubobject<USceneComponent>(FName("WeaponSocket"));
-	// WeaponSocket->SetupAttachment(GetMesh()/*, FName("")*/);
-
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -16,6 +13,10 @@ AMayCharacterBase::AMayCharacterBase() {
 
 UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
 	return AbilitySystemComponent;
+}
+
+FVector AMayCharacterBase::GetProjectileSpawnPosition() {
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
 void AMayCharacterBase::BeginPlay() {

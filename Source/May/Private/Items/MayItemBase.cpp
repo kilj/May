@@ -15,6 +15,7 @@ void AMayItemBase::BeginPlay() {
 	Super::BeginPlay();
 }
 
+//TODO: move to function library
 FActiveGameplayEffectHandle AMayItemBase::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass) {
 	const auto TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 	if (TargetASC == nullptr) return false;

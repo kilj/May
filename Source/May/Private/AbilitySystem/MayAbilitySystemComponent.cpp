@@ -3,7 +3,7 @@
 #include "AbilitySystem/Abilities/MayGameplayAbility.h"
 
 void UMayAbilitySystemComponent::OnAbilityActorInfoSet() {
-	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UMayAbilitySystemComponent::EffectApplied);
+	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &ThisClass::ClientEffectApplied);
 }
 
 void UMayAbilitySystemComponent::AddStartupAbilities(const TArray<TSubclassOf<UGameplayAbility>>& Abilities) {
@@ -41,7 +41,7 @@ void UMayAbilitySystemComponent::OnAbilityInputTagReleased(FGameplayTag& Tag) {
 	}
 }
 
-void UMayAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle) {
+void UMayAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle) {
 	FGameplayTagContainer TagsContainer;
 	GESpec.GetAllAssetTags(TagsContainer);
 	
