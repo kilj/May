@@ -1,10 +1,17 @@
 ﻿#include "Character/MayCharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "May.h"
 #include "AbilitySystem/MayAbilitySystemComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Utils/MayLogChannels.h"
 
 AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+
+	GetMesh()->SetGenerateOverlapEvents(true); //in case, somebody will want to use Mesh instead of CollisionCapsuleComponent
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));

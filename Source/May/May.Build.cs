@@ -25,6 +25,7 @@ public class May : ModuleRules
         
         PrivateDependencyModuleNames.AddRange(new string[] {
 	        "GameplayTags",
+	        "Niagara"
         });
     }
 }

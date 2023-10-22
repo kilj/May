@@ -14,8 +14,7 @@ UTargetDataUnderClick* UTargetDataUnderClick::CreateTargetDataUnderClick(UGamepl
 }
 
 void UTargetDataUnderClick::Activate() {
-	const bool IsLocallyControlled = Ability->GetCurrentActorInfo()->IsLocallyControlled();
-	if (IsLocallyControlled) {
+	if (Ability->GetCurrentActorInfo()->IsLocallyControlled()) {
 		//sending from client
 		SendClickData();
 	}

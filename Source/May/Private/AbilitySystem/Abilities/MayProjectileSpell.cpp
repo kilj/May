@@ -24,7 +24,7 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 		SpawnTransform.SetLocation(SpawnLocation);
 		SpawnTransform.SetRotation(Rotation.Quaternion());
 
-		const auto Projectile = GetWorld()->SpawnActorDeferred<AMayProjectile>(ProjectileClass, SpawnTransform, Owner, Cast<APawn>(Owner), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+		const auto Projectile = GetWorld()->SpawnActorDeferred<AMayProjectile>(ProjectileClass, SpawnTransform, Owner, Cast<APawn>(GetAvatarActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 		//TODO: give projectile GESpec for damage
 		Projectile->FinishSpawning(SpawnTransform);
 	}

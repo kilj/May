@@ -2,8 +2,11 @@
 
 #include "Projectiles/MayProjectile.h"
 
+#include "May.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
 
 AMayProjectile::AMayProjectile() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -13,6 +16,8 @@ AMayProjectile::AMayProjectile() {
 	
 	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	Sphere->SetupAttachment(GetRootComponent());
+
+	Sphere->SetCollisionObjectType(ECC_Projectile);
 
 	Sphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	Sphere->SetCollisionResponseToAllChannels(ECR_Ignore);
@@ -32,5 +37,26 @@ void AMayProjectile::BeginPlay() {
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AMayProjectile::OnSphereOverlap);
 }
 
+void AMayProjectile::Destroyed() {
+	if (!bHit && !HasAuthority())
+		OnImpact();
+	
+	Super::Destroyed();
+}
+
 void AMayProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+	if (OtherActor == GetInstigator()) return;
+	
+	OnImpact();
+
+	if (HasAuthority())
+		Destroy();
+	else
+		bHit = true;
+}
+
+//TODO: just spawn all needed things on destroy?
+void AMayProjectile::OnImpact() const {
+	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation(), FRotator::ZeroRotator);
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ImpactEffect, GetActorLocation(), FRotator::ZeroRotator);
 }
