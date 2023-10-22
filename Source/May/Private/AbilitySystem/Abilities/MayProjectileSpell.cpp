@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Abilities/MayProjectileSpell.h"
 
+#include "AbilitySystemComponent.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "Projectiles/MayProjectile.h"
 
@@ -25,7 +26,14 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 		SpawnTransform.SetRotation(Rotation.Quaternion());
 
 		const auto Projectile = GetWorld()->SpawnActorDeferred<AMayProjectile>(ProjectileClass, SpawnTransform, Owner, Cast<APawn>(GetAvatarActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
-		//TODO: give projectile GESpec for damage
+
+		check(DamageEffectClass);
+		
+		const auto SourceASC = GetAbilitySystemComponentFromActorInfo();
+		FGameplayEffectContextHandle EffectContext = SourceASC->MakeEffectContext();
+		EffectContext.AddSourceObject(this); //TODO: pass here spell or who's casting?
+
+		Projectile->DamageGESpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }

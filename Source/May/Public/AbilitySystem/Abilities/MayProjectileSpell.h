@@ -9,7 +9,7 @@
 class AMayProjectile;
 
 /**
- * 
+ * Ability which spawns MayProjectile and attaches to it "damage" GE
  */
 UCLASS()
 class MAY_API UMayProjectileSpell : public UMayGameplayAbility {
@@ -20,6 +20,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AMayProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass; //TODO: rename to ImpactEffect?
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnProjectile(const FVector& TargetLocation);

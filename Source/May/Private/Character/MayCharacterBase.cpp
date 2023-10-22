@@ -9,9 +9,10 @@ AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
-	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Ignore);
 
-	GetMesh()->SetGenerateOverlapEvents(true); //in case, somebody will want to use Mesh instead of CollisionCapsuleComponent
+	GetCapsuleComponent()->SetGenerateOverlapEvents(true);
+	GetMesh()->SetGenerateOverlapEvents(false);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));

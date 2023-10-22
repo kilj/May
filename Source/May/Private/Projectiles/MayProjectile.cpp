@@ -2,6 +2,8 @@
 
 #include "Projectiles/MayProjectile.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "May.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -49,8 +51,13 @@ void AMayProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, A
 	
 	OnImpact();
 
-	if (HasAuthority())
+	if (HasAuthority()) {
+		if (const auto TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor)) {
+			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageGESpecHandle.Data.Get());
+		}
+		
 		Destroy();
+	}
 	else
 		bHit = true;
 }
