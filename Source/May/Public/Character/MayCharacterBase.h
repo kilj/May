@@ -19,8 +19,10 @@ class MAY_API AMayCharacterBase : public ACharacter, public IAbilitySystemInterf
 public:
 	AMayCharacterBase();
 
+	UFUNCTION(BlueprintCallable)
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	UFUNCTION(BlueprintCallable)
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 	
 protected:

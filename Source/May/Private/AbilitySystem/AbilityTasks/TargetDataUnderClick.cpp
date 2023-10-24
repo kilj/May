@@ -36,10 +36,7 @@ void UTargetDataUnderClick::SendClickData() {
 		FHitResult Hit;
 		PC->GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 		if (Hit.bBlockingHit) {
-			FGameplayAbilityTargetDataHandle DataHandle;
-			FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit();
-			Data->HitResult = Hit;
-			DataHandle.Add(Data);
+			FGameplayAbilityTargetDataHandle DataHandle = FGameplayAbilityTargetDataHandle(new FGameplayAbilityTargetData_SingleTargetHit(Hit)); //that's ptr allocation will be converted to TSharedPtr<FGameplayAbilityTargetData> inside of constructor
 
 			AbilitySystemComponent->ServerSetReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey(), DataHandle, FGameplayTag(), AbilitySystemComponent->ScopedPredictionKey);
 
