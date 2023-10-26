@@ -22,6 +22,7 @@ public:
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	UFUNCTION(BlueprintCallable)
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	UPROPERTY(VisibleAnywhere)

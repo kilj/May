@@ -6,13 +6,14 @@
 #include "Blueprint/UserWidget.h"
 #include "MayWidget.generated.h"
 
+struct FMayAttributeInfo;
 struct FGameplayTag;
-class UMayAbilitySystemComponent;
 struct FGameplayAttribute;
-class UAttributeInfo;
+class UMayAbilitySystemComponent;
 class UMayAttributeSet;
+class UAttributeInfo;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAttributeDataSignature, const FMayAttributeInfo&, Info);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAttributeDataSignature, const FMayAttributeInfo&, Info); //TODO: delete because we use OnAttributeInfoChanged ufunc
 
 /**
  * Base class for all May widgets, windows, etc.
@@ -23,18 +24,23 @@ class MAY_API UMayWidget : public UUserWidget {
 
 public:
 	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
-	void OnWidgetInited();
+	void OnWidgetInited(); //TODO: call before subscription/broadcasting events to bp?
 
-	UPROPERTY(BlueprintAssignable, Category="May|Widget|Attributes")
-	FAttributeDataSignature AttributeInfoDelegate;
+	// UPROPERTY(BlueprintAssignable, Category="May|Widget")
+	// FAttributeDataSignature AttributeInfoDelegate; //TODO: delete because we use OnAttributeInfoChanged ufunc
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnAttributeInfoChanged(FMayAttributeInfo Info);
 
 protected:
+	//TODO: cache here local player?
+	
 	/**
 	 * Widget uses this DataAsset for retrieving attribute data, defined by game designers 
 	 */
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UAttributeInfo> AttributeInfo;
 
-	void SubscribeToAttribute(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS, FGameplayTag AttributeTag, FGameplayAttribute Attribute) const;
-	void BroadcastAttribute(const UMayAttributeSet* AS, FGameplayTag AttributeTag, const FGameplayAttribute& Attribute) const;
+	void SubscribeToAttribute(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS, FGameplayTag AttributeTag, const FGameplayAttribute& Attribute);
+	void BroadcastAttribute(const UMayAttributeSet* AS, FGameplayTag AttributeTag, const FGameplayAttribute& Attribute);
 };

@@ -16,10 +16,10 @@ class MAY_API UMayAbilitySystemLibrary : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
-	static UOverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
-	
-	UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
-	static UAttributeWindowWidgetController* GetAttributeWindowWidgetController(const UObject* WorldContextObject);
+	// UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
+	// static UOverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
+	//
+	// UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
+	// static UAttributeWindowWidgetController* GetAttributeWindowWidgetController(const UObject* WorldContextObject);
 	
 };

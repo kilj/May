@@ -4,18 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "MayWidget.h"
-#include "StatusBarWidget.generated.h"
-
-class UMayAbilitySystemComponent;
-class UMayAttributeSet;
-struct FGameplayAttribute;
+#include "AttributeMenuWidget.generated.h"
 
 USTRUCT(BlueprintType)
-struct FStatusBarWidgetData {
+struct FAttributeMenuWidgetData {
 	GENERATED_BODY()
 
-	FStatusBarWidgetData() {}
-	FStatusBarWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS) : AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	FAttributeMenuWidgetData() {}
+	FAttributeMenuWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS) : AbilitySystemComponent(ASC), AttributeSet(AS) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UMayAbilitySystemComponent> AbilitySystemComponent = nullptr;
@@ -28,17 +24,17 @@ struct FStatusBarWidgetData {
  * 
  */
 UCLASS(Blueprintable)
-class MAY_API UStatusBarWidget : public UMayWidget {
+class MAY_API UAttributeMenuWidget : public UMayWidget {
 	GENERATED_BODY()
 
 public:
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
-	void InitWidget(const FStatusBarWidgetData Data);
+	void InitWidget(const FAttributeMenuWidgetData Data);
 
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
-	FORCEINLINE FStatusBarWidgetData GetWidgetData() const { return WidgetData; };
+	FORCEINLINE FAttributeMenuWidgetData GetWidgetData() const { return WidgetData; };
 
 private:
 	UPROPERTY()
-	FStatusBarWidgetData WidgetData;
+	FAttributeMenuWidgetData WidgetData;
 };

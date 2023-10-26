@@ -7,11 +7,12 @@
 void UStatusBarWidget::InitWidget(const FStatusBarWidgetData Data) {
 	WidgetData = Data;
 
+
 	SubscribeToAttribute(Data.AbilitySystemComponent, Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
 	SubscribeToAttribute(Data.AbilitySystemComponent, Data.AttributeSet, FMayGameplayTags::Get().AttributesVitalHealth, Data.AttributeSet->GetHealthAttribute());
 
 	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
 	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesVitalHealth, Data.AttributeSet->GetHealthAttribute());
-	
+
 	OnWidgetInited();
 }
