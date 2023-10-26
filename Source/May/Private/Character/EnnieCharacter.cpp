@@ -10,7 +10,6 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
-#include "GameFramework/PlayerState.h"
 #include "Player/EnniePlayerController.h"
 #include "Player/EnniePlayerState.h"
 #include "UI/HUD/MayHUD.h"
@@ -86,7 +85,7 @@ void AEnnieCharacter::InitAbilityActorInfo() {
 		// player controller will be null on non-locally controlled client
 		if (const auto PC = Cast<AEnniePlayerController>(GetController())) {
 			if (const auto HUD = Cast<AMayHUD>(PC->GetHUD())) {
-				HUD->InitOverlay(PC, PS, AbilitySystemComponent, AttributeSet);
+				HUD->InitOverlay(AbilitySystemComponent, AttributeSet);
 			}
 		}
 	}
