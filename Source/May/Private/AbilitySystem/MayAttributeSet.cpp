@@ -2,7 +2,6 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Net/UnrealNetwork.h"
-#include "Utils/MayLogChannels.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
 
@@ -13,10 +12,6 @@ UMayAttributeSet::UMayAttributeSet() {
 
 void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	//Vital attributes
-	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Health, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Mana, COND_None, REPNOTIFY_Always);
 
 	//Primary attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Strength, COND_None, REPNOTIFY_Always);
@@ -36,6 +31,9 @@ void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 
+	//Vital attributes
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Health, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Mana, COND_None, REPNOTIFY_Always);
 }
 
 void UMayAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) {
@@ -62,6 +60,19 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	//
 	// if (Data.EvaluatedData.Attribute == GetManaAttribute())
 	// 	SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
+
+	//handle meta attribute IncomingDamage
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute()) {
+		const float IncomingDamageValue = GetIncomingDamage(); //cache meta attribute value
+		SetIncomingDamage(0.f); //cleaning up after ourself
+
+		if (IncomingDamageValue > 0.f) {
+			const float NewHealth = GetHealth() - IncomingDamageValue;
+			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
+
+			const bool bFatal = NewHealth <= 0.f;
+		}
+	}
 }
 
 void UMayAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const {

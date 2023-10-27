@@ -52,6 +52,9 @@ struct FMayGameplayTags {
 	FGameplayTag InputKey3;
 	FGameplayTag InputKey4;
 
+	//
+	FGameplayTag Damage;
+
 private:
 	static FMayGameplayTags Instance;
 };

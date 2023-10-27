@@ -41,4 +41,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.InputKey2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.2"));
 	Instance.InputKey3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.3"));
 	Instance.InputKey4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.4"));
+
+	//
+	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"));
 }

@@ -2,7 +2,9 @@
 
 #include "AbilitySystem/Abilities/MayProjectileSpell.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/MayGameplayTags.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "Projectiles/MayProjectile.h"
 
@@ -33,7 +35,10 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 		FGameplayEffectContextHandle EffectContext = SourceASC->MakeEffectContext();
 		EffectContext.AddSourceObject(this); //TODO: pass here spell or who's casting?
 
-		Projectile->DamageGESpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
+		const auto SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
+
+		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, FMayGameplayTags::Get().Damage, 50.f);
+		Projectile->DamageGESpecHandle = SpecHandle;
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }
