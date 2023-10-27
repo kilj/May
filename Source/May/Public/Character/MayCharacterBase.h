@@ -43,15 +43,19 @@ protected:
 	
 	virtual void InitAbilityActorInfo();
 
+	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
 
+	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
 
+	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
 
+	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
 	void InitDefaultAttributes(TSubclassOf<UGameplayEffect> AttributesEffectClass, float Level = 1.0f);
 
 	void AddStartupAbilities();

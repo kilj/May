@@ -1,4 +1,6 @@
-﻿#include "Items/EffectItem.h"
+﻿// Red Beat, 2023
+
+#include "Items/EffectItem.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"

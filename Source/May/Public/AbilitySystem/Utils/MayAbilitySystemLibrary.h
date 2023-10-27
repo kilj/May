@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/Data/EnemyTypeInfo.h"
 #include "MayAbilitySystemLibrary.generated.h"
 
+class UAbilitySystemComponent;
 class UAttributeWindowWidgetController;
 class UOverlayWidgetController;
 
@@ -21,5 +23,8 @@ public:
 	//
 	// UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
 	// static UAttributeWindowWidgetController* GetAttributeWindowWidgetController(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
+	static void InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level);
 	
 };

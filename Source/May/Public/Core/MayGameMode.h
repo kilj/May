@@ -1,8 +1,13 @@
+// Red Beat, 2023
+
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "MayGameMode.generated.h"
+
+class UEnemyTypeInfo;
+class UAttributeInfo;
 
 UCLASS(minimalapi)
 class AMayGameMode : public AGameModeBase
@@ -11,6 +16,12 @@ class AMayGameMode : public AGameModeBase
 
 public:
 	AMayGameMode();
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UAttributeInfo> AttributesInfo;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UEnemyTypeInfo> EnemyTypesInfo;
 };
 
 

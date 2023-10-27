@@ -2,8 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "MayCharacterBase.h"
+#include "AbilitySystem/Data/EnemyTypeInfo.h"
 #include "Core/Interfaces/HighlightInterface.h"
 #include "EnemyCharacter.generated.h"
+
+enum class EEnemyType : uint8;
 
 UCLASS()
 class MAY_API AEnemyCharacter : public AMayCharacterBase, public IHighlightInterface {
@@ -27,6 +30,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
+	EEnemyType EnemyType = EEnemyType::GoblinMelee;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
 	int32 Level = 1;
 	

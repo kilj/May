@@ -1,4 +1,6 @@
-﻿#include "Items/MayItemBase.h"
+﻿// Red Beat, 2023
+
+#include "Items/MayItemBase.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"

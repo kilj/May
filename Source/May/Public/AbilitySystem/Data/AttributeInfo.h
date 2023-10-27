@@ -33,7 +33,7 @@ class MAY_API UAttributeInfo : public UDataAsset {
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TArray<FMayAttributeInfo> Info;
+	TArray<FMayAttributeInfo> Info; //TODO: convert to TMap<tag, info>
 
 	FMayAttributeInfo FindAttributeInfo(const FGameplayTag& Tag, const bool bLogNotFound = false) const;
 };

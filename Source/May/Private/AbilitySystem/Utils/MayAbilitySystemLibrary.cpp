@@ -1,9 +1,10 @@
 ﻿// Red Beat, 2023
 
 #include "AbilitySystem/Utils/MayAbilitySystemLibrary.h"
+
+#include "AbilitySystemComponent.h"
+#include "Core/MayGameMode.h"
 #include "Kismet/GameplayStatics.h"
-#include "Player/EnniePlayerState.h"
-#include "UI/HUD/MayHUD.h"
 
 // UOverlayWidgetController* UMayAbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject) {
 // 	if (const auto PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0)) {
@@ -34,3 +35,18 @@
 //
 // 	return nullptr;
 // }
+
+void UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level) {
+	const auto MayGameMode = Cast<AMayGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (MayGameMode == nullptr) //TODO: game mode is nullptr on client, so we just skip this (applied GEs will be replicated from server anyways)
+		return;
+	
+	const auto ETDefaultInfo = MayGameMode->EnemyTypesInfo->GetEnemyTypeDefaultInfo(EnemyType);
+
+	FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
+	EffectContext.AddSourceObject(ASC->GetAvatarActor());
+
+	ASC->ApplyGameplayEffectSpecToSelf(*ASC->MakeOutgoingSpec(ETDefaultInfo.PrimaryAttributes, Level, EffectContext).Data.Get());
+	ASC->ApplyGameplayEffectSpecToSelf(*ASC->MakeOutgoingSpec(ETDefaultInfo.SecondaryAttributes, Level, EffectContext).Data.Get());
+	ASC->ApplyGameplayEffectSpecToSelf(*ASC->MakeOutgoingSpec(ETDefaultInfo.VitalAttributes, Level, EffectContext).Data.Get());
+}
