@@ -50,3 +50,14 @@ void UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(const UObject* WorldCo
 	ASC->ApplyGameplayEffectSpecToSelf(*ASC->MakeOutgoingSpec(ETDefaultInfo.SecondaryAttributes, Level, EffectContext).Data.Get());
 	ASC->ApplyGameplayEffectSpecToSelf(*ASC->MakeOutgoingSpec(ETDefaultInfo.VitalAttributes, Level, EffectContext).Data.Get());
 }
+
+void UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC) {
+	const auto MayGameMode = Cast<AMayGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (MayGameMode == nullptr) //TODO: game mode is nullptr on client, so we just skip this (applied GEs will be replicated from server anyways)
+		return;
+
+	for (const auto AbilityClass : MayGameMode->EnemyTypesInfo->CommonAbilities) {
+		ASC->GiveAbility(FGameplayAbilitySpec(AbilityClass, 1));
+	}
+	
+}

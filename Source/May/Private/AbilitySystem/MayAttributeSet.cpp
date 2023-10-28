@@ -3,6 +3,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
+#include "AbilitySystem/MayGameplayTags.h"
 #include "GameFramework/Character.h"
 
 UMayAttributeSet::UMayAttributeSet() {
@@ -71,6 +72,12 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
 
 			const bool bFatal = NewHealth <= 0.f;
+
+			if (!bFatal) {
+				FGameplayTagContainer TagContainer;
+				TagContainer.AddTag(FMayGameplayTags::Get().EffectsHitReact);
+				Properties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
 		}
 	}
 }

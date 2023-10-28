@@ -6,6 +6,7 @@
 #include "Engine/DataAsset.h"
 #include "EnemyTypeInfo.generated.h"
 
+class UGameplayAbility;
 class UGameplayEffect;
 
 UENUM(BlueprintType)
@@ -44,6 +45,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TMap<EEnemyType, FEnemyTypeDefaultInfo> Info;
+
+	// Common abilities for all enemy types (death, hitReact, etc)
+	UPROPERTY(EditDefaultsOnly, Category="Defaults|Common")
+	TArray<TSubclassOf<UGameplayAbility>> CommonAbilities;
 
 	FEnemyTypeDefaultInfo GetEnemyTypeDefaultInfo(EEnemyType Type);
 };

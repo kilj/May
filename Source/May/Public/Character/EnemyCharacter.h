@@ -6,6 +6,7 @@
 #include "Core/Interfaces/HighlightInterface.h"
 #include "EnemyCharacter.generated.h"
 
+struct FGameplayTag;
 enum class EEnemyType : uint8;
 
 UCLASS()
@@ -27,6 +28,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	void OnTagChanged(const FGameplayTag Tag, int32 NewTagCount);
+
+	//TODO: maybe it's better to have enum here or something like that?
+	UPROPERTY(BlueprintReadOnly, Category="State")
+	bool bHitReacting = false;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -39,5 +46,4 @@ protected:
 	bool IsHighlighted = false;
 
 	virtual void InitAbilityActorInfo() override;
-
 };

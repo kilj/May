@@ -37,9 +37,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
-	//TODO: do we need property for this or just can hardcode it?
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
-	FName WeaponTipSocketName = FName();
+
 	
 	virtual void InitAbilityActorInfo();
 
@@ -62,9 +60,17 @@ protected:
 
 	//ICombatActorInterface
 	virtual FVector GetProjectileSpawnLocation() override;
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	//end of ICombatActorInterface
 
 private:
 	UPROPERTY(EditAnywhere, Category="Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	//TODO: do we need property for this or just can hardcode it?
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CombatActor", meta=(AllowPrivateAccess="true"))
+	FName WeaponTipSocketName = FName();
+
+	UPROPERTY(EditAnywhere, Category="CombatActor")
+	TObjectPtr<UAnimMontage> HitReactMontage;
 };

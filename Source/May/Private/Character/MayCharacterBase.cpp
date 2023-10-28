@@ -27,6 +27,10 @@ FVector AMayCharacterBase::GetProjectileSpawnLocation() {
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
+UAnimMontage* AMayCharacterBase::GetHitReactMontage_Implementation() {
+	return HitReactMontage;
+}
+
 void AMayCharacterBase::BeginPlay() {
 	Super::BeginPlay();
 }

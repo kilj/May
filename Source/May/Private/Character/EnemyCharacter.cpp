@@ -2,8 +2,8 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/MayAttributeSet.h"
+#include "AbilitySystem/MayGameplayTags.h"
 #include "AbilitySystem/Utils/MayAbilitySystemLibrary.h"
-#include "Net/UnrealNetwork.h"
 #include "Utils/MayLogChannels.h"
 
 AEnemyCharacter::AEnemyCharacter() {
@@ -46,12 +46,15 @@ void AEnemyCharacter::BeginPlay() {
 	InitAbilityActorInfo();
 
 	UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(GetWorld(), GetAbilitySystemComponent(), EnemyType, GetLevel());
+	UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(GetWorld(), GetAbilitySystemComponent());
 
 	// InitDefaultAttributes(DefaultPrimaryAttributes); //init default primary attributes on server, so they will be replicated to clients...
 	// InitDefaultAttributes(DefaultSecondaryAttributes); //... and do the same with secondary attributes
 	// InitDefaultAttributes(DefaultVitalAttributes); //... in the end we should set initial values for Health/Mana
 
 	//AddStartupAbilities();
+
+	AbilitySystemComponent->RegisterGameplayTagEvent(FMayGameplayTags::Get().EffectsHitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ThisClass::OnTagChanged);
 }
 
 void AEnemyCharacter::InitAbilityActorInfo() {
@@ -73,4 +76,8 @@ void AEnemyCharacter::Tick(float DeltaTime) {
 
 void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void AEnemyCharacter::OnTagChanged(const FGameplayTag Tag, const int32 NewTagCount) {
+	bHitReacting = Tag.MatchesTagExact(FMayGameplayTags::Get().EffectsHitReact) && NewTagCount > 0; //play hit react montage
 }

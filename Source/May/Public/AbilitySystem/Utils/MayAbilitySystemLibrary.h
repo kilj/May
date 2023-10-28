@@ -27,4 +27,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
 	static void InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level);
 	
+	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
+	static void InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
+	
 };

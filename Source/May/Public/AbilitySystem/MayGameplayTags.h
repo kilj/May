@@ -52,8 +52,11 @@ struct FMayGameplayTags {
 	FGameplayTag InputKey3;
 	FGameplayTag InputKey4;
 
-	//
+	//meta
 	FGameplayTag Damage;
+
+	//effects
+	FGameplayTag EffectsHitReact;
 
 private:
 	static FMayGameplayTags Instance;

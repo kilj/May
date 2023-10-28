@@ -43,5 +43,8 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.InputKey4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.4"));
 
 	//
-	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"));
+	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Meta attribute for incoming damage"));
+
+	//effects
+	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));
 }

@@ -37,7 +37,7 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 
 		const auto SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
 
-		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, FMayGameplayTags::Get().Damage, 50.f);
+		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, FMayGameplayTags::Get().Damage, Damage.GetValueAtLevel(GetAbilityLevel()));
 		Projectile->DamageGESpecHandle = SpecHandle;
 		Projectile->FinishSpawning(SpawnTransform);
 	}
