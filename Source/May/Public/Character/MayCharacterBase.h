@@ -24,6 +24,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+
+	UFUNCTION(NetMulticast, Reliable)
+	virtual void MulticastHandleDeath();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -61,6 +64,7 @@ protected:
 	//ICombatActorInterface
 	virtual FVector GetProjectileSpawnLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual void Die() override;
 	//end of ICombatActorInterface
 
 private:

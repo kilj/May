@@ -25,6 +25,10 @@ public:
 	virtual int32 GetLevel() override;
 	//end of ILevelInterface
 
+	//ICombatActorInterface
+	virtual void Die() override;
+	//end of ICombatActorInterface
+
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 

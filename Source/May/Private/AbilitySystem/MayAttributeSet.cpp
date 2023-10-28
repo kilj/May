@@ -4,6 +4,7 @@
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
 #include "AbilitySystem/MayGameplayTags.h"
+#include "Core/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
 
 UMayAttributeSet::UMayAttributeSet() {
@@ -73,7 +74,10 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 			const bool bFatal = NewHealth <= 0.f;
 
-			if (!bFatal) {
+			if (bFatal) {
+				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
+					CombatActorInterface->Die();
+			} else {
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FMayGameplayTags::Get().EffectsHitReact);
 				Properties.TargetASC->TryActivateAbilitiesByTag(TagContainer);

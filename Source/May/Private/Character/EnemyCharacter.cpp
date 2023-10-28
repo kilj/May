@@ -40,6 +40,14 @@ int32 AEnemyCharacter::GetLevel() {
 	return Level;
 }
 
+void AEnemyCharacter::Die() {
+	MAY_ULOG(TEXT("%s died..."), *GetActorNameOrLabel());
+	
+	SetLifeSpan(5.f);
+	
+	Super::Die();
+}
+
 void AEnemyCharacter::BeginPlay() {
 	Super::BeginPlay();
 
