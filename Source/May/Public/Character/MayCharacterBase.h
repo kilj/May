@@ -26,7 +26,7 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	UFUNCTION(NetMulticast, Reliable)
-	virtual void MulticastHandleDeath();
+	virtual void MulticastHandleDeath(); //TODO: rename to Multicast_Die()?
 	
 protected:
 	virtual void BeginPlay() override;
@@ -40,8 +40,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
-
-	
 	virtual void InitAbilityActorInfo();
 
 	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
@@ -64,7 +62,7 @@ protected:
 	//ICombatActorInterface
 	virtual FVector GetProjectileSpawnLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-	virtual void Die() override;
+	virtual void Die() override; //TODO: rename to Server_Die() ?
 	//end of ICombatActorInterface
 
 private:

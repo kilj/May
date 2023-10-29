@@ -6,6 +6,8 @@
 #include "AbilitySystem/MayGameplayTags.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
+#include "Player/EnniePlayerController.h"
 
 UMayAttributeSet::UMayAttributeSet() {
 	//InitHealth(50.f);
@@ -53,6 +55,7 @@ void UMayAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribut
 void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) {
 	Super::PostGameplayEffectExecute(Data);
 
+	//just collecting data about GE execution for easy further usage
 	FEffectProperties Properties;
 	SetEffectProperties(Data, Properties);
 
@@ -73,7 +76,6 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
 
 			const bool bFatal = NewHealth <= 0.f;
-
 			if (bFatal) {
 				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
 					CombatActorInterface->Die();
@@ -82,6 +84,12 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				TagContainer.AddTag(FMayGameplayTags::Get().EffectsHitReact);
 				Properties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+		}
+
+		//showing floating text
+		if (Properties.SourceCharacter != Properties.TargetCharacter) {
+			if (const auto EnniePC = Cast<AEnniePlayerController>(UGameplayStatics::GetPlayerController(Properties.SourceCharacter, 0)))
+				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter);
 		}
 	}
 }

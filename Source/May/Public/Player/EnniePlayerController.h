@@ -6,6 +6,7 @@
 #include "InputActionValue.h"
 #include "EnniePlayerController.generated.h"
 
+class UDamageTextComponent;
 struct FGameplayTag;
 struct FInputActionValue;
 class UMayInputConfig;
@@ -36,6 +37,9 @@ public:
 	UInputAction* IAMove;
 	
 	virtual void PlayerTick(float DeltaTime) override;
+
+	UFUNCTION(Client, Unreliable)
+	void ShowReceivedDamage(const float DamageAmount, ACharacter* TargetCharacter);
 	
 protected:
 	virtual void SetupInputComponent() override;
@@ -56,6 +60,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UMayInputConfig> InputConfig;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
 
 	IHighlightInterface* LastFrameHighlightedActor; 
 	IHighlightInterface* ThisFrameHighlightedActor;

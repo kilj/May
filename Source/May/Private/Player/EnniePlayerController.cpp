@@ -6,7 +6,9 @@
 #include "GameplayTagContainer.h"
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "Core/Interfaces/HighlightInterface.h"
+#include "GameFramework/Character.h"
 #include "Input/MayInputComponent.h"
+#include "UI/Components/DamageTextComponent.h"
 
 AEnniePlayerController::AEnniePlayerController() {
 	bReplicates = true;
@@ -83,6 +85,16 @@ void AEnniePlayerController::PlayerTick(float DeltaTime) {
 	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
+}
+
+void AEnniePlayerController::ShowReceivedDamage_Implementation(const float DamageAmount, ACharacter* TargetCharacter) {
+	if (IsValid(TargetCharacter) && DamageTextComponentClass) {
+		const auto DamageText = NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);
+		DamageText->RegisterComponent();
+		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		DamageText->ShowDamageText(DamageAmount);
+	} 
 }
 
 void AEnniePlayerController::SetupInputComponent() {

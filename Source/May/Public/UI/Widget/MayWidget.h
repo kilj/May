@@ -13,8 +13,6 @@ class UMayAbilitySystemComponent;
 class UMayAttributeSet;
 class UAttributeInfo;
 
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAttributeDataSignature, const FMayAttributeInfo&, Info); //TODO: delete because we use OnAttributeInfoChanged ufunc
-
 /**
  * Base class for all May widgets, windows, etc.
  */
@@ -25,9 +23,6 @@ class MAY_API UMayWidget : public UUserWidget {
 public:
 	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
 	void OnWidgetInited(); //TODO: call before subscription/broadcasting events to bp?
-
-	// UPROPERTY(BlueprintAssignable, Category="May|Widget")
-	// FAttributeDataSignature AttributeInfoDelegate; //TODO: delete because we use OnAttributeInfoChanged ufunc
 
 	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
 	void OnAttributeInfoChanged(FMayAttributeInfo Info);
