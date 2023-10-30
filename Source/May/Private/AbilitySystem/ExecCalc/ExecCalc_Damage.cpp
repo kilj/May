@@ -9,10 +9,12 @@
 struct MayDamageStatics {
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Armor);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BlockChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ArmorPenetration);
 	
 	MayDamageStatics() {
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, Armor, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, BlockChance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, ArmorPenetration, Source, true);
 	}
 };
 
@@ -24,6 +26,7 @@ static const MayDamageStatics& DamageStatics() {
 UExecCalc_Damage::UExecCalc_Damage() {
 	RelevantAttributesToCapture.Add(DamageStatics().ArmorDef);
 	RelevantAttributesToCapture.Add(DamageStatics().BlockChanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ArmorPenetrationDef);
 }
 
 void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const {
@@ -51,10 +54,19 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	UE_LOG(LogTemp, Log, TEXT("Eval block: BlockRandom: %f, BlockChance: %f"), BlockRandom, TargetBlockChance);
 	if (BlockRandom <= TargetBlockChance) {
 		UE_LOG(LogTemp, Warning, TEXT("Successful block! BlockRandom: %f, BlockChance: %f"), BlockRandom, TargetBlockChance);
-		Damage *= 0.5f;
+		Damage *= 0.5f; //TODO: pass this value with SetByCallerMagnitude FMayGameplayTags::Get().DamageBlockMitigation
 	}
+
+	float TargetArmor = 0.f;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().ArmorDef, Params, TargetArmor);
+
+	float SourceArmorPenetration = 0.f;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().ArmorPenetrationDef, Params, SourceArmorPenetration);
 	
-	//TODO: clamp if needed
+	//that's pretty volatile code and I've wrote it here just to do at least something
+	const float EffectiveArmor = TargetArmor *= (100 - SourceArmorPenetration * 0.25f) * 0.01f;
+	Damage *= (100 - EffectiveArmor * 0.5f) * 0.01f;
+	//end
 
 	const FGameplayModifierEvaluatedData EvaluatedData(UMayAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
 	OutExecutionOutput.AddOutputModifier(EvaluatedData);
