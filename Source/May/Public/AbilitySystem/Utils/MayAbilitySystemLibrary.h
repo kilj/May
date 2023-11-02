@@ -6,6 +6,7 @@
 #include "AbilitySystem/Data/EnemyTypeInfo.h"
 #include "MayAbilitySystemLibrary.generated.h"
 
+struct FGameplayEffectContextHandle;
 class UAbilitySystemComponent;
 class UAttributeWindowWidgetController;
 class UOverlayWidgetController;
@@ -29,5 +30,17 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
 	static void InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
+
+	UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|GameplayEffects")
+	static bool GetIsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);
+
+	UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|GameplayEffects")
+	static bool GetIsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle);
+
+	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary|GameplayEffects")
+	static void SetIsBlockedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool InValue);
+	
+	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary|GameplayEffects")
+	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool InValue);
 	
 };

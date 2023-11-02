@@ -3,6 +3,7 @@
 #include "AbilitySystem/Utils/MayAbilitySystemLibrary.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/MayAbilityTypes.h"
 #include "Core/MayGameMode.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -60,4 +61,24 @@ void UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(const UObject* WorldCon
 		ASC->GiveAbility(FGameplayAbilitySpec(AbilityClass, 1));
 	}
 	
+}
+
+bool UMayAbilitySystemLibrary::GetIsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle) {
+	const auto EffectContext = static_cast<const FMayGameplayEffectContext*>(EffectContextHandle.Get()); //that c/c++ casting options are pretty shitty shit
+	return EffectContext != nullptr ? EffectContext->IsBlockHit() : false;
+}
+
+bool UMayAbilitySystemLibrary::GetIsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle) {
+	const auto EffectContext = static_cast<const FMayGameplayEffectContext*>(EffectContextHandle.Get()); //that c/c++ casting options are pretty shitty shit
+	return EffectContext != nullptr ? EffectContext->IsCriticalHit() : false;
+}
+
+void UMayAbilitySystemLibrary::SetIsBlockedHit(FGameplayEffectContextHandle& EffectContextHandle, const bool InValue) {
+	if (const auto EffectContext = static_cast<FMayGameplayEffectContext*>(EffectContextHandle.Get()))
+		EffectContext->SetIsBlockHit(InValue);
+}
+
+void UMayAbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& EffectContextHandle, const bool InValue) {
+	if (const auto EffectContext = static_cast<FMayGameplayEffectContext*>(EffectContextHandle.Get()))
+		EffectContext->SetIsCriticalHit(InValue);
 }

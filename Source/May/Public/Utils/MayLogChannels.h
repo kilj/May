@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Red Beat, 2023
+
+#pragma once
 
 #include "Logging/LogMacros.h"
 

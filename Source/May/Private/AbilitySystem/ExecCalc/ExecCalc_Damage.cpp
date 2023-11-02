@@ -3,6 +3,7 @@
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/MayAbilityTypes.h"
 #include "AbilitySystem/MayAttributeSet.h"
 #include "AbilitySystem/MayGameplayTags.h"
 
@@ -46,6 +47,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	const auto TargetAvatar = TargetASC ? TargetASC->GetAvatarActor() : nullptr;
 
 	const auto Spec = ExecutionParams.GetOwningSpec();
+	const auto EffectContext = static_cast<FMayGameplayEffectContext*>(Spec.GetContext().Get());
 
 	const FGameplayTagContainer* SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	const FGameplayTagContainer* TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
@@ -68,6 +70,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitResistanceDef, Params, TargetCriticalHitResistance);
 
 	const bool bCriticalDamageHit = FMath::RandRange(0.f, 100.f) <= SourceCriticalHitChance;
+	EffectContext->SetIsCriticalHit(bCriticalDamageHit);
+	
 	if (bCriticalDamageHit) {
 		UE_LOG(LogTemp, Warning, TEXT("Critical hit! Source CritHitChance: %f"), SourceCriticalHitChance);
 		Damage *= FMath::Max(1.f, 1.f + SourceCriticalHitDamage * 0.01f - TargetCriticalHitResistance * 0.01f);
@@ -77,6 +81,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().BlockChanceDef, Params, TargetBlockChance);
 
 	const bool bBlockedHit = FMath::RandRange(0.f, 100.f) <= TargetBlockChance;
+	EffectContext->SetIsBlockHit(bBlockedHit);
+
 	if (bBlockedHit) {
 		UE_LOG(LogTemp, Warning, TEXT("Hit successfully blocked! Target's block chance was %f"), TargetBlockChance);
 		Damage *= 0.5f; //TODO: pass this value with SetByCallerMagnitude FMayGameplayTags::Get().DamageBlockMitigation OR make a CT in EnemyTypesInfo and get that value from it

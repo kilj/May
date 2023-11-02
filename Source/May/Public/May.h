@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Red Beat, 2023
 
 #pragma once
 

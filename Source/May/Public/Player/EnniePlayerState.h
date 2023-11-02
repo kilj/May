@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Red Beat, 2023
+
+#pragma once
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
