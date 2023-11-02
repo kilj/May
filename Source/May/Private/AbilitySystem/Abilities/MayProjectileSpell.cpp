@@ -33,7 +33,8 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 		
 		const auto SourceASC = GetAbilitySystemComponentFromActorInfo();
 		FGameplayEffectContextHandle EffectContext = SourceASC->MakeEffectContext();
-		EffectContext.AddSourceObject(this); //TODO: pass here spell or who's casting?
+		EffectContext.AddSourceObject(Projectile);
+		EffectContext.SetAbility(this);
 
 		const auto SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
 
