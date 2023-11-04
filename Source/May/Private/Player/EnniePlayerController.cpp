@@ -87,13 +87,13 @@ void AEnniePlayerController::PlayerTick(float DeltaTime) {
 	CursorTrace();
 }
 
-void AEnniePlayerController::ShowReceivedDamage_Implementation(const float DamageAmount, ACharacter* TargetCharacter) {
+void AEnniePlayerController::ShowReceivedDamage_Implementation(const float DamageAmount, ACharacter* TargetCharacter, FColor TextColor) {
 	if (IsValid(TargetCharacter) && DamageTextComponentClass) {
 		const auto DamageText = NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);
 		DamageText->RegisterComponent();
 		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		DamageText->ShowDamageText(DamageAmount);
+		DamageText->ShowDamageText(DamageAmount, TextColor);
 	} 
 }
 

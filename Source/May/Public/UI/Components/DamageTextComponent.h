@@ -17,7 +17,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void ShowDamageText(float Damage);
+	void ShowDamageText(float Damage, FColor TextColor);
 
 protected:
 	virtual void BeginPlay() override;

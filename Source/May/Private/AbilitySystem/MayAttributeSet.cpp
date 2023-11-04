@@ -3,6 +3,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
+#include "AbilitySystem/MayAbilityTypes.h"
 #include "AbilitySystem/MayGameplayTags.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
@@ -59,6 +60,8 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	FEffectProperties Properties;
 	SetEffectProperties(Data, Properties);
 
+	const auto EffectContext = static_cast<FMayGameplayEffectContext*>(Properties.EffectContextHandle.Get());
+
 	// this code will call AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate twice, but somehow there are some people who recommends such approach
 	// if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	// 	SetHealth(FMath::Clamp(GetHealth(), 0.0f, GetMaxHealth()));
@@ -88,8 +91,15 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 		//showing floating text
 		if (Properties.SourceCharacter != Properties.TargetCharacter) {
-			if (const auto EnniePC = Cast<AEnniePlayerController>(UGameplayStatics::GetPlayerController(Properties.SourceCharacter, 0)))
-				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter);
+			if (const auto EnniePC = Cast<AEnniePlayerController>(UGameplayStatics::GetPlayerController(Properties.SourceCharacter, 0))) {
+				auto TextColor = FColor::White;
+				if (EffectContext->IsBlockHit())
+					TextColor = FColor::Orange;
+				if (EffectContext->IsCriticalHit())
+					TextColor = FColor::Red;
+				
+				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter, TextColor);
+			}
 		}
 	}
 }

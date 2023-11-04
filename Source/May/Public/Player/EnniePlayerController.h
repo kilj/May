@@ -41,7 +41,7 @@ public:
 	virtual void PlayerTick(float DeltaTime) override;
 
 	UFUNCTION(Client, Unreliable)
-	void ShowReceivedDamage(const float DamageAmount, ACharacter* TargetCharacter);
+	void ShowReceivedDamage(const float DamageAmount, ACharacter* TargetCharacter, FColor TextColor = FColor::White);
 	
 protected:
 	virtual void SetupInputComponent() override;
