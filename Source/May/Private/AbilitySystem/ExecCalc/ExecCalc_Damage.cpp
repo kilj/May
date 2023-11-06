@@ -58,7 +58,11 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	//TODO: depend damage calculations from Source/Target level
 	
-	float Damage = Spec.GetSetByCallerMagnitude(FMayGameplayTags::Get().Damage);
+	float Damage = 0.f;
+
+	for (const auto DamageTypeTag : FMayGameplayTags::Get().DamageTypes) {
+		Damage += Spec.GetSetByCallerMagnitude(DamageTypeTag, false);
+	}
 
 	float SourceCriticalHitChance = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitChanceDef, Params, SourceCriticalHitChance);

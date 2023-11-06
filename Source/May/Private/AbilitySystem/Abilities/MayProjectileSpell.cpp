@@ -4,7 +4,6 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
-#include "AbilitySystem/MayGameplayTags.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "Projectiles/MayProjectile.h"
 
@@ -38,8 +37,12 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 
 		const auto SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContext);
 
-		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, FMayGameplayTags::Get().Damage, Damage.GetValueAtLevel(GetAbilityLevel()));
+		for (auto& Pair : DamageTypes) {
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Pair.Key, Pair.Value.GetValueAtLevel(GetAbilityLevel()));
+		}
+		
 		Projectile->DamageGESpecHandle = SpecHandle;
 		Projectile->FinishSpawning(SpawnTransform);
+
 	}
 }

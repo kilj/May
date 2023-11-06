@@ -9,6 +9,7 @@
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/EnniePlayerController.h"
+#include "UI/Components/DamageTextComponent.h"
 
 UMayAttributeSet::UMayAttributeSet() {
 	//InitHealth(50.f);
@@ -92,13 +93,11 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 		//showing floating text
 		if (Properties.SourceCharacter != Properties.TargetCharacter) {
 			if (const auto EnniePC = Cast<AEnniePlayerController>(UGameplayStatics::GetPlayerController(Properties.SourceCharacter, 0))) {
-				auto TextColor = FColor::White;
-				if (EffectContext->IsBlockHit())
-					TextColor = FColor::Orange;
-				if (EffectContext->IsCriticalHit())
-					TextColor = FColor::Red;
+				FUIDamageData DamageData;
+				DamageData.bIsBlockedHit = EffectContext->IsBlockHit();
+				DamageData.bIsCriticalHit = EffectContext->IsCriticalHit();
 				
-				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter, TextColor);
+				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter, DamageData);
 			}
 		}
 	}

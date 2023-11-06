@@ -8,6 +8,7 @@
 #include "InputActionValue.h"
 #include "EnniePlayerController.generated.h"
 
+struct FUIDamageData;
 class UDamageTextComponent;
 struct FGameplayTag;
 struct FInputActionValue;
@@ -41,7 +42,7 @@ public:
 	virtual void PlayerTick(float DeltaTime) override;
 
 	UFUNCTION(Client, Unreliable)
-	void ShowReceivedDamage(const float DamageAmount, ACharacter* TargetCharacter, FColor TextColor = FColor::White);
+	void ShowReceivedDamage(const float DamageAmount, ACharacter* TargetCharacter, const FUIDamageData& UIDamageData);
 	
 protected:
 	virtual void SetupInputComponent() override;

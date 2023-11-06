@@ -12,7 +12,7 @@ struct FMayGameplayTags {
 	static const FMayGameplayTags& Get() { return Instance; }
 
 	static void InitNativeGameplayTags();
-
+	
 	//attributes.primary
 	FGameplayTag AttributesPrimaryStrength;
 	FGameplayTag AttributesPrimaryIntelligence;
@@ -57,6 +57,13 @@ struct FMayGameplayTags {
 
 	//effects
 	FGameplayTag EffectsHitReact;
+
+	//damageTypes
+	FGameplayTag DamagePhysical;
+	FGameplayTag DamageFire;
+	FGameplayTag DamageIce;
+
+	TArray<FGameplayTag> DamageTypes;
 
 private:
 	static FMayGameplayTags Instance;

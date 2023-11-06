@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MayGameplayAbility.h"
+#include "MayDamageGameplayAbility.h"
 #include "MayProjectileSpell.generated.h"
 
 class AMayProjectile;
@@ -12,7 +12,7 @@ class AMayProjectile;
  * Ability which spawns MayProjectile and attaches to it "damage" GE
  */
 UCLASS()
-class MAY_API UMayProjectileSpell : public UMayGameplayAbility {
+class MAY_API UMayProjectileSpell : public UMayDamageGameplayAbility {
 	GENERATED_BODY()
 
 protected:
@@ -20,9 +20,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AMayProjectile> ProjectileClass;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UGameplayEffect> DamageEffectClass; //TODO: rename to ImpactEffect?
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnProjectile(const FVector& TargetLocation);

@@ -47,4 +47,13 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 
 	//effects
 	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));
+
+	//damage types
+	Instance.DamagePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical"));
+	Instance.DamageFire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Fire"));
+	Instance.DamageIce = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Ice"));
+
+	Instance.DamageTypes.Add(Instance.DamagePhysical);
+	Instance.DamageTypes.Add(Instance.DamageFire);
+	Instance.DamageTypes.Add(Instance.DamageIce);
 }
