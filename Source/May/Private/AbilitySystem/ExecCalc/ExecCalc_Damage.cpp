@@ -15,6 +15,11 @@ struct MayDamageStatics {
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitDamage);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitResistance);
 	
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ResistancePhysical);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ResistanceMagical);
+
+	TMap<FGameplayTag, FGameplayEffectAttributeCaptureDefinition> TagsToCaptureDefs;
+	
 	MayDamageStatics() {
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, Armor, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, BlockChance, Target, false);
@@ -22,6 +27,14 @@ struct MayDamageStatics {
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, CriticalHitChance, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, CriticalHitDamage, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, CriticalHitResistance, Target, false);
+		
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, ResistancePhysical, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, ResistanceMagical, Target, false);
+
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamagePhysical, ResistancePhysicalDef);
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamagePhysicalBleeding, ResistancePhysicalDef);
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamageMagicFire, ResistanceMagicalDef);
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamageMagicIce, ResistanceMagicalDef);
 	}
 };
 
@@ -37,6 +50,9 @@ UExecCalc_Damage::UExecCalc_Damage() {
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitChanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitDamageDef);
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitResistanceDef);
+	
+	RelevantAttributesToCapture.Add(DamageStatics().ResistancePhysicalDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ResistanceMagicalDef);
 }
 
 void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const {
@@ -60,8 +76,17 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	
 	float Damage = 0.f;
 
-	for (const auto& DamageType : FMayGameplayTags::Get().DamageTypes) {
-		Damage += Spec.GetSetByCallerMagnitude(DamageType.Key, false);
+	for (const auto& Pair : FMayGameplayTags::Get().DamageTypes) {
+		const auto CaptureDef = DamageStatics().TagsToCaptureDefs[Pair.Value];
+
+		float DamageTypeValue = Spec.GetSetByCallerMagnitude(Pair.Key, false);
+		
+		float Resistance = 0.f;
+		ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(CaptureDef, Params, Resistance);
+		Resistance = FMath::Clamp(Resistance, 0, 100.f);
+
+		DamageTypeValue *= (100.f - Resistance) * 0.01f;
+		Damage += DamageTypeValue;
 	}
 
 	float SourceCriticalHitChance = 0.f;
@@ -77,7 +102,6 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	EffectContext->SetIsCriticalHit(bCriticalDamageHit);
 	
 	if (bCriticalDamageHit) {
-		UE_LOG(LogTemp, Warning, TEXT("Critical hit! Source CritHitChance: %f"), SourceCriticalHitChance);
 		Damage *= FMath::Max(1.f, 1.f + SourceCriticalHitDamage * 0.01f - TargetCriticalHitResistance * 0.01f);
 	}
 
@@ -88,7 +112,6 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	EffectContext->SetIsBlockHit(bBlockedHit);
 
 	if (bBlockedHit) {
-		UE_LOG(LogTemp, Warning, TEXT("Hit successfully blocked! Target's block chance was %f"), TargetBlockChance);
 		Damage *= 0.5f; //TODO: pass this value with SetByCallerMagnitude FMayGameplayTags::Get().DamageBlockMitigation OR make a CT in EnemyTypesInfo and get that value from it
 	}
 
