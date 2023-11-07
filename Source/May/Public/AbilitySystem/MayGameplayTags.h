@@ -31,6 +31,10 @@ struct FMayGameplayTags {
 	FGameplayTag AttributesSecondaryMaxHealth;
 	FGameplayTag AttributesSecondaryMaxMana;
 
+	//attributes.resistance
+	FGameplayTag AttributesResistancePhysical;
+	FGameplayTag AttributesResistanceMagical;
+	
 	//attributes.vital
 	FGameplayTag AttributesVitalHealth;
 	FGameplayTag AttributesVitalMana;
@@ -55,15 +59,16 @@ struct FMayGameplayTags {
 	//meta
 	FGameplayTag Damage;
 
-	//effects
-	FGameplayTag EffectsHitReact;
-
 	//damageTypes
 	FGameplayTag DamagePhysical;
-	FGameplayTag DamageFire;
-	FGameplayTag DamageIce;
+	FGameplayTag DamagePhysicalBleeding;
+	FGameplayTag DamageMagicFire;
+	FGameplayTag DamageMagicIce;
 
-	TArray<FGameplayTag> DamageTypes;
+	TMap<FGameplayTag, FGameplayTag> DamageTypes; //damagetype -> resistance
+
+	//effects
+	FGameplayTag EffectsHitReact;
 
 private:
 	static FMayGameplayTags Instance;

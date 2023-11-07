@@ -60,8 +60,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	
 	float Damage = 0.f;
 
-	for (const auto DamageTypeTag : FMayGameplayTags::Get().DamageTypes) {
-		Damage += Spec.GetSetByCallerMagnitude(DamageTypeTag, false);
+	for (const auto& DamageType : FMayGameplayTags::Get().DamageTypes) {
+		Damage += Spec.GetSetByCallerMagnitude(DamageType.Key, false);
 	}
 
 	float SourceCriticalHitChance = 0.f;

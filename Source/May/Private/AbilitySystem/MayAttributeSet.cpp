@@ -37,6 +37,10 @@ void UMayAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 
+	//resistance attributes
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, ResistancePhysical, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, ResistanceMagical, COND_None, REPNOTIFY_Always);
+
 	//Vital attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMayAttributeSet, Mana, COND_None, REPNOTIFY_Always);
@@ -165,6 +169,14 @@ void UMayAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealt
 
 void UMayAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, MaxMana, OldMaxMana);
+}
+
+void UMayAttributeSet::OnRep_ResistancePhysical(const FGameplayAttributeData& OldResistancePhysical) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, ResistancePhysical, OldResistancePhysical);
+}
+
+void UMayAttributeSet::OnRep_ResistanceMagical(const FGameplayAttributeData& OldResistanceMagical) const {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UMayAttributeSet, ResistanceMagical, OldResistanceMagical);
 }
 
 void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Properties) {

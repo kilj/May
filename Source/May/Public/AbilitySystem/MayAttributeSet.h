@@ -163,6 +163,21 @@ public:
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
 
+	//Resistance attributes
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ResistancePhysical, Category="Attributes|Resistance")
+	FGameplayAttributeData ResistancePhysical;
+	ATTRIBUTE_ACCESSORS(UMayAttributeSet, ResistancePhysical);
+
+	UFUNCTION()
+	void OnRep_ResistancePhysical(const FGameplayAttributeData& OldResistancePhysical) const;
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ResistanceMagical, Category="Attributes|Resistance")
+	FGameplayAttributeData ResistanceMagical;
+	ATTRIBUTE_ACCESSORS(UMayAttributeSet, ResistanceMagical);
+
+	UFUNCTION()
+	void OnRep_ResistanceMagical(const FGameplayAttributeData& OldResistanceMagical) const;
+	
 	//Vital attributes
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Health, Category="Attributes|Vital")

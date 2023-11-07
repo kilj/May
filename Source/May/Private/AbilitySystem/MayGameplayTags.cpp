@@ -21,7 +21,12 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.AttributesSecondaryManaRegeneration = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.ManaRegeneration"));
 	Instance.AttributesSecondaryMaxHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.MaxHealth"));
 	Instance.AttributesSecondaryMaxMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.MaxMana"));
-	
+
+	//attributes.resistance
+	Instance.AttributesResistancePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Physical"));
+	Instance.AttributesResistanceMagical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Magical"));
+
+	//attributes.vital
 	Instance.AttributesVitalHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.Health"));
 	Instance.AttributesVitalMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.Mana"));
 
@@ -42,18 +47,20 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.InputKey3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.3"));
 	Instance.InputKey4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.4"));
 
-	//
+	//meta attributes
 	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Meta attribute for incoming damage"));
-
-	//effects
-	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));
 
 	//damage types
 	Instance.DamagePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical"));
-	Instance.DamageFire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Fire"));
-	Instance.DamageIce = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Ice"));
+	Instance.DamagePhysicalBleeding = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical.Bleeding"));
+	Instance.DamageMagicFire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Magic.Fire"));
+	Instance.DamageMagicIce = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Magic.Ice"));
 
-	Instance.DamageTypes.Add(Instance.DamagePhysical);
-	Instance.DamageTypes.Add(Instance.DamageFire);
-	Instance.DamageTypes.Add(Instance.DamageIce);
+	Instance.DamageTypes.Add(Instance.DamagePhysical, Instance.AttributesResistancePhysical);
+	Instance.DamageTypes.Add(Instance.DamagePhysicalBleeding, Instance.AttributesResistancePhysical);
+	Instance.DamageTypes.Add(Instance.DamageMagicFire, Instance.AttributesResistanceMagical);
+	Instance.DamageTypes.Add(Instance.DamageMagicIce, Instance.AttributesResistanceMagical);
+
+	//effects
+	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));
 }

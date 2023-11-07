@@ -28,6 +28,10 @@ void UAttributeMenuWidget::InitWidget(const FAttributeMenuWidgetData Data) {
 	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
 	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxMana, Data.AttributeSet->GetMaxManaAttribute());
 
+	//resistances
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistancePhysical, Data.AttributeSet->GetResistancePhysicalAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistanceMagical, Data.AttributeSet->GetResistanceMagicalAttribute());
+
 	//TODO: vital
 
 	//broadcasting
@@ -46,6 +50,9 @@ void UAttributeMenuWidget::InitWidget(const FAttributeMenuWidgetData Data) {
 	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryManaRegeneration, Data.AttributeSet->GetManaRegenerationAttribute());
 	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
 	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxMana, Data.AttributeSet->GetMaxManaAttribute());
+	
+	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesResistancePhysical, Data.AttributeSet->GetResistancePhysicalAttribute());
+	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesResistanceMagical, Data.AttributeSet->GetResistanceMagicalAttribute());
 
 	//TODO: broadcast vital
 	
