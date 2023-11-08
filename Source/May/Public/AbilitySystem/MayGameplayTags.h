@@ -49,6 +49,7 @@ struct FMayGameplayTags {
 	FGameplayTag EventMontageFirebolt;
 
 	//input
+	FGameplayTag InputKeySpace;
 	FGameplayTag InputKeyLMB;
 	FGameplayTag InputKeyRMB;
 	FGameplayTag InputKey1;

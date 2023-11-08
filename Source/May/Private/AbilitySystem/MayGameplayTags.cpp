@@ -40,6 +40,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.EventMontageFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Firebolt"));
 	
 	//input
+	Instance.InputKeySpace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.Space"));
 	Instance.InputKeyLMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.LMB"));
 	Instance.InputKeyRMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.RMB"));
 	Instance.InputKey1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.1"));
