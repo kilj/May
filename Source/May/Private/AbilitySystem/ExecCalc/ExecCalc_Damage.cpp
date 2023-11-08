@@ -31,10 +31,8 @@ struct MayDamageStatics {
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, ResistancePhysical, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMayAttributeSet, ResistanceMagical, Target, false);
 
-		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamagePhysical, ResistancePhysicalDef);
-		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamagePhysicalBleeding, ResistancePhysicalDef);
-		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamageMagicFire, ResistanceMagicalDef);
-		TagsToCaptureDefs.Add(FMayGameplayTags::Get().DamageMagicIce, ResistanceMagicalDef);
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().AttributesResistancePhysical, ResistancePhysicalDef);
+		TagsToCaptureDefs.Add(FMayGameplayTags::Get().AttributesResistanceMagical, ResistanceMagicalDef);
 	}
 };
 
@@ -77,8 +75,10 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	float Damage = 0.f;
 
 	for (const auto& Pair : FMayGameplayTags::Get().DamageTypes) {
-		const auto CaptureDef = DamageStatics().TagsToCaptureDefs[Pair.Value];
-
+		//theoretically, game-designer can add ANY tag to damage_ability as damage type and it will be an error. TODO: we must limit possible tags or wrap tags to enum in UMayDamageGameplayAbility
+		checkf(MayDamageStatics().TagsToCaptureDefs.Contains(Pair.Value), TEXT("TagsToCaptureDefs doesn't contain Tag: [%s] in ExecCalc_Damage"), *Pair.Value.ToString());
+		
+		const auto CaptureDef = MayDamageStatics().TagsToCaptureDefs[Pair.Value];
 		float DamageTypeValue = Spec.GetSetByCallerMagnitude(Pair.Key, false);
 		
 		float Resistance = 0.f;

@@ -53,14 +53,10 @@ void AEnemyCharacter::BeginPlay() {
 
 	InitAbilityActorInfo();
 
-	UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(GetWorld(), GetAbilitySystemComponent(), EnemyType, GetLevel());
-	UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(GetWorld(), GetAbilitySystemComponent());
-
-	// InitDefaultAttributes(DefaultPrimaryAttributes); //init default primary attributes on server, so they will be replicated to clients...
-	// InitDefaultAttributes(DefaultSecondaryAttributes); //... and do the same with secondary attributes
-	// InitDefaultAttributes(DefaultVitalAttributes); //... in the end we should set initial values for Health/Mana
-
-	//AddStartupAbilities();
+	if (HasAuthority()) {
+		UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(GetWorld(), GetAbilitySystemComponent(), EnemyType, GetLevel());
+		UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(GetWorld(), GetAbilitySystemComponent());
+	}
 
 	AbilitySystemComponent->RegisterGameplayTagEvent(FMayGameplayTags::Get().EffectsHitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ThisClass::OnTagChanged);
 }
@@ -68,8 +64,6 @@ void AEnemyCharacter::BeginPlay() {
 void AEnemyCharacter::InitAbilityActorInfo() {
 	Super::InitAbilityActorInfo();
 
-	MAY_ULOG(TEXT("Init ability actor info on enemy: %s"), *GetActorNameOrLabel());
-	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 
 	Cast<UMayAbilitySystemComponent>(AbilitySystemComponent)->OnAbilityActorInfoSet();
@@ -77,9 +71,6 @@ void AEnemyCharacter::InitAbilityActorInfo() {
 
 void AEnemyCharacter::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-
-	// if (IsHighlighted)
-	// 	DrawDebugSphere(GetWorld(), GetActorLocation(), 40, 12, FColor::Red);
 }
 
 void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
