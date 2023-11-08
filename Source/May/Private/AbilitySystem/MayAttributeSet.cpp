@@ -96,7 +96,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 		//showing floating text
 		if (Properties.SourceCharacter != Properties.TargetCharacter) {
-			if (const auto EnniePC = Cast<AEnniePlayerController>(UGameplayStatics::GetPlayerController(Properties.SourceCharacter, 0))) {
+			if (const auto EnniePC = Cast<AEnniePlayerController>(Properties.SourceCharacter->GetController())) {
 				FUIDamageData DamageData;
 				DamageData.bIsBlockedHit = EffectContext->IsBlockHit();
 				DamageData.bIsCriticalHit = EffectContext->IsCriticalHit();

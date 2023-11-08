@@ -6,6 +6,8 @@
 #include "Core/Interfaces/HighlightInterface.h"
 #include "EnemyCharacter.generated.h"
 
+class AMayAIController;
+class UBehaviorTree;
 struct FGameplayTag;
 enum class EEnemyType : uint8;
 
@@ -32,6 +34,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	virtual void PossessedBy(AController* NewController) override;
+
 	void OnTagChanged(const FGameplayTag Tag, int32 NewTagCount);
 
 	//TODO: maybe it's better to have enum here or something like that?
@@ -46,6 +50,12 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
 	int32 Level = 1;
+
+	UPROPERTY(EditAnywhere, Category="AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+
+	UPROPERTY()
+	TObjectPtr<AMayAIController> MayAIController;
 	
 	bool IsHighlighted = false;
 

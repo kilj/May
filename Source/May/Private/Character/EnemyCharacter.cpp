@@ -4,6 +4,9 @@
 #include "AbilitySystem/MayAttributeSet.h"
 #include "AbilitySystem/MayGameplayTags.h"
 #include "AbilitySystem/Utils/MayAbilitySystemLibrary.h"
+#include "AI/MayAIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Utils/MayLogChannels.h"
 
 AEnemyCharacter::AEnemyCharacter() {
@@ -75,6 +78,16 @@ void AEnemyCharacter::Tick(float DeltaTime) {
 
 void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void AEnemyCharacter::PossessedBy(AController* NewController) {
+	Super::PossessedBy(NewController);
+
+	if (!HasAuthority()) return;
+	
+	MayAIController = Cast<AMayAIController>(NewController);
+	MayAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	MayAIController->RunBehaviorTree(BehaviorTree);
 }
 
 void AEnemyCharacter::OnTagChanged(const FGameplayTag Tag, const int32 NewTagCount) {
