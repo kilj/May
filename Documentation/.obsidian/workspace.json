@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "4c2b857a2ba11128",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a5c016e20e81fde",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e50fc6b3405ddf65",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Intro.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a508e3f483b3f0be",
+    "type": "split",
+    "children": [
+      {
+        "id": "2682d62b81cc5cff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "be25a68beae30975",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "85d60cfeba230144",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#wip",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a2cfc21955dbf714",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e7e3255f2d72782f",
+    "type": "split",
+    "children": [
+      {
+        "id": "85858704621d752e",
+        "type": "tabs",
+        "dimension": 57.35714285714286,
+        "children": [
+          {
+            "id": "450632fb83254ab3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Intro.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e1c1c2bf6531e0c9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Intro.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "32d937898573538b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "212689598e58b7fa",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Intro.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "4e988a33947c9675",
+        "type": "tabs",
+        "dimension": 42.642857142857146,
+        "children": [
+          {
+            "id": "8d2abc58d8c0fbb7",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "random-note:Open random note": false,
+      "graph:Open graph view": false
+    }
+  },
+  "active": "e50fc6b3405ddf65",
+  "lastOpenFiles": [
+    "Concept/Base concept of the game.md",
+    "Intro.md",
+    "Concept"
+  ]
+}
