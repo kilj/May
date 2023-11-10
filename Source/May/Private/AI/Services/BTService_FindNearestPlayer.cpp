@@ -28,9 +28,4 @@ void UBTService_FindNearestPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, u
 
 	UBTFunctionLibrary::SetBlackboardValueAsObject(this, TargetToFollowSelector, NearestActor);
 	UBTFunctionLibrary::SetBlackboardValueAsFloat(this, DistanceToTargetSelector, NearestDistance);
-
-	if (NearestActor)
-		GEngine->AddOnScreenDebugMessage(-1, 0.5, FColor::Red, *FString::Printf(TEXT("Nearest actor: %s, Distance: %f"), *NearestActor->GetActorNameOrLabel(), NearestDistance));
-	else
-		GEngine->AddOnScreenDebugMessage(-1, 0.5, FColor::Green, TEXT("Nearest actor is nullptr"));
 }
