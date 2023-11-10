@@ -7,36 +7,6 @@
 #include "Core/MayGameMode.h"
 #include "Kismet/GameplayStatics.h"
 
-// UOverlayWidgetController* UMayAbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject) {
-// 	if (const auto PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0)) {
-// 		if (const auto MayHUD = Cast<AMayHUD>(PC->GetHUD())) {
-// 			const auto PS = PC->GetPlayerState<AEnniePlayerState>();
-// 			const auto ASC = PS->GetAbilitySystemComponent();
-// 			const auto AS = PS->GetAttributeSet();
-//
-// 			const FWidgetControllerParams Params (PC, PS, ASC, AS);
-// 			return MayHUD->GetOverlayWidgetController(Params);
-// 		}
-// 	}
-//
-// 	return nullptr;
-// }
-//
-// UAttributeWindowWidgetController* UMayAbilitySystemLibrary::GetAttributeWindowWidgetController(const UObject* WorldContextObject) {
-// 	if (const auto PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0)) {
-// 		if (const auto MayHUD = Cast<AMayHUD>(PC->GetHUD())) {
-// 			const auto PS = PC->GetPlayerState<AEnniePlayerState>();
-// 			const auto ASC = PS->GetAbilitySystemComponent();
-// 			const auto AS = PS->GetAttributeSet();
-//
-// 			const FWidgetControllerParams Params (PC, PS, ASC, AS);
-// 			return MayHUD->GetAttributeWindowWidgetController(Params);
-// 		}
-// 	}
-//
-// 	return nullptr;
-// }
-
 void UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level) {
 	const auto MayGameMode = Cast<AMayGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
 	if (MayGameMode == nullptr) //TODO: game mode is nullptr on client, so we just skip this (applied GEs will be replicated from server anyways)
@@ -61,6 +31,13 @@ void UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(const UObject* WorldCon
 		ASC->GiveAbility(FGameplayAbilitySpec(AbilityClass, 1));
 	}
 	
+}
+
+FEnemyTypeDefaultInfo UMayAbilitySystemLibrary::GetEnemyTypeInfo(const UObject* WorldContextObject, const EEnemyType EnemyType) {
+	const auto MayGameMode = Cast<AMayGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
+	checkf(MayGameMode, TEXT("Trying to get game mode, but it's null. It should be accessed only from server."))
+	
+	return MayGameMode->EnemyTypesInfo->GetEnemyTypeDefaultInfo(EnemyType);
 }
 
 bool UMayAbilitySystemLibrary::GetIsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle) {

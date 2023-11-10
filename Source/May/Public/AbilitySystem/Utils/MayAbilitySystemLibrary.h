@@ -19,17 +19,14 @@ class MAY_API UMayAbilitySystemLibrary : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 
 public:
-	// UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
-	// static UOverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
-	//
-	// UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|WidgetController")
-	// static UAttributeWindowWidgetController* GetAttributeWindowWidgetController(const UObject* WorldContextObject);
-
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
 	static void InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level);
 	
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
 	static void InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
+
+	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
+	static FEnemyTypeDefaultInfo GetEnemyTypeInfo(const UObject* WorldContextObject, const EEnemyType EnemyType);
 
 	UFUNCTION(BlueprintPure, Category="MayAbilitySystemLibrary|GameplayEffects")
 	static bool GetIsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);

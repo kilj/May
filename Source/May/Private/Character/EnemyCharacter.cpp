@@ -95,8 +95,13 @@ void AEnemyCharacter::PossessedBy(AController* NewController) {
 	MayAIController = Cast<AMayAIController>(NewController);
 	MayAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 	MayAIController->RunBehaviorTree(BehaviorTree);
+
+	const auto EType = UMayAbilitySystemLibrary::GetEnemyTypeInfo(GetWorld(), EnemyType);
+
+	MayAIController->GetBlackboardComponent()->SetValueAsEnum(FName("AttackType"), static_cast<uint8>(EType.AttackType));
 }
 
 void AEnemyCharacter::OnTagChanged(const FGameplayTag Tag, const int32 NewTagCount) {
 	bHitReacting = Tag.MatchesTagExact(FMayGameplayTags::Get().EffectsHitReact) && NewTagCount > 0; //play hit react montage
+	MayAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsHitReacting"), bHitReacting);
 }

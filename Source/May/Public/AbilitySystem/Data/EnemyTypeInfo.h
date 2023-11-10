@@ -16,9 +16,18 @@ enum class EEnemyType : uint8 {
 	GoblinShaman
 };
 
-USTRUCT()
+UENUM(BlueprintType, Blueprintable)
+enum class EEnemyAttackType : uint8 {
+	Melee,
+	Ranged
+};
+
+USTRUCT(BlueprintType)
 struct FEnemyTypeDefaultInfo {
 	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, Category="Defaults")
+	EEnemyAttackType AttackType = EEnemyAttackType::Melee;
 
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TSubclassOf<UGameplayEffect> PrimaryAttributes;
