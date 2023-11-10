@@ -7,6 +7,7 @@
 #include "AI/MayAIController.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Utils/MayLogChannels.h"
 
 AEnemyCharacter::AEnemyCharacter() {
@@ -19,6 +20,12 @@ AEnemyCharacter::AEnemyCharacter() {
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UMayAttributeSet>("AttributeSet");
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 }
 
 void AEnemyCharacter::HighlightActor() {

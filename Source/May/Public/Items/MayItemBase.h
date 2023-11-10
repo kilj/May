@@ -37,6 +37,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Effects")
 	bool bDestroyOnEffectApplied = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Effects")
+	bool bApplyEffectToEnemies = false;
+
 	UFUNCTION(BlueprintCallable)
 	FActiveGameplayEffectHandle ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
