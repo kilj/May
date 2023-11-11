@@ -21,11 +21,14 @@ class MAY_API ICombatActorInterface {
 public:
 	virtual FVector GetProjectileSpawnLocation() = 0;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UAnimMontage* GetHitReactMontage();
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void UpdateFacingTarget(const FVector& Target);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetFacingTarget(const FVector& Target);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	FVector GetFacingTarget() const;
 
 	virtual void Server_Die() = 0;
 };

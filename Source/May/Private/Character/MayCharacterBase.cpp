@@ -30,6 +30,14 @@ UAnimMontage* AMayCharacterBase::GetHitReactMontage_Implementation() {
 	return HitReactMontage;
 }
 
+void AMayCharacterBase::SetFacingTarget_Implementation(const FVector& Target) {
+	FacingTarget = Target;
+}
+
+FVector AMayCharacterBase::GetFacingTarget_Implementation() const {
+	return FacingTarget;
+}
+
 void AMayCharacterBase::Server_Die() {
 	Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
 	MulticastHandleDeath();

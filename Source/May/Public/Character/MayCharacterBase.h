@@ -47,6 +47,8 @@ protected:
 	//ICombatActorInterface
 	virtual FVector GetProjectileSpawnLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
+	virtual FVector GetFacingTarget_Implementation() const override;
 	virtual void Server_Die() override; //TODO: rename to Server_Die() ?
 	//end of ICombatActorInterface
 
@@ -57,4 +59,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="CombatActor")
 	TObjectPtr<UAnimMontage> HitReactMontage;
+
+	UPROPERTY()
+	FVector FacingTarget = FVector::Zero();
 };
