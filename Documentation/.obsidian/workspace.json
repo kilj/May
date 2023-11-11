@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "9a5c016e20e81fde",
+        "id": "43b385fe2e6fcfe8",
         "type": "tabs",
         "children": [
           {
-            "id": "e50fc6b3405ddf65",
+            "id": "9982d68ae5c386ce",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Intro.md",
+                "file": "Game Design/Core Features/Class system.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#wip",
+                "query": "How",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -87,7 +87,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Intro.md",
+                "file": "Game Design/Core Features/Class system.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Intro.md",
+                "file": "Game Design/Core Features/Class system.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +127,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Intro.md"
+                "file": "Game Design/Core Features/Class system.md"
               }
             }
           }
@@ -164,10 +164,25 @@
       "graph:Open graph view": false
     }
   },
-  "active": "e50fc6b3405ddf65",
+  "active": "9982d68ae5c386ce",
   "lastOpenFiles": [
     "Concept/Base concept of the game.md",
+    "Concept/Setting.md",
+    "Game Design/Narrative/Victorian Crisis of Faith (Alternative).md",
+    "Game Design/Core Features/Class system.md",
     "Intro.md",
+    "Game Design/Core Features/Main gameplay flow.md",
+    "Game Design/Characteristic system.md",
+    "Concept/extra/MoodBoard_SomeCombat_0.jpg",
+    "Concept/extra/MoodBoard_DestinyArmorSet.jpg",
+    "Concept/extra/MoodBoard_DoomFanArt.jpg",
+    "Gorta Mór 1845.md",
+    "Game Design/Narrative/Gorta Mór 1845.md",
+    "Game Design/Core Features",
+    "Game Design/Narrative",
+    "Concept/extra",
+    "Game Design",
+    "Untitled.md",
     "Concept"
   ]
 }
