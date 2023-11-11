@@ -86,7 +86,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			const bool bFatal = NewHealth <= 0.f;
 			if (bFatal) {
 				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
-					CombatActorInterface->Die();
+					CombatActorInterface->Server_Die();
 			} else {
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FMayGameplayTags::Get().EffectsHitReact);

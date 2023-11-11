@@ -34,7 +34,7 @@ protected:
 	 * Widget uses this DataAsset for retrieving attribute data, defined by game designers 
 	 */
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UAttributeInfo> AttributeInfo; //TODO: use from MayGameMode and delete here
+	TObjectPtr<UAttributeInfo> AttributeInfo; //TODO: use from some client class and delete here
 
 	void SubscribeToAttribute(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS, FGameplayTag AttributeTag, const FGameplayAttribute& Attribute);
 	void BroadcastAttribute(const UMayAttributeSet* AS, FGameplayTag AttributeTag, const FGameplayAttribute& Attribute);

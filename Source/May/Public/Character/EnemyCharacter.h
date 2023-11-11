@@ -28,7 +28,7 @@ public:
 	//end of ILevelInterface
 
 	//ICombatActorInterface
-	virtual void Die() override;
+	virtual void Server_Die() override;
 	//end of ICombatActorInterface
 
 	virtual void Tick(float DeltaTime) override;

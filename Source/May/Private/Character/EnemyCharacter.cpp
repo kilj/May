@@ -50,12 +50,12 @@ int32 AEnemyCharacter::GetLevel() {
 	return Level;
 }
 
-void AEnemyCharacter::Die() {
+void AEnemyCharacter::Server_Die() {
 	MAY_ULOG(TEXT("%s died..."), *GetActorNameOrLabel());
 	
 	SetLifeSpan(5.f);
 	
-	Super::Die();
+	Super::Server_Die();
 }
 
 void AEnemyCharacter::BeginPlay() {

@@ -1,3 +1,5 @@
+// Red Beat, 2023
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -5,10 +7,11 @@
 #include "MayAbilitySystemComponent.generated.h"
 
 class UMayGameplayAbility;
+
 DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
 
 /**
- * 
+ * Extended version of AbilitySystemComponent for May project
  */
 UCLASS()
 class MAY_API UMayAbilitySystemComponent : public UAbilitySystemComponent

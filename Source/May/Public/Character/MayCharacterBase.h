@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Red Beat, 2023
+
+#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
@@ -42,33 +44,13 @@ protected:
 
 	virtual void InitAbilityActorInfo();
 
-	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
-	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
-
-	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
-	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
-
-	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
-	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
-
-	//TODO: Move to EnnieCharacter because of we initing attributes for enemy from enemytypeinfo (gamemode)
-	void InitDefaultAttributes(TSubclassOf<UGameplayEffect> AttributesEffectClass, float Level = 1.0f);
-
-	void AddStartupAbilities();
-
 	//ICombatActorInterface
 	virtual FVector GetProjectileSpawnLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-	virtual void Die() override; //TODO: rename to Server_Die() ?
+	virtual void Server_Die() override; //TODO: rename to Server_Die() ?
 	//end of ICombatActorInterface
 
 private:
-	UPROPERTY(EditAnywhere, Category="Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
-
 	//TODO: do we need property for this or just can hardcode it?
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CombatActor", meta=(AllowPrivateAccess="true"))
 	FName WeaponTipSocketName = FName();

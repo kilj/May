@@ -1,5 +1,6 @@
-#include "AbilitySystem/MayAbilitySystemComponent.h"
+// Red Beat, 2023
 
+#include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/MayGameplayAbility.h"
 
 void UMayAbilitySystemComponent::OnAbilityActorInfoSet() {
@@ -15,7 +16,6 @@ void UMayAbilitySystemComponent::AddStartupAbilities(const TArray<TSubclassOf<UG
 		}
 
 		GiveAbility(Spec);
-		//GiveAbilityAndActivateOnce(Spec);
 	}
 }
 
