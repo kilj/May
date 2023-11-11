@@ -37,7 +37,9 @@ struct FEnemyTypeDefaultInfo {
 
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TSubclassOf<UGameplayEffect> VitalAttributes;
-	
+
+	UPROPERTY(EditDefaultsOnly, Category="Defaults")
+	TArray<TSubclassOf<UGameplayAbility>> Abilities;
 };
 
 /**
@@ -48,10 +50,6 @@ class MAY_API UEnemyTypeInfo : public UDataAsset {
 	GENERATED_BODY()
 
 public:
-	// common attributes for all classes
-	// UPROPERTY(EditDefaultsOnly, Category="Defaults")
-	// TSubclassOf<UGameplayEffect> SecondaryAttributes;
-
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TMap<EEnemyType, FEnemyTypeDefaultInfo> Info;
 

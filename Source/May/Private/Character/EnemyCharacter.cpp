@@ -65,7 +65,7 @@ void AEnemyCharacter::BeginPlay() {
 
 	if (HasAuthority()) {
 		UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(GetWorld(), GetAbilitySystemComponent(), EnemyType, GetLevel());
-		UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(GetWorld(), GetAbilitySystemComponent());
+		UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(GetWorld(), GetAbilitySystemComponent(), EnemyType, GetLevel());
 	}
 
 	AbilitySystemComponent->RegisterGameplayTagEvent(FMayGameplayTags::Get().EffectsHitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ThisClass::OnTagChanged);

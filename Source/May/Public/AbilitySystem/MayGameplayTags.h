@@ -39,6 +39,9 @@ struct FMayGameplayTags {
 	FGameplayTag AttributesVitalHealth;
 	FGameplayTag AttributesVitalMana;
 
+	//abilities
+	FGameplayTag AbilitiesAttackMelee;
+
 	//message
 	FGameplayTag MessageHealthCrystal;
 	FGameplayTag MessageHealthPotion;

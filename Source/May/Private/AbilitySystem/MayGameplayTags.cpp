@@ -30,6 +30,9 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.AttributesVitalHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.Health"));
 	Instance.AttributesVitalMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.Mana"));
 
+	//abilities
+	Instance.AbilitiesAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Melee"));
+
 	//message
 	Instance.MessageHealthCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthCrystal"));
 	Instance.MessageHealthPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthPotion"));

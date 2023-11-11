@@ -20,10 +20,10 @@ class MAY_API UMayAbilitySystemLibrary : public UBlueprintFunctionLibrary {
 
 public:
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
-	static void InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, EEnemyType EnemyType, int32 Level);
+	static void InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, const EEnemyType EnemyType, const int32 Level);
 	
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
-	static void InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
+	static void InitEnemyDefaultAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, const EEnemyType EnemyType, const int32 Level);
 
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
 	static FEnemyTypeDefaultInfo GetEnemyTypeInfo(const UObject* WorldContextObject, const EEnemyType EnemyType);
