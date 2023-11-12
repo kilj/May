@@ -28,7 +28,7 @@ public:
 	void SetFacingTarget(const FVector& Target);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector GetFacingTarget() const;
+	FVector GetFacingTarget();
 
 	virtual void Server_Die() = 0;
 };

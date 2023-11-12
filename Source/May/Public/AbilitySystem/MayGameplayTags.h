@@ -50,6 +50,7 @@ struct FMayGameplayTags {
 
 	//events.montage
 	FGameplayTag EventMontageFirebolt;
+	FGameplayTag EventMontageAttackMelee;
 
 	//input
 	FGameplayTag InputKeySpace;

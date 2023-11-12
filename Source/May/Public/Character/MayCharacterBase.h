@@ -48,8 +48,8 @@ protected:
 	virtual FVector GetProjectileSpawnLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
-	virtual FVector GetFacingTarget_Implementation() const override;
-	virtual void Server_Die() override; //TODO: rename to Server_Die() ?
+	virtual FVector GetFacingTarget_Implementation() override;
+	virtual void Server_Die() override;
 	//end of ICombatActorInterface
 
 private:

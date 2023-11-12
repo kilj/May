@@ -34,7 +34,7 @@ void AMayCharacterBase::SetFacingTarget_Implementation(const FVector& Target) {
 	FacingTarget = Target;
 }
 
-FVector AMayCharacterBase::GetFacingTarget_Implementation() const {
+FVector AMayCharacterBase::GetFacingTarget_Implementation() {
 	return FacingTarget;
 }
 
