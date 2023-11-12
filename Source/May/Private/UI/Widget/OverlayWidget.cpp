@@ -33,7 +33,6 @@ void UOverlayWidget::GameplayEffectAssetTagApplied(const FGameplayTagContainer& 
 			continue;
 		
 		const auto Row = GetDataTableRowByTag<FUINotificationWidgetRow>(NotificationsWidgetDataTable, Tag);
-		//NotificationsWidgetRowDelegate.Broadcast(*Row);
 		OnUINotificationMessage(*Row);
 	}
 }

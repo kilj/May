@@ -55,9 +55,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
 	FORCEINLINE FOverlayWidgetData GetWidgetData() const { return WidgetData; };
 
-	UPROPERTY(BlueprintAssignable, Category="GAS|Messages")
-	FUINotificationWidgetRowSignature NotificationsWidgetRowDelegate; //TODO: delete
-
 	UFUNCTION(BlueprintImplementableEvent, Category="May|UINotifications")
 	void OnUINotificationMessage(FUINotificationWidgetRow Data);
 
