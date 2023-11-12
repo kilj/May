@@ -22,7 +22,7 @@ UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
 	return AbilitySystemComponent;
 }
 
-FVector AMayCharacterBase::GetProjectileSpawnLocation() {
+FVector AMayCharacterBase::GetWeaponTipLocation_Implementation() {
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 

@@ -19,7 +19,8 @@ class MAY_API ICombatActorInterface {
 	GENERATED_BODY()
 
 public:
-	virtual FVector GetProjectileSpawnLocation() = 0;
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	FVector GetWeaponTipLocation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UAnimMontage* GetHitReactMontage();

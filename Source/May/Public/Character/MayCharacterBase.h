@@ -45,7 +45,7 @@ protected:
 	virtual void InitAbilityActorInfo();
 
 	//ICombatActorInterface
-	virtual FVector GetProjectileSpawnLocation() override;
+	virtual FVector GetWeaponTipLocation_Implementation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
 	virtual FVector GetFacingTarget_Implementation() override;
@@ -53,7 +53,6 @@ protected:
 	//end of ICombatActorInterface
 
 private:
-	//TODO: do we need property for this or just can hardcode it?
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CombatActor", meta=(AllowPrivateAccess="true"))
 	FName WeaponTipSocketName = FName();
 

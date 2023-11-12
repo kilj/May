@@ -16,9 +16,7 @@ void UMayProjectileSpell::SpawnProjectile(const FVector& TargetLocation) {
 	if (const auto Owner = GetOwningActorFromActorInfo(); Owner->HasAuthority()) {
 		checkf(ProjectileClass, TEXT("Can't spawn projectile because of Projectile class on GA is null"));
 		
-		ICombatActorInterface* CombatActor = Cast<ICombatActorInterface>(GetAvatarActorFromActorInfo());
-
-		const FVector SpawnLocation = CombatActor != nullptr ? CombatActor->GetProjectileSpawnLocation() : FVector();
+		const FVector SpawnLocation = ICombatActorInterface::Execute_GetWeaponTipLocation(GetAvatarActorFromActorInfo());
 		FRotator Rotation = (TargetLocation - SpawnLocation).Rotation();
 		Rotation.Pitch = 0.f; //making projectiles flies in parallel to the ground
 
