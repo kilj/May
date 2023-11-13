@@ -5,6 +5,7 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/MayAbilityTypes.h"
 #include "Core/MayGameMode.h"
+#include "Core/Interfaces/CombatActorInterface.h"
 #include "Kismet/GameplayStatics.h"
 
 void UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, const EEnemyType EnemyType, const int32 Level) {
@@ -62,4 +63,22 @@ void UMayAbilitySystemLibrary::SetIsBlockedHit(FGameplayEffectContextHandle& Eff
 void UMayAbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& EffectContextHandle, const bool InValue) {
 	if (const auto EffectContext = static_cast<FMayGameplayEffectContext*>(EffectContextHandle.Get()))
 		EffectContext->SetIsCriticalHit(InValue);
+}
+
+void UMayAbilitySystemLibrary::GetLivePlayersInRadius(const UObject* WorldContextObject, const FVector& FromOrigin, float Radius, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore) {
+	FCollisionQueryParams SphereParams;
+	SphereParams.MobilityType = EQueryMobilityType::Dynamic; //players have dynamic mobility type 
+	SphereParams.AddIgnoredActors(ActorsToIgnore);
+
+	TArray<FOverlapResult> Overlaps;
+	if (const UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull)) {
+		World->OverlapMultiByObjectType(Overlaps, FromOrigin, FQuat::Identity, FCollisionObjectQueryParams(FCollisionObjectQueryParams::InitType::AllDynamicObjects), FCollisionShape::MakeSphere(Radius), SphereParams);
+
+		for (auto OverlapResult : Overlaps) {
+			const auto Actor = OverlapResult.GetActor();
+			if (Actor->Implements<UCombatActorInterface>() && !ICombatActorInterface::Execute_IsDead(Actor))
+				OutOverlappingActors.AddUnique(OverlapResult.GetActor());
+		}
+	}
+
 }

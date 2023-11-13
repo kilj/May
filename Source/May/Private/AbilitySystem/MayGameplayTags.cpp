@@ -32,6 +32,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 
 	//abilities
 	Instance.AbilitiesAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Melee"));
+	Instance.AbilitiesAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Range"));
 
 	//message
 	Instance.MessageHealthCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthCrystal"));
@@ -42,6 +43,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	//event
 	Instance.EventMontageFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Firebolt"));
 	Instance.EventMontageAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee"));
+	Instance.EventMontageAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Range"));
 	
 	//input
 	Instance.InputKeySpace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.Space"));

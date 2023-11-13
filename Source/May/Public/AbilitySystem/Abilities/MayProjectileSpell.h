@@ -18,10 +18,7 @@ class MAY_API UMayProjectileSpell : public UMayDamageGameplayAbility {
 protected:
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<AMayProjectile> ProjectileClass;
-
 	UFUNCTION(BlueprintCallable)
-	void SpawnProjectile(const FVector& TargetLocation);
+	void SpawnProjectile(TSubclassOf<AMayProjectile> ProjectileClass, const FVector& SpawnLocation, const FVector& TargetLocation);
 	
 };

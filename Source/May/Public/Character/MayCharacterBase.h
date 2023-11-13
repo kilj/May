@@ -27,8 +27,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
+	//ICombatActorInterface
+	virtual FVector GetWeaponTipLocation_Implementation() const override;
+	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
+	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
+	virtual FVector GetFacingTarget_Implementation() const override;
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
+	virtual void Server_Die() override;
+	//end of ICombatActorInterface
+	
 	UFUNCTION(NetMulticast, Reliable)
-	virtual void MulticastHandleDeath(); //TODO: rename to Multicast_Die()?
+	virtual void Multicast_Die();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -44,14 +54,6 @@ protected:
 
 	virtual void InitAbilityActorInfo();
 
-	//ICombatActorInterface
-	virtual FVector GetWeaponTipLocation_Implementation() override;
-	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
-	virtual FVector GetFacingTarget_Implementation() override;
-	virtual void Server_Die() override;
-	//end of ICombatActorInterface
-
 private:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CombatActor", meta=(AllowPrivateAccess="true"))
 	FName WeaponTipSocketName = FName();
@@ -61,4 +63,6 @@ private:
 
 	UPROPERTY()
 	FVector FacingTarget = FVector::Zero();
+
+	bool bDead = false;
 };

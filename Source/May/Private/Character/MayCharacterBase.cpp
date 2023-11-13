@@ -22,11 +22,11 @@ UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
 	return AbilitySystemComponent;
 }
 
-FVector AMayCharacterBase::GetWeaponTipLocation_Implementation() {
+FVector AMayCharacterBase::GetWeaponTipLocation_Implementation() const {
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
-UAnimMontage* AMayCharacterBase::GetHitReactMontage_Implementation() {
+UAnimMontage* AMayCharacterBase::GetHitReactMontage_Implementation() const {
 	return HitReactMontage;
 }
 
@@ -34,16 +34,24 @@ void AMayCharacterBase::SetFacingTarget_Implementation(const FVector& Target) {
 	FacingTarget = Target;
 }
 
-FVector AMayCharacterBase::GetFacingTarget_Implementation() {
+FVector AMayCharacterBase::GetFacingTarget_Implementation() const {
 	return FacingTarget;
+}
+
+bool AMayCharacterBase::IsDead_Implementation() const {
+	return bDead;
+}
+
+AActor* AMayCharacterBase::GetAvatar_Implementation() {
+	return this;
 }
 
 void AMayCharacterBase::Server_Die() {
 	Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
-	MulticastHandleDeath();
+	Multicast_Die();
 }
 
-void AMayCharacterBase::MulticastHandleDeath_Implementation() {
+void AMayCharacterBase::Multicast_Die_Implementation() {
 	Weapon->SetSimulatePhysics(true);
 	Weapon->SetEnableGravity(true);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
@@ -54,6 +62,8 @@ void AMayCharacterBase::MulticastHandleDeath_Implementation() {
 	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	bDead = true;
 }
 
 void AMayCharacterBase::BeginPlay() {

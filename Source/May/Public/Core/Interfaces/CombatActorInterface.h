@@ -20,16 +20,22 @@ class MAY_API ICombatActorInterface {
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector GetWeaponTipLocation();
+	FVector GetWeaponTipLocation() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	UAnimMontage* GetHitReactMontage();
+	UAnimMontage* GetHitReactMontage() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetFacingTarget(const FVector& Target);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector GetFacingTarget();
+	FVector GetFacingTarget() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool IsDead() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	AActor* GetAvatar(); //TODO: idk, maybe we should delete it at all
 
 	virtual void Server_Die() = 0;
 };

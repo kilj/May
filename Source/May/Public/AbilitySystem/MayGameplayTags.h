@@ -41,6 +41,7 @@ struct FMayGameplayTags {
 
 	//abilities
 	FGameplayTag AbilitiesAttackMelee;
+	FGameplayTag AbilitiesAttackRange;
 
 	//message
 	FGameplayTag MessageHealthCrystal;
@@ -51,6 +52,7 @@ struct FMayGameplayTags {
 	//events.montage
 	FGameplayTag EventMontageFirebolt;
 	FGameplayTag EventMontageAttackMelee;
+	FGameplayTag EventMontageAttackRange;
 
 	//input
 	FGameplayTag InputKeySpace;
