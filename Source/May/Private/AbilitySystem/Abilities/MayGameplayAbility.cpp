@@ -53,12 +53,14 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 
 	const auto TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 	checkf(TargetASC, TEXT("Actor [%s] hasn't Ability system component"), *TargetActor->GetActorNameOrLabel());
+
+	const auto SourceASC = GetAbilitySystemComponentFromActorInfo();
 	
-	FGameplayEffectContextHandle EffectContext = TargetASC->MakeEffectContext();
+	FGameplayEffectContextHandle EffectContext = SourceASC->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
 	EffectContext.SetAbility(this);
 
-	const FGameplayEffectSpecHandle SpecHandle = TargetASC->MakeOutgoingSpec(ImpactGEClass, 1.f, EffectContext);
+	const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(ImpactGEClass, 1.f, EffectContext);
 
 	for (auto& Pair : DamageTypes) {
 		if (!Pair.Key.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Damage.Type")))) {
@@ -69,5 +71,5 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Pair.Key, Pair.Value.GetValueAtLevel(GetAbilityLevel()));
 	}
 
-	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), TargetASC);
+	SourceASC->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), TargetASC);
 }

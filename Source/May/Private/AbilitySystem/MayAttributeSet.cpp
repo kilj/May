@@ -7,7 +7,6 @@
 #include "AbilitySystem/MayGameplayTags.h"
 #include "Core/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
-#include "Kismet/GameplayStatics.h"
 #include "Player/EnniePlayerController.h"
 #include "UI/Components/DamageTextComponent.h"
 
@@ -67,13 +66,6 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 	const auto EffectContext = static_cast<FMayGameplayEffectContext*>(Properties.EffectContextHandle.Get());
 
-	// this code will call AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate twice, but somehow there are some people who recommends such approach
-	// if (Data.EvaluatedData.Attribute == GetHealthAttribute())
-	// 	SetHealth(FMath::Clamp(GetHealth(), 0.0f, GetMaxHealth()));
-	//
-	// if (Data.EvaluatedData.Attribute == GetManaAttribute())
-	// 	SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
-
 	//handle meta attribute IncomingDamage
 	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute()) {
 		const float IncomingDamageValue = GetIncomingDamage(); //cache meta attribute value
@@ -88,15 +80,18 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
 					CombatActorInterface->Server_Die();
 			} else {
-				FGameplayTagContainer TagContainer;
-				TagContainer.AddTag(FMayGameplayTags::Get().EffectsHitReact);
+				const FGameplayTagContainer TagContainer(FMayGameplayTags::Get().EffectsHitReact);
 				Properties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
 		}
 
 		//showing floating text
 		if (Properties.SourceCharacter != Properties.TargetCharacter) {
-			if (const auto EnniePC = Cast<AEnniePlayerController>(Properties.SourceCharacter->GetController())) {
+			auto EnniePC = Cast<AEnniePlayerController>(Properties.SourceCharacter->GetController());
+			if (EnniePC == nullptr)
+				EnniePC = Cast<AEnniePlayerController>(Properties.TargetCharacter->GetController());
+				
+			if (EnniePC) {
 				FUIDamageData DamageData;
 				DamageData.bIsBlockedHit = EffectContext->IsBlockHit();
 				DamageData.bIsCriticalHit = EffectContext->IsCriticalHit();
