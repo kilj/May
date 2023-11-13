@@ -67,10 +67,9 @@ struct FMayGameplayTags {
 	FGameplayTag Damage;
 
 	//damageTypes
-	FGameplayTag DamagePhysical;
-	FGameplayTag DamagePhysicalBleeding;
-	FGameplayTag DamageMagicFire;
-	FGameplayTag DamageMagicIce;
+	FGameplayTag DamageTypePhysical;
+	FGameplayTag DamageTypeMagicalFire;
+	FGameplayTag DamageTypeMagicalIce;
 
 	TMap<FGameplayTag, FGameplayTag> DamageTypes; //damagetype -> resistance
 

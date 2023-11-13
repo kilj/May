@@ -58,15 +58,14 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Meta attribute for incoming damage"));
 
 	//damage types
-	Instance.DamagePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical"));
-	Instance.DamagePhysicalBleeding = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical.Bleeding"));
-	Instance.DamageMagicFire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Magic.Fire"));
-	Instance.DamageMagicIce = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Magic.Ice"));
+	Instance.DamageTypePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Type.Physical"));
+	Instance.DamageTypeMagicalFire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Type.Magical.Fire"));
+	Instance.DamageTypeMagicalIce = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Type.Magical.Ice"));
 
-	Instance.DamageTypes.Add(Instance.DamagePhysical, Instance.AttributesResistancePhysical);
-	Instance.DamageTypes.Add(Instance.DamagePhysicalBleeding, Instance.AttributesResistancePhysical);
-	Instance.DamageTypes.Add(Instance.DamageMagicFire, Instance.AttributesResistanceMagical);
-	Instance.DamageTypes.Add(Instance.DamageMagicIce, Instance.AttributesResistanceMagical);
+	//damage type to resistant attribute map
+	Instance.DamageTypes.Add(Instance.DamageTypePhysical, Instance.AttributesResistancePhysical);
+	Instance.DamageTypes.Add(Instance.DamageTypeMagicalFire, Instance.AttributesResistanceMagical);
+	Instance.DamageTypes.Add(Instance.DamageTypeMagicalIce, Instance.AttributesResistanceMagical);
 
 	//effects
 	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));

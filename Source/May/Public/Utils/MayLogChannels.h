@@ -49,7 +49,7 @@ TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *FString::Printf(fmt, ##__VA_ARGS__) \
 )
 
-#define MAY_ULOGWARNING_WITHOWNER(Owner, fmt, ...) \
+#define MAY_ULOGW(Owner, fmt, ...) \
 UE_LOG(LogMay, Warning, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *GetClientServerContextString(this), \
