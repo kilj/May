@@ -103,5 +103,7 @@ void AEnemyCharacter::PossessedBy(AController* NewController) {
 
 void AEnemyCharacter::OnTagChanged(const FGameplayTag Tag, const int32 NewTagCount) {
 	bHitReacting = Tag.MatchesTagExact(FMayGameplayTags::Get().EffectsHitReact) && NewTagCount > 0; //play hit react montage
-	MayAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsHitReacting"), bHitReacting);
+
+	if (MayAIController && MayAIController->GetBlackboardComponent()) //ai controller is not null only on server
+		MayAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsHitReacting"), bHitReacting);
 }
