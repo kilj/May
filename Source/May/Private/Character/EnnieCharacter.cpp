@@ -74,7 +74,7 @@ void AEnnieCharacter::OnRep_PlayerState() {
 
 void AEnnieCharacter::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> AttributesEffectClass, const float Level) {
 	if (AttributesEffectClass == nullptr) {
-		MAY_ULOGERROR(TEXT("Can't init default attributes, because Attribute TSubclasOf is null"));
+		MAY_ULOGE(this, TEXT("Can't init default attributes, because Attribute TSubclasOf is null"));
 		return;
 	}
 	

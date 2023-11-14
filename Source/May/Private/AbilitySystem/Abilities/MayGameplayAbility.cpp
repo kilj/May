@@ -30,7 +30,7 @@ void UMayGameplayAbility::SpawnProjectileAndAttachEffect(const TSubclassOf<AMayP
 
 	for (auto& Pair : DamageTypes) {
 		if (!Pair.Key.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Damage.Type")))) {
-			MAY_ULOGW(Owner, TEXT("Gameplay tag [%s] is not a damage type. This tag will be skipped..."), *Pair.Key.ToString())
+			MAY_ULOGW(Owner, TEXT("Gameplay tag [%s] is not a damage type tag (use Damage.Type.Something). This tag will be skipped..."), *Pair.Key.ToString())
 			continue;
 		}
 		
@@ -64,7 +64,7 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 
 	for (auto& Pair : DamageTypes) {
 		if (!Pair.Key.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Damage.Type")))) {
-			MAY_ULOGW(Owner, TEXT("Gameplay tag [%s] is not a damage type. This tag will be skipped..."), *Pair.Key.ToString())
+			MAY_ULOGW(Owner, TEXT("Gameplay tag [%s] is not a damage type tag (use Damage.Type.Something). This tag will be skipped..."), *Pair.Key.ToString())
 			continue;
 		}
 		

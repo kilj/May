@@ -43,6 +43,9 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	//event
 	Instance.EventMontageFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Firebolt"));
 	Instance.EventMontageAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee"));
+	Instance.EventMontageAttackMeleeWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Weapon"));
+	Instance.EventMontageAttackMeleeHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.R"));
+	Instance.EventMontageAttackMeleeHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.L"));
 	Instance.EventMontageAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Range"));
 	
 	//input

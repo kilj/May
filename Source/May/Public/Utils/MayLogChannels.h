@@ -40,12 +40,12 @@ TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *FString::Printf(fmt, ##__VA_ARGS__) \
 )
 
-#define MAY_ULOGERROR(fmt, ...) \
+#define MAY_ULOGE(Owner, fmt, ...) \
 UE_LOG(LogMay, Error, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *GetClientServerContextString(this), \
 *FString(__FUNCTION__), __LINE__, \
-*GetNameSafe(GetOwner()), *GetNameSafe(this), \
+*GetNameSafe(Owner), *GetNameSafe(this), \
 *FString::Printf(fmt, ##__VA_ARGS__) \
 )
 

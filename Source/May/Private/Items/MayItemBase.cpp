@@ -23,7 +23,7 @@ FActiveGameplayEffectHandle AMayItemBase::ApplyEffectToTarget(AActor* TargetActo
 	if (TargetASC == nullptr) return false;
 
 	if (GameplayEffectClass == nullptr) {
-		MAY_ULOGERROR(TEXT("Can't apply GE to target, because GE class is null"));
+		MAY_ULOGE(this, TEXT("Can't apply GE to target, because GE class is null"));
 		return false;
 	}
 	
