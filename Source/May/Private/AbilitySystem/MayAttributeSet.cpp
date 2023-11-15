@@ -5,7 +5,7 @@
 #include "GameplayEffectExtension.h"
 #include "AbilitySystem/MayAbilityTypes.h"
 #include "AbilitySystem/MayGameplayTags.h"
-#include "Core/Interfaces/CombatActorInterface.h"
+#include "Character/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
 #include "Player/EnniePlayerController.h"
 #include "UI/Components/DamageTextComponent.h"

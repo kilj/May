@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
-#include "Core/Interfaces/CombatActorInterface.h"
-#include "Core/Interfaces/LevelInterface.h"
+#include "Character/Interfaces/CombatActorInterface.h"
+#include "Character/Interfaces/LevelInterface.h"
 #include "MayCharacterBase.generated.h"
 
 class UGameplayAbility;

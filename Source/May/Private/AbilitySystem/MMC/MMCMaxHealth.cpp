@@ -2,7 +2,7 @@
 
 #include "AbilitySystem/MMC/MMCMaxHealth.h"
 #include "AbilitySystem/MayAttributeSet.h"
-#include "Core/Interfaces/LevelInterface.h"
+#include "Character/Interfaces/LevelInterface.h"
 
 UMMCMaxHealth::UMMCMaxHealth() {
 	VigorDef.AttributeToCapture = UMayAttributeSet::GetVigorAttribute();

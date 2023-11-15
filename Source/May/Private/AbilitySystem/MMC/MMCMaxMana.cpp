@@ -3,7 +3,7 @@
 #include "AbilitySystem/MMC/MMCMaxMana.h"
 
 #include "AbilitySystem/MayAttributeSet.h"
-#include "Core/Interfaces/LevelInterface.h"
+#include "Character/Interfaces/LevelInterface.h"
 
 UMMCMaxMana::UMMCMaxMana() {
 	IntelligenceDef.AttributeToCapture = UMayAttributeSet::GetIntelligenceAttribute();

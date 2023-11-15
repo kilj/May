@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "MayCharacterBase.h"
 #include "AbilitySystem/Data/EnemyTypeInfo.h"
-#include "Core/Interfaces/HighlightInterface.h"
+#include "Character/Interfaces/HighlightInterface.h"
 #include "EnemyCharacter.generated.h"
 
 class AMayAIController;
