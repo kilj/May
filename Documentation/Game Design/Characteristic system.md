@@ -1,3 +1,5 @@
+All characters playable and non-playable have a one singular characteristic set. It can be divided into these categories: Main, Vital, Sub. 
+
 MAIN: 
 - [STR] Strange
 - [DEX] Dexterity

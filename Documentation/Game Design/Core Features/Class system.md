@@ -1,4 +1,4 @@
-There would be described class system or a archetypes.  
+There would be described class systems or archetypes of what you can equip to be like.  
 #wip 
 
 * Priest 
