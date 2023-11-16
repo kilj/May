@@ -5,7 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagContainer.h"
 #include "AbilitySystem/MayAbilitySystemComponent.h"
-#include "Core/Interfaces/HighlightInterface.h"
+#include "Character/Interfaces/HighlightInterface.h"
 #include "GameFramework/Character.h"
 #include "Input/MayInputComponent.h"
 #include "UI/Components/DamageTextComponent.h"

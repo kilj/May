@@ -5,7 +5,7 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/MayAbilityTypes.h"
 #include "Core/MayGameMode.h"
-#include "Core/Interfaces/CombatActorInterface.h"
+#include "Character/Interfaces/CombatActorInterface.h"
 #include "Kismet/GameplayStatics.h"
 
 void UMayAbilitySystemLibrary::InitEnemyDefaultAttributes(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, const EEnemyType EnemyType, const int32 Level) {
