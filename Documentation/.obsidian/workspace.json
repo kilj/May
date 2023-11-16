@@ -13,14 +13,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Game Design/Core Features/Class system.md",
+                "file": "Game Design/Narrative/Victorian Crisis of Faith (Alternative).md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8972f22d880ea19e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Game Design/Core Features/Character creation.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -87,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Game Design/Core Features/Class system.md",
+                "file": "Game Design/Core Features/Character creation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Game Design/Core Features/Class system.md",
+                "file": "Game Design/Core Features/Character creation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Game Design/Core Features/Class system.md"
+                "file": "Game Design/Core Features/Character creation.md"
               }
             }
           }
@@ -164,16 +178,19 @@
       "graph:Open graph view": false
     }
   },
-  "active": "9982d68ae5c386ce",
+  "active": "8972f22d880ea19e",
   "lastOpenFiles": [
-    "Concept/Base concept of the game.md",
-    "Concept/Setting.md",
-    "Game Design/Narrative/Victorian Crisis of Faith (Alternative).md",
     "Game Design/Core Features/Class system.md",
-    "Intro.md",
+    "Game Design/Core Features/Character creation.md",
     "Game Design/Core Features/Main gameplay flow.md",
-    "Game Design/Characteristic system.md",
+    "Concept/Setting.md",
+    "MoodBoard_SomeCombat_0.jpg.md",
+    "Concept/Base concept of the game.md",
     "Concept/extra/MoodBoard_SomeCombat_0.jpg",
+    "Game Design/Characteristic system.md",
+    "Intro.md",
+    "VS NY.md",
+    "Game Design/Narrative/Victorian Crisis of Faith (Alternative).md",
     "Concept/extra/MoodBoard_DestinyArmorSet.jpg",
     "Concept/extra/MoodBoard_DoomFanArt.jpg",
     "Gorta Mór 1845.md",
@@ -182,7 +199,6 @@
     "Game Design/Narrative",
     "Concept/extra",
     "Game Design",
-    "Untitled.md",
     "Concept"
   ]
 }
