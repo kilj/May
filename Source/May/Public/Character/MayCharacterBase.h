@@ -30,7 +30,6 @@ public:
 
 	//ICombatActorInterface
 	virtual UCharacterConfig* GetCharacterConfig_Implementation() const override;
-	virtual FVector GetWeaponTipLocation_Implementation() const override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
 	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
 	virtual FVector GetFacingTarget_Implementation() const override;
@@ -40,7 +39,7 @@ public:
 	//end of ICombatActorInterface
 
 	UPROPERTY(EditAnywhere, Category="Defaults")
-	TSoftObjectPtr<UCharacterConfig> CharacterConfig;
+	TObjectPtr<UCharacterConfig> CharacterConfig; //TODO: change TObjectPtr to soft ref
 	
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void Multicast_Die();
@@ -60,9 +59,6 @@ protected:
 	virtual void InitAbilityActorInfo();
 
 private:
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CombatActor", meta=(AllowPrivateAccess="true"))
-	FName WeaponTipSocketName = FName();
-
 	UPROPERTY(EditAnywhere, Category="CombatActor")
 	TObjectPtr<UAnimMontage> HitReactMontage;
 

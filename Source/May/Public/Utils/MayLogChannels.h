@@ -15,33 +15,15 @@ MAY_API FString GetClientServerContextString(UObject* ContextObject = nullptr);
 /**
  * MAY_ULOG
  *
- *   You can use this macro in any code where `this` evaluates to a valid UObject.
+ *   You can use this macro in any code where `Owner` evaluates to a valid UObject.
  *   The log will print with the __FUNCTION__ and __LINE__ where you write the macro,
  *   and will report `this` identity as [OwnerName]->[ThisName] in the log message.
  *   The message that you pass in (fmt, ...) is appended to the rest of the log info.
  *   
  */
 
-#define MAY_ULOG(fmt, ...) \
+#define MAY_ULOG(Owner, fmt, ...) \
 UE_LOG(LogMay, Log, \
-TEXT("[%s] %s:%i [%s]->[%s] %s"), \
-*GetClientServerContextString(this), \
-*FString(__FUNCTION__), __LINE__, \
-*GetNameSafe(GetOwner()), *GetNameSafe(this), \
-*FString::Printf(fmt, ##__VA_ARGS__) \
-)
-
-#define MAY_ULOGWARNING(fmt, ...) \
-UE_LOG(LogMay, Warning, \
-TEXT("[%s] %s:%i [%s]->[%s] %s"), \
-*GetClientServerContextString(this), \
-*FString(__FUNCTION__), __LINE__, \
-*GetNameSafe(GetOwner()), *GetNameSafe(this), \
-*FString::Printf(fmt, ##__VA_ARGS__) \
-)
-
-#define MAY_ULOGE(Owner, fmt, ...) \
-UE_LOG(LogMay, Error, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *GetClientServerContextString(this), \
 *FString(__FUNCTION__), __LINE__, \
@@ -51,6 +33,15 @@ TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 
 #define MAY_ULOGW(Owner, fmt, ...) \
 UE_LOG(LogMay, Warning, \
+TEXT("[%s] %s:%i [%s]->[%s] %s"), \
+*GetClientServerContextString(this), \
+*FString(__FUNCTION__), __LINE__, \
+*GetNameSafe(Owner), *GetNameSafe(this), \
+*FString::Printf(fmt, ##__VA_ARGS__) \
+)
+
+#define MAY_ULOGE(Owner, fmt, ...) \
+UE_LOG(LogMay, Error, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 *GetClientServerContextString(this), \
 *FString(__FUNCTION__), __LINE__, \

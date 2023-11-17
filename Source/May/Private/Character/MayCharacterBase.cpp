@@ -27,10 +27,6 @@ UCharacterConfig* AMayCharacterBase::GetCharacterConfig_Implementation() const {
 	return CharacterConfig.Get();
 }
 
-FVector AMayCharacterBase::GetWeaponTipLocation_Implementation() const {
-	return Weapon->GetSocketLocation(WeaponTipSocketName);
-}
-
 UAnimMontage* AMayCharacterBase::GetHitReactMontage_Implementation() const {
 	return HitReactMontage;
 }

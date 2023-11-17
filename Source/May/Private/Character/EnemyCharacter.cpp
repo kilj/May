@@ -51,7 +51,7 @@ int32 AEnemyCharacter::GetLevel() {
 }
 
 void AEnemyCharacter::Server_Die() {
-	MAY_ULOG(TEXT("%s died..."), *GetActorNameOrLabel());
+	MAY_ULOG(this, TEXT("%s died..."), *GetActorNameOrLabel());
 	
 	SetLifeSpan(5.f);
 	
@@ -104,6 +104,6 @@ void AEnemyCharacter::PossessedBy(AController* NewController) {
 void AEnemyCharacter::OnTagChanged(const FGameplayTag Tag, const int32 NewTagCount) {
 	bHitReacting = Tag.MatchesTagExact(FMayGameplayTags::Get().EffectsHitReact) && NewTagCount > 0; //play hit react montage
 
-	if (MayAIController && MayAIController->GetBlackboardComponent()) //ai controller is not null only on server
+	if (MayAIController && MayAIController->GetBlackboardComponent()) //AI controller exists only on server
 		MayAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsHitReacting"), bHitReacting);
 }

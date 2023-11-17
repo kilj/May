@@ -90,7 +90,7 @@ void AEnnieCharacter::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> A
 
 void AEnnieCharacter::AddStartupAbilities() {
 	if (!HasAuthority()) {
-		MAY_ULOGWARNING(TEXT("Calling AEnnieCharacter::AddStartupAbilities from client!"));
+		MAY_ULOGW(this, TEXT("Calling AEnnieCharacter::AddStartupAbilities from client!"));
 		return;
 	}
 

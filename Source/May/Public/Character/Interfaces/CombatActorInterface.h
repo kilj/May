@@ -22,12 +22,9 @@ class MAY_API ICombatActorInterface {
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UCharacterConfig* GetCharacterConfig() const;
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector GetWeaponTipLocation() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	UAnimMontage* GetHitReactMontage() const;
+	UAnimMontage* GetHitReactMontage() const; //TODO: move it to character config
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetFacingTarget(const FVector& Target);
