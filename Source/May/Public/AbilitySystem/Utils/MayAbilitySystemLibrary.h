@@ -41,6 +41,6 @@ public:
 	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool InValue);
 
 	UFUNCTION(BlueprintCallable, Category="MayAbilitySystemLibrary")
-	static void GetLivePlayersInRadius(const UObject* WorldContextObject, const FVector& FromOrigin, float Radius, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore);
+	static void GetLivePlayersInRadius(const UObject* WorldContextObject, const FVector& FromOrigin, float Radius, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore, bool bDrawDebug);
 	
 };

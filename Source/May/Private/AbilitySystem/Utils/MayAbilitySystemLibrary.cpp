@@ -65,7 +65,7 @@ void UMayAbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& Ef
 		EffectContext->SetIsCriticalHit(InValue);
 }
 
-void UMayAbilitySystemLibrary::GetLivePlayersInRadius(const UObject* WorldContextObject, const FVector& FromOrigin, float Radius, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore) {
+void UMayAbilitySystemLibrary::GetLivePlayersInRadius(const UObject* WorldContextObject, const FVector& FromOrigin, float Radius, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore, bool bDrawDebug) {
 	FCollisionQueryParams SphereParams;
 	SphereParams.MobilityType = EQueryMobilityType::Dynamic; //players have dynamic mobility type 
 	SphereParams.AddIgnoredActors(ActorsToIgnore);
@@ -73,6 +73,9 @@ void UMayAbilitySystemLibrary::GetLivePlayersInRadius(const UObject* WorldContex
 	TArray<FOverlapResult> Overlaps;
 	if (const UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull)) {
 		World->OverlapMultiByObjectType(Overlaps, FromOrigin, FQuat::Identity, FCollisionObjectQueryParams(FCollisionObjectQueryParams::InitType::AllDynamicObjects), FCollisionShape::MakeSphere(Radius), SphereParams);
+
+		if (bDrawDebug)
+			DrawDebugSphere(World, FromOrigin, Radius, 12, FColor::Green, false, 0.5f);
 
 		for (auto OverlapResult : Overlaps) {
 			const auto Actor = OverlapResult.GetActor();
