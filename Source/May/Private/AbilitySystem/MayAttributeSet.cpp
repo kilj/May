@@ -86,7 +86,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 		}
 
 		//showing floating text
-		if (Properties.SourceCharacter != Properties.TargetCharacter) {
+		if (Properties.SourceCharacter && Properties.TargetCharacter && Properties.SourceCharacter != Properties.TargetCharacter) {
 			auto EnniePC = Cast<AEnniePlayerController>(Properties.SourceCharacter->GetController());
 			if (EnniePC == nullptr)
 				EnniePC = Cast<AEnniePlayerController>(Properties.TargetCharacter->GetController());
