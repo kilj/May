@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 #include "CombatActorInterface.generated.h"
 
+class UCharacterConfig;
 // This class does not need to be modified.
 UINTERFACE(BlueprintType)
 class UCombatActorInterface : public UInterface {
@@ -19,6 +20,9 @@ class MAY_API ICombatActorInterface {
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UCharacterConfig* GetCharacterConfig() const;
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	FVector GetWeaponTipLocation() const;
 

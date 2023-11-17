@@ -9,6 +9,7 @@
 #include "Character/Interfaces/LevelInterface.h"
 #include "MayCharacterBase.generated.h"
 
+class UCharacterConfig;
 class UGameplayAbility;
 class UGameplayEffect;
 class UAttributeSet;
@@ -28,6 +29,7 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	//ICombatActorInterface
+	virtual UCharacterConfig* GetCharacterConfig_Implementation() const override;
 	virtual FVector GetWeaponTipLocation_Implementation() const override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
 	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
@@ -36,9 +38,15 @@ public:
 	virtual AActor* GetAvatar_Implementation() override;
 	virtual void Server_Die() override;
 	//end of ICombatActorInterface
+
+	UPROPERTY(EditAnywhere, Category="Defaults")
+	TSoftObjectPtr<UCharacterConfig> CharacterConfig;
 	
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void Multicast_Die();
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
+	TObjectPtr<USkeletalMeshComponent> Weapon; //TODO: rename to current or equipped weapon?
 	
 protected:
 	virtual void BeginPlay() override;
@@ -48,9 +56,6 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
-	
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
 
 	virtual void InitAbilityActorInfo();
 

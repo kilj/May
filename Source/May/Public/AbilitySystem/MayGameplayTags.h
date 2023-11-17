@@ -56,6 +56,9 @@ struct FMayGameplayTags {
 	FGameplayTag EventMontageAttackMeleeHandR;
 	FGameplayTag EventMontageAttackMeleeHandL;
 	FGameplayTag EventMontageAttackRange;
+	// FGameplayTag EventMontageAttackWeaponSpear;
+	// FGameplayTag EventMontageAttackWeaponSlingshot;
+	// FGameplayTag EventMontageAttackHandR;
 
 	//input
 	FGameplayTag InputKeySpace;

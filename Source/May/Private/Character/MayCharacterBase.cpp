@@ -2,6 +2,7 @@
 
 #include "Character/MayCharacterBase.h"
 #include "May.h"
+#include "Character/Data/CharacterConfig.h"
 #include "Components/CapsuleComponent.h"
 
 AMayCharacterBase::AMayCharacterBase() {
@@ -20,6 +21,10 @@ AMayCharacterBase::AMayCharacterBase() {
 
 UAbilitySystemComponent* AMayCharacterBase::GetAbilitySystemComponent() const {
 	return AbilitySystemComponent;
+}
+
+UCharacterConfig* AMayCharacterBase::GetCharacterConfig_Implementation() const {
+	return CharacterConfig.Get();
 }
 
 FVector AMayCharacterBase::GetWeaponTipLocation_Implementation() const {
