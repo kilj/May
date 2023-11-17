@@ -24,7 +24,6 @@ struct FCharacterAttackInfo {
 	FName SocketName = FName();
 };
 
-
 /**
  * 
  */

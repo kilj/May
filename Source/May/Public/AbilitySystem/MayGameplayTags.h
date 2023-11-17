@@ -56,9 +56,13 @@ struct FMayGameplayTags {
 	FGameplayTag EventMontageAttackMeleeHandR;
 	FGameplayTag EventMontageAttackMeleeHandL;
 	FGameplayTag EventMontageAttackRange;
-	// FGameplayTag EventMontageAttackWeaponSpear;
-	// FGameplayTag EventMontageAttackWeaponSlingshot;
-	// FGameplayTag EventMontageAttackHandR;
+
+	//socket tags for testing idea
+	FGameplayTag SocketWeaponStuff;
+	FGameplayTag SocketWeaponAxe;
+	FGameplayTag SocketWeaponSlingshot;
+	FGameplayTag SocketHandR;
+	FGameplayTag SocketHandL;
 
 	//input
 	FGameplayTag InputKeySpace;

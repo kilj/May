@@ -11,9 +11,11 @@ class UGameplayEffect;
 
 UENUM(BlueprintType)
 enum class EEnemyType : uint8 {
+	None,
 	GoblinMelee,
 	GoblinArcher,
-	GoblinShaman
+	GoblinShaman,
+	Ghoul
 };
 
 UENUM(BlueprintType, Blueprintable)

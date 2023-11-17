@@ -47,6 +47,13 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.EventMontageAttackMeleeHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.R"));
 	Instance.EventMontageAttackMeleeHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.L"));
 	Instance.EventMontageAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Range"));
+
+	//socket tags for testing idea
+	Instance.SocketWeaponStuff = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff"));
+	Instance.SocketWeaponAxe = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Axe"));
+	Instance.SocketWeaponSlingshot = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Slingshot"));
+	Instance.SocketHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.R"));
+	Instance.SocketHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.L"));
 	
 	//input
 	Instance.InputKeySpace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.Space"));
