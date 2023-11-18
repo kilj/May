@@ -54,11 +54,11 @@ UExecCalc_Damage::UExecCalc_Damage() {
 }
 
 void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const {
-	const auto SourceASC = ExecutionParams.GetSourceAbilitySystemComponent();
-	const auto TargetASC = ExecutionParams.GetTargetAbilitySystemComponent();
+	// const auto SourceASC = ExecutionParams.GetSourceAbilitySystemComponent();
+	// const auto TargetASC = ExecutionParams.GetTargetAbilitySystemComponent();
 
-	const auto SourceAvatar = SourceASC ? SourceASC->GetAvatarActor() : nullptr;
-	const auto TargetAvatar = TargetASC ? TargetASC->GetAvatarActor() : nullptr;
+	// const auto SourceAvatar = SourceASC ? SourceASC->GetAvatarActor() : nullptr;
+	// const auto TargetAvatar = TargetASC ? TargetASC->GetAvatarActor() : nullptr;
 
 	const auto Spec = ExecutionParams.GetOwningSpec();
 	const auto EffectContext = static_cast<FMayGameplayEffectContext*>(Spec.GetContext().Get());
@@ -75,7 +75,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	float Damage = 0.f;
 
 	for (const auto& Pair : FMayGameplayTags::Get().DamageTypes) {
-		//theoretically, game-designer can add ANY tag to damage_ability as damage type and it will be an error. TODO: we must limit possible tags or wrap tags to enum in UMayDamageGameplayAbility
+		//theoretically, game-designer can add ANY tag to damage_ability as damage type and it will be an error. May ability checks if tag is correct when adds tag to projectile or when causing damage directly
 		checkf(MayDamageStatics().TagsToCaptureDefs.Contains(Pair.Value), TEXT("TagsToCaptureDefs doesn't contain Tag: [%s] in ExecCalc_Damage"), *Pair.Value.ToString());
 		
 		const auto CaptureDef = MayDamageStatics().TagsToCaptureDefs[Pair.Value];

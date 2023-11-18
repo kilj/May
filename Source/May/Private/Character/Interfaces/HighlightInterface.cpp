@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Red Beat, 2023
 
 #include "Character/Interfaces/HighlightInterface.h"
-
-// Add default functionality here for any IHighlightInterface functions that are not pure virtual.
