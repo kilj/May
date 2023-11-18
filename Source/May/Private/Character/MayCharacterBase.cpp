@@ -1,6 +1,8 @@
 ﻿// Red Beat, 2023
 
 #include "Character/MayCharacterBase.h"
+
+#include "AbilitySystemComponent.h"
 #include "May.h"
 #include "Components/CapsuleComponent.h"
 
@@ -47,6 +49,8 @@ AActor* AMayCharacterBase::GetAvatar_Implementation() {
 }
 
 void AMayCharacterBase::Server_Die() {
+	GetAbilitySystemComponent()->ClearAllAbilities(); //for now, we'll remove all abilities on death to prevent using anything on dead character, but in future probably TODO: add bCanActivateWhenDead to ability?
+	
 	Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
 	Multicast_Die();
 }
@@ -62,7 +66,7 @@ void AMayCharacterBase::Multicast_Die_Implementation() {
 	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
+	
 	bDead = true;
 }
 

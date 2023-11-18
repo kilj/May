@@ -8,7 +8,9 @@
 
 void UMayGameplayAbility::SpawnProjectileAndAttachEffect(const TSubclassOf<AMayProjectile> ProjectileClass, const TSubclassOf<UGameplayEffect> ImpactGEClass, TMap<FGameplayTag, FScalableFloat> DamageTypes, const FVector& SpawnLocation, const FVector& TargetLocation) {
 	const auto Owner = GetOwningActorFromActorInfo();
-	checkf(Owner->HasAuthority(), TEXT("Owner should has network authority to call UMayGameplayAbility::SpawnProjectileAndAttachEffect"))
+	if (!Owner->HasAuthority()) //Owner should has network authority to call UMayGameplayAbility::SpawnProjectileAndAttachEffect
+		return;
+	
 	checkf(ProjectileClass, TEXT("Can't spawn projectile because of ProjectileClass is null"));
 	checkf(ImpactGEClass, TEXT("Can't attach impact gameplay effect, because ImpactGEClass is null"));
 
