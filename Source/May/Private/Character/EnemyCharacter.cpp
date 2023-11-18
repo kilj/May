@@ -52,10 +52,12 @@ int32 AEnemyCharacter::GetLevel() {
 
 void AEnemyCharacter::Server_Die() {
 	MAY_ULOG(this, TEXT("%s died..."), *GetActorNameOrLabel());
-	
+
+	Super::Server_Die();
 	SetLifeSpan(5.f);
 	
-	Super::Server_Die();
+	if (MayAIController && MayAIController->GetBlackboardComponent()) //AI controller exists only on server
+		MayAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsDead"), bDead);
 }
 
 void AEnemyCharacter::BeginPlay() {

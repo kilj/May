@@ -2,7 +2,6 @@
 
 #include "Character/MayCharacterBase.h"
 #include "May.h"
-#include "Character/Data/CharacterConfig.h"
 #include "Components/CapsuleComponent.h"
 
 AMayCharacterBase::AMayCharacterBase() {

@@ -58,12 +58,12 @@ protected:
 
 	virtual void InitAbilityActorInfo();
 
+	bool bDead = false;
+
 private:
 	UPROPERTY(EditAnywhere, Category="CombatActor")
 	TObjectPtr<UAnimMontage> HitReactMontage;
 
 	UPROPERTY()
 	FVector FacingTarget = FVector::Zero();
-
-	bool bDead = false;
 };
