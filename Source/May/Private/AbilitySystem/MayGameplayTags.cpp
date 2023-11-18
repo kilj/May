@@ -32,7 +32,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 
 	//abilities
 	Instance.AbilitiesAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Melee"));
-	Instance.AbilitiesAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Range"));
+	Instance.AbilitiesAttackRanged = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Ranged"));
 
 	//message
 	Instance.MessageHealthCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthCrystal"));
@@ -46,7 +46,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.EventMontageAttackMeleeWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Weapon"));
 	Instance.EventMontageAttackMeleeHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.R"));
 	Instance.EventMontageAttackMeleeHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.L"));
-	Instance.EventMontageAttackRange = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Range"));
+	Instance.EventMontageAttackRanged = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Ranged"));
 
 	//socket tags for testing idea
 	Instance.SocketWeaponStuff = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff"));

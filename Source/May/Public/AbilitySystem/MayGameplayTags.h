@@ -41,7 +41,7 @@ struct FMayGameplayTags {
 
 	//abilities
 	FGameplayTag AbilitiesAttackMelee;
-	FGameplayTag AbilitiesAttackRange;
+	FGameplayTag AbilitiesAttackRanged;
 
 	//message
 	FGameplayTag MessageHealthCrystal;
@@ -55,9 +55,9 @@ struct FMayGameplayTags {
 	FGameplayTag EventMontageAttackMeleeWeapon;
 	FGameplayTag EventMontageAttackMeleeHandR;
 	FGameplayTag EventMontageAttackMeleeHandL;
-	FGameplayTag EventMontageAttackRange;
+	FGameplayTag EventMontageAttackRanged;
 
-	//socket tags for testing idea
+	//socket tags for testing idea (not used yet)
 	FGameplayTag SocketWeaponStuff;
 	FGameplayTag SocketWeaponAxe;
 	FGameplayTag SocketWeaponSlingshot;
