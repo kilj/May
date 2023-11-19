@@ -36,7 +36,7 @@ public:
 	bool IsDead() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	AActor* GetAvatar(); //TODO: idk, maybe we should delete it at all
+	AActor* GetAvatar(); //TODO: change to AMayCharacterBase* GetCharacter()
 
 	virtual void Server_Die() = 0;
 };
