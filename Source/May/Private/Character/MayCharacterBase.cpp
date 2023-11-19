@@ -44,7 +44,7 @@ bool AMayCharacterBase::IsDead_Implementation() const {
 	return bDead;
 }
 
-AActor* AMayCharacterBase::GetAvatar_Implementation() {
+AMayCharacterBase* AMayCharacterBase::GetMayCharacter_Implementation() {
 	return this;
 }
 

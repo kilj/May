@@ -40,17 +40,13 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.MessageManaCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaCrystal"));
 	Instance.MessageManaPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaPotion"));
 
-	//event
-	Instance.EventMontageFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Firebolt"));
-	Instance.EventMontageAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee"));
-	Instance.EventMontageAttackMeleeWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Weapon"));
-	Instance.EventMontageAttackMeleeHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.R"));
-	Instance.EventMontageAttackMeleeHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Melee.Hand.L"));
-	Instance.EventMontageAttackRanged = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Attack.Ranged"));
-
 	//socket tags for testing idea
+	Instance.SocketWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon"));
 	Instance.SocketWeaponStuff = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff"));
+	Instance.SocketWeaponStuffMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff.Melee"));
+	Instance.SocketWeaponStuffFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff.Firebolt"));
 	Instance.SocketWeaponAxe = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Axe"));
+	Instance.SocketWeaponSpear = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Spear"));
 	Instance.SocketWeaponSlingshot = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Slingshot"));
 	Instance.SocketHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.R"));
 	Instance.SocketHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.L"));

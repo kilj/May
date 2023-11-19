@@ -49,17 +49,13 @@ struct FMayGameplayTags {
 	FGameplayTag MessageManaCrystal;
 	FGameplayTag MessageManaPotion;
 
-	//events.montage
-	FGameplayTag EventMontageFirebolt;
-	FGameplayTag EventMontageAttackMelee;
-	FGameplayTag EventMontageAttackMeleeWeapon;
-	FGameplayTag EventMontageAttackMeleeHandR;
-	FGameplayTag EventMontageAttackMeleeHandL;
-	FGameplayTag EventMontageAttackRanged;
-
-	//socket tags for testing idea (not used yet)
+	//sockets (for montages and cues)
+	FGameplayTag SocketWeapon;
 	FGameplayTag SocketWeaponStuff;
+	FGameplayTag SocketWeaponStuffMelee;
+	FGameplayTag SocketWeaponStuffFirebolt;
 	FGameplayTag SocketWeaponAxe;
+	FGameplayTag SocketWeaponSpear;
 	FGameplayTag SocketWeaponSlingshot;
 	FGameplayTag SocketHandR;
 	FGameplayTag SocketHandL;

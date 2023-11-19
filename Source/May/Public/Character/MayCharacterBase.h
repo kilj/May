@@ -34,7 +34,7 @@ public:
 	virtual void SetFacingTarget_Implementation(const FVector& Target) override;
 	virtual FVector GetFacingTarget_Implementation() const override;
 	virtual bool IsDead_Implementation() const override;
-	virtual AActor* GetAvatar_Implementation() override;
+	virtual AMayCharacterBase* GetMayCharacter_Implementation() override;
 	virtual void Server_Die() override;
 	//end of ICombatActorInterface
 
