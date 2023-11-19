@@ -2,6 +2,7 @@
 
 #include "Character/Data/CharacterConfig.h"
 #include "Character/MayCharacterBase.h"
+#include "Utils/MayLogChannels.h"
 
 FCharacterAttackInfo UCharacterConfig::GetRandomAttackInfo() {
 	checkf(Attacks.Num() > 0, TEXT("Attacks array is empty"));
@@ -27,4 +28,14 @@ FVector UCharacterConfig::GetAttackSocketLocation(const FGameplayTag& Tag, const
 		return Character->GetMesh()->GetSocketLocation(SocketName);
 
 	return Character->GetActorLocation();
+}
+
+UNiagaraSystem* UCharacterConfig::GetHitReaction(const FGameplayTag& Tag) {
+	if (HitReacts.Num() <= 0)
+		MAY_ULOGW(this, TEXT("Trying to get hit reaction niagara system from empty HitReacts map. Check character's config."));
+
+	if (HitReacts.Contains(Tag))
+		return HitReacts[Tag];
+
+	return nullptr;
 }

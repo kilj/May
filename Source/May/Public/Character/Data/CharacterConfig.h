@@ -7,6 +7,7 @@
 #include "Engine/DataAsset.h"
 #include "CharacterConfig.generated.h"
 
+class UNiagaraSystem;
 class AMayCharacterBase;
 
 USTRUCT(BlueprintType)
@@ -35,6 +36,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TArray<FCharacterAttackInfo> Attacks;
 
+	UPROPERTY(EditDefaultsOnly, Category="Defaults")
+	TMap<FGameplayTag, UNiagaraSystem*> HitReacts;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="CharacterConfig")
 	FCharacterAttackInfo GetRandomAttackInfo(); //TODO: add here ability tag to select attack for this ability, not just random attack from all attacks
 
@@ -47,4 +51,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="CharacterConfig")
 	FVector GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacterBase* Character);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="CharacterConfig")
+	UNiagaraSystem* GetHitReaction(const FGameplayTag& Tag);
 };

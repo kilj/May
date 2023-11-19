@@ -35,10 +35,10 @@ private:
 	TObjectPtr<USphereComponent> Sphere;
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<UNiagaraSystem> ImpactEffect;
+	TObjectPtr<UNiagaraSystem> ImpactEffect; //TODO: get impact effect from OtherActor character's config
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<USoundBase> ImpactSound;
+	TObjectPtr<USoundBase> ImpactSound; //TODO: get impact sound from OtherActor character's config
 	
 	UFUNCTION()
 	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

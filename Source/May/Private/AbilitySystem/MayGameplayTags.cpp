@@ -79,4 +79,5 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 
 	//effects
 	Instance.EffectsHitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"));
+	Instance.EffectsHitReactBlood = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact.Blood"));
 }

@@ -85,6 +85,7 @@ struct FMayGameplayTags {
 
 	//effects
 	FGameplayTag EffectsHitReact;
+	FGameplayTag EffectsHitReactBlood;
 
 private:
 	static FMayGameplayTags Instance;
