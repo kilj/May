@@ -3,6 +3,7 @@
 #include "AbilitySystem/Abilities/MayGameplayAbility.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Projectiles/MayProjectile.h"
 #include "Utils/MayLogChannels.h"
 
@@ -74,4 +75,28 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 	}
 
 	SourceASC->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), TargetASC);
+}
+
+void UMayGameplayAbility::SpawnPawnsInForwardCone(const TSubclassOf<APawn> PawnClass, const int32 Num, const float HalfAngleInDegrees, const float MinDistance, const float MaxDistance, const bool bDrawDebug) {
+	const FVector ForwardVector = GetAvatarActorFromActorInfo()->GetActorForwardVector();
+	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
+
+	if (bDrawDebug) {
+		DrawDebugCone(GetWorld(), Location, ForwardVector, MinDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
+		DrawDebugCone(GetWorld(), Location, ForwardVector, MaxDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
+	}
+
+	for (int32 i = 0; i < Num; i++) {
+		const FVector RandomUnitVector = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(ForwardVector, HalfAngleInDegrees);
+		const FVector Direction = FVector(RandomUnitVector.X, RandomUnitVector.Y, 0.f);
+		const FVector SpawnLocation = Location + Direction * FMath::RandRange(MinDistance, MaxDistance);
+
+		if (bDrawDebug)
+			DrawDebugSphere(GetWorld(), SpawnLocation, 14, 4, FColor::Green, false, 1.f);
+
+		SpawnPawnAtPosition(PawnClass, SpawnLocation);
+	}
+}
+
+void UMayGameplayAbility::SpawnPawnAtPosition(TSubclassOf<APawn> PawnClass, const FVector& SpawnLocation) {
 }
