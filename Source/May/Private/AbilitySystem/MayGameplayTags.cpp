@@ -40,7 +40,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.MessageManaCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaCrystal"));
 	Instance.MessageManaPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.ManaPotion"));
 
-	//socket tags for testing idea
+	//sockets (for montages and cues)
 	Instance.SocketWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon"));
 	Instance.SocketWeaponStuff = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff"));
 	Instance.SocketWeaponStuffMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Stuff.Melee"));
