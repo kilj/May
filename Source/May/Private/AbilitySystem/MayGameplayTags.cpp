@@ -50,6 +50,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.SocketWeaponSlingshot = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Weapon.Slingshot"));
 	Instance.SocketHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.R"));
 	Instance.SocketHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.L"));
+	Instance.SocketTail = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Tail"));
 	
 	//input
 	Instance.InputKeySpace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.Space"));

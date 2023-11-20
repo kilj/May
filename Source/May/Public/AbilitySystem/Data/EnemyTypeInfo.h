@@ -15,7 +15,8 @@ enum class EEnemyType : uint8 {
 	GoblinMelee,
 	GoblinArcher,
 	GoblinShaman,
-	Ghoul
+	Ghoul,
+	Demon
 };
 
 UENUM(BlueprintType, Blueprintable)

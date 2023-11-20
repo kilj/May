@@ -59,6 +59,7 @@ struct FMayGameplayTags {
 	FGameplayTag SocketWeaponSlingshot;
 	FGameplayTag SocketHandR;
 	FGameplayTag SocketHandL;
+	FGameplayTag SocketTail;
 
 	//input
 	FGameplayTag InputKeySpace;
