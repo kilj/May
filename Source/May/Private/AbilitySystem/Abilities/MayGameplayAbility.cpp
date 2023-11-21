@@ -77,9 +77,12 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 	SourceASC->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), TargetASC);
 }
 
-void UMayGameplayAbility::SpawnPawnsInForwardCone(const TSubclassOf<APawn> PawnClass, const int32 Num, const float HalfAngleInDegrees, const float MinDistance, const float MaxDistance, const bool bDrawDebug) {
+//TODO: this method works fine when HalfAngleInDegrees <= 90
+void UMayGameplayAbility::SpawnPawnsInForwardConeRandom(const TSubclassOf<APawn> PawnClass, const int32 Num, const float HalfAngleInDegrees, const float MinDistance, const float MaxDistance, const bool bDrawDebug) {
 	const FVector ForwardVector = GetAvatarActorFromActorInfo()->GetActorForwardVector();
+	const FVector UpVector = GetAvatarActorFromActorInfo()->GetActorUpVector();
 	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
+	const FPlane Plane = FPlane(ForwardVector, UpVector);
 
 	if (bDrawDebug) {
 		DrawDebugCone(GetWorld(), Location, ForwardVector, MinDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
@@ -88,14 +91,51 @@ void UMayGameplayAbility::SpawnPawnsInForwardCone(const TSubclassOf<APawn> PawnC
 
 	for (int32 i = 0; i < Num; i++) {
 		const FVector RandomUnitVector = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(ForwardVector, HalfAngleInDegrees);
-		const FVector Direction = FVector(RandomUnitVector.X, RandomUnitVector.Y, 0.f);
-		const FVector SpawnLocation = Location + Direction * FMath::RandRange(MinDistance, MaxDistance);
+		const FVector Direction = FVector::VectorPlaneProject(RandomUnitVector, Plane).GetSafeNormal();
+		FVector SpawnLocation = Location + Direction * FMath::RandRange(MinDistance, MaxDistance);
+
+		FHitResult Hit;
+		GetWorld()->LineTraceSingleByChannel(Hit, SpawnLocation + FVector::UpVector * 400.f, SpawnLocation + FVector::DownVector * 400.f, ECC_Visibility);
+		if (Hit.bBlockingHit)
+			SpawnLocation = Hit.ImpactPoint; //trace down for the ground
 
 		if (bDrawDebug)
 			DrawDebugSphere(GetWorld(), SpawnLocation, 14, 4, FColor::Green, false, 1.f);
 
 		SpawnPawnAtPosition(PawnClass, SpawnLocation);
 	}
+}
+
+void UMayGameplayAbility::SpawnPawnsInForwardConeEvenly(TSubclassOf<APawn> PawnClass, int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug) {
+	const FVector ForwardVector = GetAvatarActorFromActorInfo()->GetActorForwardVector();
+	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
+
+	if (bDrawDebug) {
+		DrawDebugCone(GetWorld(), Location, ForwardVector, MinDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
+		DrawDebugCone(GetWorld(), Location, ForwardVector, MaxDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
+	}
+
+	if (Num <= 0)
+		return;
+
+	const float SpreadDelta = HalfAngleInDegrees * 2.f / Num;
+	const FVector SpreadRot = ForwardVector.RotateAngleAxis(-HalfAngleInDegrees + SpreadDelta * 0.5f, FVector::UpVector);
+
+	for (int32 i = 0; i < Num; i++) {
+		const FVector Direction = SpreadRot.RotateAngleAxis(SpreadDelta * i, FVector::UpVector);
+		FVector SpawnLocation = Location + Direction * FMath::RandRange(MinDistance, MaxDistance);
+
+		FHitResult Hit;
+		GetWorld()->LineTraceSingleByChannel(Hit, SpawnLocation + FVector::UpVector * 400.f, SpawnLocation + FVector::DownVector * 400.f, ECC_Visibility);
+		if (Hit.bBlockingHit)
+			SpawnLocation = Hit.ImpactPoint; //trace down for the ground
+
+		if (bDrawDebug)
+			DrawDebugSphere(GetWorld(), SpawnLocation, 14, 4, FColor::Green, false, 1.f);
+
+		SpawnPawnAtPosition(PawnClass, SpawnLocation);
+	}
+
 }
 
 void UMayGameplayAbility::SpawnPawnAtPosition(TSubclassOf<APawn> PawnClass, const FVector& SpawnLocation) {

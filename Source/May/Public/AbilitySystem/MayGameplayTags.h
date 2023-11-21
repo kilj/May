@@ -42,6 +42,8 @@ struct FMayGameplayTags {
 	//abilities
 	FGameplayTag AbilitiesAttackMelee;
 	FGameplayTag AbilitiesAttackRanged;
+	FGameplayTag AbilitiesSpellFirebolt;
+	FGameplayTag AbilitiesSpellSummon;
 
 	//message
 	FGameplayTag MessageHealthCrystal;

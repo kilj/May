@@ -33,7 +33,10 @@ public:
 	void ApplyEffectToActor(AActor* TargetActor, TSubclassOf<UGameplayEffect> ImpactGEClass, TMap<FGameplayTag, FScalableFloat> DamageTypes);
 
 	UFUNCTION(BlueprintCallable)
-	void SpawnPawnsInForwardCone(TSubclassOf<APawn> PawnClass, int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug);
+	void SpawnPawnsInForwardConeRandom(TSubclassOf<APawn> PawnClass, int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug);
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnPawnsInForwardConeEvenly(TSubclassOf<APawn> PawnClass, int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug);
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnPawnAtPosition(TSubclassOf<APawn> PawnClass, const FVector& SpawnLocation);
