@@ -4,10 +4,13 @@
 #include "Character/MayCharacterBase.h"
 #include "Utils/MayLogChannels.h"
 
-FCharacterAttackInfo UCharacterConfig::GetRandomAttackInfo() {
-	checkf(Attacks.Num() > 0, TEXT("Attacks array is empty"));
-	
-	return Attacks[FMath::RandRange(0, Attacks.Num() - 1)];
+FActionInfo UCharacterConfig::GetAttackInfo(const FGameplayTag& Tag) {
+	for (const auto Attack : Attacks) {
+		if (Attack.Tag.MatchesTag(Tag))
+			return Attack;
+	}
+
+	return FActionInfo::Empty();
 }
 
 FVector UCharacterConfig::GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacterBase* Character) {
