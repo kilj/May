@@ -37,7 +37,7 @@ public:
 	TArray<FCharacterAttackInfo> Attacks;
 
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
-	TMap<FGameplayTag, UNiagaraSystem*> HitReacts;
+	TMap<FGameplayTag, UNiagaraSystem*> HitReacts; //TODO: rename to HitReactEffects
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="CharacterConfig")
 	FCharacterAttackInfo GetRandomAttackInfo(); //TODO: add here ability tag to select attack for this ability, not just random attack from all attacks

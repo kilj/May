@@ -62,6 +62,7 @@ struct FMayGameplayTags {
 	FGameplayTag SocketHandR;
 	FGameplayTag SocketHandL;
 	FGameplayTag SocketTail;
+	FGameplayTag SocketSummon; //TODO: in fact, this isn't a socket, but we're using socket-tags to identify correct data for abilities
 
 	//input
 	FGameplayTag InputKeySpace;

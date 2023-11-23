@@ -53,6 +53,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.SocketHandR = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.R"));
 	Instance.SocketHandL = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Hand.L"));
 	Instance.SocketTail = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Tail"));
+	Instance.SocketSummon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Socket.Summon"));
 	
 	//input
 	Instance.InputKeySpace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Input.Key.Space"));

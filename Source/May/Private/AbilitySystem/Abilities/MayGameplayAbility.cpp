@@ -78,7 +78,7 @@ void UMayGameplayAbility::ApplyEffectToActor(AActor* TargetActor, const TSubclas
 }
 
 //TODO: this method works fine when HalfAngleInDegrees <= 90
-void UMayGameplayAbility::SpawnPawnsInForwardConeRandom(const TSubclassOf<APawn> PawnClass, const int32 Num, const float HalfAngleInDegrees, const float MinDistance, const float MaxDistance, const bool bDrawDebug) {
+TArray<FVector> UMayGameplayAbility::GetSpawnLocationsInForwardConeRandom(const int32 Num, const float HalfAngleInDegrees, const float MinDistance, const float MaxDistance, const bool bDrawDebug) {
 	const FVector ForwardVector = GetAvatarActorFromActorInfo()->GetActorForwardVector();
 	const FVector UpVector = GetAvatarActorFromActorInfo()->GetActorUpVector();
 	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
@@ -88,6 +88,8 @@ void UMayGameplayAbility::SpawnPawnsInForwardConeRandom(const TSubclassOf<APawn>
 		DrawDebugCone(GetWorld(), Location, ForwardVector, MinDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
 		DrawDebugCone(GetWorld(), Location, ForwardVector, MaxDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
 	}
+
+	TArray<FVector> Result;
 
 	for (int32 i = 0; i < Num; i++) {
 		const FVector RandomUnitVector = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(ForwardVector, HalfAngleInDegrees);
@@ -102,11 +104,13 @@ void UMayGameplayAbility::SpawnPawnsInForwardConeRandom(const TSubclassOf<APawn>
 		if (bDrawDebug)
 			DrawDebugSphere(GetWorld(), SpawnLocation, 14, 4, FColor::Green, false, 1.f);
 
-		SpawnPawnAtPosition(PawnClass, SpawnLocation);
+		Result.Add(SpawnLocation);
 	}
+
+	return Result;
 }
 
-void UMayGameplayAbility::SpawnPawnsInForwardConeEvenly(TSubclassOf<APawn> PawnClass, int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug) {
+TArray<FVector> UMayGameplayAbility::GetSpawnLocationsInForwardConeEvenly(int32 Num, float HalfAngleInDegrees, float MinDistance, float MaxDistance, bool bDrawDebug) {
 	const FVector ForwardVector = GetAvatarActorFromActorInfo()->GetActorForwardVector();
 	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
 
@@ -115,8 +119,10 @@ void UMayGameplayAbility::SpawnPawnsInForwardConeEvenly(TSubclassOf<APawn> PawnC
 		DrawDebugCone(GetWorld(), Location, ForwardVector, MaxDistance, FMath::DegreesToRadians(HalfAngleInDegrees), 0.f, 12, FColor::Magenta, false, 1.f);
 	}
 
+	TArray<FVector> Result;
+
 	if (Num <= 0)
-		return;
+		return Result;
 
 	const float SpreadDelta = HalfAngleInDegrees * 2.f / Num;
 	const FVector SpreadRot = ForwardVector.RotateAngleAxis(-HalfAngleInDegrees + SpreadDelta * 0.5f, FVector::UpVector);
@@ -133,9 +139,10 @@ void UMayGameplayAbility::SpawnPawnsInForwardConeEvenly(TSubclassOf<APawn> PawnC
 		if (bDrawDebug)
 			DrawDebugSphere(GetWorld(), SpawnLocation, 14, 4, FColor::Green, false, 1.f);
 
-		SpawnPawnAtPosition(PawnClass, SpawnLocation);
+		Result.Add(SpawnLocation);
 	}
 
+	return Result;
 }
 
 void UMayGameplayAbility::SpawnPawnAtPosition(TSubclassOf<APawn> PawnClass, const FVector& SpawnLocation) {
