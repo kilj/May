@@ -23,11 +23,12 @@ UMayAbilitySystemComponent* AEnniePlayerController::GetASC() {
 
 void AEnniePlayerController::BeginPlay() {
 	Super::BeginPlay();
-	
-	check(DefaultMappingContext);
-	
+
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer())) {
-		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		if (DefaultMappingContext)
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		else
+			MAY_ULOGW(this, TEXT("Can't add UInputMappingContext to UEnhancedInputLocalPlayerSubsystem, because DefaultMappingContext is null."));
 	}
 
 	bShowMouseCursor = true;

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "EnhancedInputComponent.h"
 #include "MayInputConfig.h"
+#include "Utils/MayLogChannels.h"
 #include "MayInputComponent.generated.h"
 
 
@@ -27,7 +28,10 @@ protected:
 
 template <class UserClass, typename PressedFuncType, typename ReleasedFuncType, typename HeldFuncType>
 void UMayInputComponent::BindAbilityActions(const UMayInputConfig* Config, UserClass* Object, PressedFuncType PressedFunc, ReleasedFuncType ReleasedFunc, HeldFuncType HeldFunc) {
-	check(Config);
+	if (Config == nullptr) {
+		MAY_ULOGW(GetOwner(), TEXT("Can't bind ability actions because UMayInputConfig is null"));
+		return;
+	}
 
 	for (const auto [Action, Tag] : Config->AbilityInputActions) {
 		if (Action && Tag.IsValid()) {
