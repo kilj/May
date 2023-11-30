@@ -14,7 +14,7 @@ void UBTService_FindNearestPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, u
 	const FName TargetTag = OwningPawn->ActorHasTag(FName("Player")) ? FName("Enemy") : FName("Player");
 
 	TArray<AActor*> OutActors;
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TargetTag, OutActors); //that's slow operation, maybe we should replace it with array of actors on GameState OR we can use normal gameplay tags and fire events
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TargetTag, OutActors); //TODO: that's SLOW operation, so we should replace it with array of actors on GameState OR we can use normal gameplay tags and fire events
 
 	AActor* NearestActor = nullptr;
 	float NearestDistance = TNumericLimits<float>::Max();
