@@ -43,7 +43,7 @@ struct FMayGameplayTags {
 	FGameplayTag AbilitiesAttackMelee;
 	FGameplayTag AbilitiesAttackRanged;
 	FGameplayTag AbilitiesSpellFirebolt;
-	FGameplayTag AbilitiesSpellSummon;
+	FGameplayTag AbilitiesSpellSummon; //TODO: add Summon.Demon, Summon.Goblin, etc
 
 	//message
 	FGameplayTag MessageHealthCrystal;

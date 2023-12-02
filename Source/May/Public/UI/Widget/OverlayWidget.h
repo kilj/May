@@ -8,6 +8,8 @@
 #include "Engine/DataTable.h"
 #include "OverlayWidget.generated.h"
 
+class UAbilityInfo;
+
 USTRUCT(BlueprintType)
 struct FUINotificationWidgetRow : public FTableRowBase {
 	GENERATED_BODY()
@@ -59,8 +61,13 @@ public:
 	void OnUINotificationMessage(FUINotificationWidgetRow Data);
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="May|Widget|Data")
+	// data table with configured info about possible UI notifications
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="May|Widget")
 	TObjectPtr<UDataTable> NotificationsWidgetDataTable;
+
+	// data asset with tag<->abilities map
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="May|Widget")
+	TObjectPtr<UAbilityInfo> AbilityInfo;
 
 	void GameplayEffectAssetTagApplied(const FGameplayTagContainer& Data);
 

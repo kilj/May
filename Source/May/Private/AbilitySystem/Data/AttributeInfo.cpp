@@ -11,7 +11,7 @@ FMayAttributeInfo UAttributeInfo::FindAttributeInfo(const FGameplayTag& Tag, con
 	}
 
 	if (bLogNotFound)
-		UE_LOG(LogMayAbilitySystem, Warning, TEXT("Can't find %s in %s"), *Tag.ToString(), *GetNameSafe(this));
+		UE_LOG(LogMayAbilitySystem, Warning, TEXT("Can't find attribute info for tag %s in %s"), *Tag.ToString(), *GetNameSafe(this));
 	
 	return FMayAttributeInfo();
 }
