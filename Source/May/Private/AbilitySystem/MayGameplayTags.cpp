@@ -31,10 +31,11 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.AttributesVitalMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.Mana"));
 
 	//abilities
-	Instance.AbilitiesAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Melee"));
-	Instance.AbilitiesAttackRanged = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack.Ranged"));
-	Instance.AbilitiesSpellFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Spell.Firebolt"));
-	Instance.AbilitiesSpellSummon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Spell.Summon"));
+	Instance.Ability = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability"));
+	Instance.AbilityAttackMelee = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Attack.Melee"));
+	Instance.AbilityAttackRanged = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Attack.Ranged"));
+	Instance.AbilitySpellFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Spell.Firebolt"));
+	Instance.AbilitySpellSummon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Spell.Summon"));
 
 	//message
 	Instance.MessageHealthCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthCrystal"));

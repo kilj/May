@@ -25,7 +25,7 @@ MAY_API FString GetClientServerContextString(UObject* ContextObject = nullptr);
 #define MAY_ULOG(Owner, fmt, ...) \
 UE_LOG(LogMay, Log, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
-*GetClientServerContextString(this), \
+*GetClientServerContextString(Owner), \
 *FString(__FUNCTION__), __LINE__, \
 *GetNameSafe(Owner), *GetNameSafe(this), \
 *FString::Printf(fmt, ##__VA_ARGS__) \
@@ -34,7 +34,7 @@ TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 #define MAY_ULOGW(Owner, fmt, ...) \
 UE_LOG(LogMay, Warning, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
-*GetClientServerContextString(this), \
+*GetClientServerContextString(Owner), \
 *FString(__FUNCTION__), __LINE__, \
 *GetNameSafe(Owner), *GetNameSafe(this), \
 *FString::Printf(fmt, ##__VA_ARGS__) \
@@ -43,7 +43,7 @@ TEXT("[%s] %s:%i [%s]->[%s] %s"), \
 #define MAY_ULOGE(Owner, fmt, ...) \
 UE_LOG(LogMay, Error, \
 TEXT("[%s] %s:%i [%s]->[%s] %s"), \
-*GetClientServerContextString(this), \
+*GetClientServerContextString(Owner), \
 *FString(__FUNCTION__), __LINE__, \
 *GetNameSafe(Owner), *GetNameSafe(this), \
 *FString::Printf(fmt, ##__VA_ARGS__) \

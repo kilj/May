@@ -40,10 +40,11 @@ struct FMayGameplayTags {
 	FGameplayTag AttributesVitalMana;
 
 	//abilities
-	FGameplayTag AbilitiesAttackMelee;
-	FGameplayTag AbilitiesAttackRanged;
-	FGameplayTag AbilitiesSpellFirebolt;
-	FGameplayTag AbilitiesSpellSummon; //TODO: add Summon.Demon, Summon.Goblin, etc
+	FGameplayTag Ability;
+	FGameplayTag AbilityAttackMelee;
+	FGameplayTag AbilityAttackRanged;
+	FGameplayTag AbilitySpellFirebolt;
+	FGameplayTag AbilitySpellSummon; //TODO: add Summon.Demon, Summon.Goblin, etc
 
 	//message
 	FGameplayTag MessageHealthCrystal;

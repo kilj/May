@@ -22,6 +22,9 @@ struct FMayAbilityInfo {
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<const UTexture2D> Icon = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	FGameplayTag InputTag = FGameplayTag::EmptyTag;
 };
 
 /**

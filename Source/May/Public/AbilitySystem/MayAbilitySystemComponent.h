@@ -9,6 +9,7 @@
 class UMayGameplayAbility;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
+DECLARE_MULTICAST_DELEGATE(FAbilitiesGiven); //probably this is shit and we should use GetActivatableAbilities
 
 /**
  * Extended version of AbilitySystemComponent for May project
@@ -22,6 +23,7 @@ public:
 	void OnAbilityActorInfoSet();
 
 	FEffectAssetTags EffectAssetTagsDelegate;
+	FAbilitiesGiven AbilitiesGivenDelegate;
 
 	void AddStartupAbilities(const TArray<TSubclassOf<UGameplayAbility>>& Abilities);
 

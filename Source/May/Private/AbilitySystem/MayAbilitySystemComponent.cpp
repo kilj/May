@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/MayGameplayAbility.h"
+#include "Utils/MayLogChannels.h"
 
 void UMayAbilitySystemComponent::OnAbilityActorInfoSet() {
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &ThisClass::ClientEffectApplied);
@@ -17,6 +18,8 @@ void UMayAbilitySystemComponent::AddStartupAbilities(const TArray<TSubclassOf<UG
 
 		GiveAbility(Spec);
 	}
+	MAY_ULOGW(GetOwnerActor(), TEXT("AddStartupAbilities: finish"));
+	AbilitiesGivenDelegate.Broadcast();
 }
 
 void UMayAbilitySystemComponent::OnAbilityInputTagPressed(FGameplayTag& Tag) {
