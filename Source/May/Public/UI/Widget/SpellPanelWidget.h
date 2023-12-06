@@ -6,6 +6,7 @@
 #include "MayWidget.h"
 #include "SpellPanelWidget.generated.h"
 
+struct FMayAbilityInfo;
 class UAbilityInfo;
 
 USTRUCT(BlueprintType)
@@ -35,6 +36,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
 	FORCEINLINE FSpellPanelWidgetData GetWidgetData() const { return WidgetData; };
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnAbilityInfoChanged(FMayAbilityInfo Info);
 
 protected:
 	// data asset with tag<->abilities map
