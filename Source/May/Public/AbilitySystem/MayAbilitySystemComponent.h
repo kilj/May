@@ -9,7 +9,7 @@
 class UMayGameplayAbility;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
-DECLARE_MULTICAST_DELEGATE(FAbilitiesGiven); //probably this is shit and we should use GetActivatableAbilities
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnAbilityGiven, const FGameplayAbilitySpec& /*AbilitySpec*/);
 
 /**
  * Extended version of AbilitySystemComponent for May project
@@ -23,7 +23,7 @@ public:
 	void OnAbilityActorInfoSet();
 
 	FEffectAssetTags EffectAssetTagsDelegate;
-	FAbilitiesGiven AbilitiesGivenDelegate;
+	FOnAbilityGiven AbilityGivenDelegate;
 
 	void AddStartupAbilities(const TArray<TSubclassOf<UGameplayAbility>>& Abilities);
 
@@ -35,5 +35,7 @@ protected:
 
 	UFUNCTION(Client, Reliable)
 	void ClientEffectApplied(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle);
+
+	virtual void OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) override;
 	
 };

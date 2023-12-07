@@ -18,8 +18,6 @@ void UMayAbilitySystemComponent::AddStartupAbilities(const TArray<TSubclassOf<UG
 
 		GiveAbility(Spec);
 	}
-	MAY_ULOGW(GetOwnerActor(), TEXT("AddStartupAbilities: finish"));
-	AbilitiesGivenDelegate.Broadcast();
 }
 
 void UMayAbilitySystemComponent::OnAbilityInputTagPressed(FGameplayTag& Tag) {
@@ -42,6 +40,12 @@ void UMayAbilitySystemComponent::OnAbilityInputTagReleased(FGameplayTag& Tag) {
 		AbilitySpecInputReleased(Spec);
 		//end ability for some abilities?
 	}
+}
+
+void UMayAbilitySystemComponent::OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) {
+	Super::OnGiveAbility(AbilitySpec);
+	
+	AbilityGivenDelegate.Broadcast(AbilitySpec);
 }
 
 void UMayAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* ASC, const FGameplayEffectSpec& GESpec, FActiveGameplayEffectHandle GEHandle) {

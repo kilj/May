@@ -6,6 +6,7 @@
 #include "MayWidget.h"
 #include "SpellPanelWidget.generated.h"
 
+struct FGameplayAbilitySpec;
 struct FMayAbilityInfo;
 class UAbilityInfo;
 
@@ -45,7 +46,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="May|Widget")
 	TObjectPtr<UAbilityInfo> AbilityInfo;
 	
-	void OnStartupAbilitiesGiven();
+	void OnAbilityGiven(const FGameplayAbilitySpec& AbilitySpec);
 
 private:
 	UPROPERTY()
