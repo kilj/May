@@ -37,6 +37,9 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 	Instance.AbilitySpellFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Spell.Firebolt"));
 	Instance.AbilitySpellSummon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Ability.Spell.Summon"));
 
+	//cooldowns
+	Instance.CooldownSpellFirebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Cooldown.Spell.Firebolt"));
+
 	//message
 	Instance.MessageHealthCrystal = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthCrystal"));
 	Instance.MessageHealthPotion = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Message.HealthPotion"));

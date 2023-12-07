@@ -46,6 +46,9 @@ struct FMayGameplayTags {
 	FGameplayTag AbilitySpellFirebolt;
 	FGameplayTag AbilitySpellSummon; //TODO: add Summon.Demon, Summon.Goblin, etc
 
+	//cooldowns
+	FGameplayTag CooldownSpellFirebolt;
+
 	//message
 	FGameplayTag MessageHealthCrystal;
 	FGameplayTag MessageHealthPotion;
