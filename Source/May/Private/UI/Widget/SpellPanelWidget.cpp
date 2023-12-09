@@ -14,6 +14,10 @@ void USpellPanelWidget::InitWidget(const FSpellPanelWidgetData Data) {
 	const auto ASC = Data.AbilitySystemComponent;
 
 	ASC->AbilityGivenDelegate.AddUObject(this, &USpellPanelWidget::OnAbilityGiven);
+	ASC->AbilityCommittedCallbacks.AddLambda([this](UGameplayAbility* Ability)
+	{
+		OnAbilityCommited(Ability);
+	});
 
 	OnWidgetInited();
 }

@@ -6,6 +6,7 @@
 #include "MayWidget.h"
 #include "SpellPanelWidget.generated.h"
 
+class UGameplayAbility;
 struct FGameplayAbilitySpec;
 struct FMayAbilityInfo;
 class UAbilityInfo;
@@ -40,6 +41,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
 	void OnAbilityInfoChanged(FMayAbilityInfo Info);
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnAbilityCommited(UGameplayAbility* Ability);
 
 protected:
 	// data asset with tag<->abilities map
