@@ -20,7 +20,7 @@ void AEnniePlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME(AEnniePlayerState, Level);
 }
 
-void AEnniePlayerState::OnRep_Level(int32 OldLevel) {
+void AEnniePlayerState::OnRep_Level(const float OldLevel) {
 	Level = OldLevel;
 }
 

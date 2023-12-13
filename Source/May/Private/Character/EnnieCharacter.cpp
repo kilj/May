@@ -5,6 +5,7 @@
 #include "AbilitySystem/MayAttributeSet.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
+#include "Character/Data/LevelInfo.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -42,11 +43,28 @@ AEnnieCharacter::AEnnieCharacter() {
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
-int32 AEnnieCharacter::GetLevel() {
+float AEnnieCharacter::GetLevel() {
 	if (const auto PS = GetPlayerState<AEnniePlayerState>())
 		return PS->GetPlayerLevel();
 
-	return 0;
+	return 1.f;
+}
+
+void AEnnieCharacter::AddExperience_Implementation(const int32 Experience) {
+	const auto PS = GetPlayerState<AEnniePlayerState>();
+	check(PS);
+
+	const auto OldLevel = PS->GetPlayerLevel();
+	const auto OldExperience = LevelInfo->GetExperience(OldLevel); //TODO: implement generic case if LevelInfo is not set
+
+	const auto NewExperience = OldExperience + Experience;
+	const auto NewLevel = LevelInfo->GetLevel(NewExperience); //TODO: FMath::Max(NewLevel, MaxLevel)
+
+	for (int i = FMath::FloorToInt(OldLevel) + 1; i <= FMath::FloorToInt(NewLevel); ++i) {
+		MAY_ULOGW(this, TEXT("TODO: We get new level (%i)!"), i);
+	}
+	
+	PS->SetPlayerLevel(NewLevel);
 }
 
 void AEnnieCharacter::Tick(float DeltaSeconds) {

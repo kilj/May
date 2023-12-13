@@ -17,7 +17,8 @@ public:
 	AEnnieCharacter();
 
 	//ILevelInterface
-	virtual int32 GetLevel() override;
+	virtual float GetLevel() override;
+	virtual void AddExperience_Implementation(const int32 Experience) override;
 	//end of ILevelInterface
 
 	virtual void Tick(float DeltaSeconds) override;

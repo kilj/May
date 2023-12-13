@@ -24,8 +24,8 @@ float UMMCMaxHealth::CalculateBaseMagnitude_Implementation(const FGameplayEffect
 	GetCapturedAttributeMagnitude(VigorDef, Spec, Params, Vigor);
 	Vigor = FMath::Max<float>(Vigor, 0.0f);
 
-	auto ILI = Cast<ILevelInterface>(Spec.GetContext().GetSourceObject());
-	const int32 Level = ILI->GetLevel();
+	const auto ILI = Cast<ILevelInterface>(Spec.GetContext().GetSourceObject());
+	const int32 Level = FMath::FloorToInt(ILI->GetLevel());
 
 	return 80.f + 2.5f * Vigor + 10.f * Level;
 }

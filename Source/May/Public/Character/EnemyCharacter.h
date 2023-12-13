@@ -24,7 +24,8 @@ public:
 	//end of IHighlightInterface
 
 	//ILevelInterface
-	virtual int32 GetLevel() override;
+	virtual float GetLevel() override;
+	virtual void AddExperience_Implementation(const int32 Experience) override;
 	//end of ILevelInterface
 
 	//ICombatActorInterface
@@ -49,7 +50,7 @@ protected:
 	EEnemyType EnemyType = EEnemyType::GoblinMelee;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
-	int32 Level = 1;
+	float Level = 1.f;
 
 	UPROPERTY(EditAnywhere, Category="AI")
 	TObjectPtr<UBehaviorTree> BehaviorTree;

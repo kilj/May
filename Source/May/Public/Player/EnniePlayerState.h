@@ -33,12 +33,13 @@ public:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	FORCEINLINE int32 GetPlayerLevel () const { return Level; }
+	FORCEINLINE float GetPlayerLevel() const { return Level; }
+	FORCEINLINE void SetPlayerLevel(const float NewLevel) { Level = NewLevel; } //TODO: move Level to public?
 
 private:
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
-	int32 Level = 1;
+	float Level = 1.f;
 
 	UFUNCTION()
-	void OnRep_Level(int32 OldLevel);
+	void OnRep_Level(float OldLevel);
 };

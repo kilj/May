@@ -23,5 +23,8 @@ class MAY_API ILevelInterface {
 	GENERATED_BODY()
 
 public:
-	virtual int32 GetLevel();
+	virtual float GetLevel();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void AddExperience(const int32 Experience);
 };

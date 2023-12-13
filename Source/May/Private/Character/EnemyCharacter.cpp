@@ -46,8 +46,12 @@ void AEnemyCharacter::UnHighlightActor() {
 	Weapon->CustomDepthStencilValue = 0;
 }
 
-int32 AEnemyCharacter::GetLevel() {
+float AEnemyCharacter::GetLevel() {
 	return Level;
+}
+
+void AEnemyCharacter::AddExperience_Implementation(const int32 Experience) {
+	MAY_ULOGW(this, TEXT("TODO: Implement AddExperience for EnemyCharacter"));
 }
 
 void AEnemyCharacter::Server_Die() {

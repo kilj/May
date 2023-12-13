@@ -2,6 +2,6 @@
 
 #include "Character/Interfaces/LevelInterface.h"
 
-int32 ILevelInterface::GetLevel() {
-	return 0;
+float ILevelInterface::GetLevel() {
+	return 1.f;
 }
