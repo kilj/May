@@ -23,8 +23,6 @@ struct FActionInfo {
 	// action socket name (specific weapon, hand or something else)
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FName SocketName = FName();
-
-	static FActionInfo Empty() { return FActionInfo(); }
 };
 
 /**

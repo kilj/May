@@ -10,7 +10,7 @@ FActionInfo UCharacterConfig::GetAttackInfo(const FGameplayTag& Tag) {
 			return Attack;
 	}
 
-	return FActionInfo::Empty();
+	return FActionInfo();
 }
 
 FVector UCharacterConfig::GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacterBase* Character) {

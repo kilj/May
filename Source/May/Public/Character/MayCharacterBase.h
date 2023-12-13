@@ -9,6 +9,7 @@
 #include "Character/Interfaces/LevelInterface.h"
 #include "MayCharacterBase.generated.h"
 
+class ULevelInfo;
 class UCharacterConfig;
 class UGameplayAbility;
 class UGameplayEffect;
@@ -40,6 +41,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Defaults")
 	TObjectPtr<UCharacterConfig> CharacterConfig; //TODO: change TObjectPtr to soft ref
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Defaults")
+	TObjectPtr<ULevelInfo> LevelInfo; //TODO: change TObjectPtr to soft ref
 	
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void Multicast_Die();
