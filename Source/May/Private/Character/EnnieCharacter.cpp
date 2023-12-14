@@ -51,6 +51,8 @@ float AEnnieCharacter::GetLevel() {
 }
 
 void AEnnieCharacter::AddExperience_Implementation(const int32 Experience) {
+	//TODO: check Exp > 0
+	
 	const auto PS = GetPlayerState<AEnniePlayerState>();
 	check(PS);
 
@@ -59,10 +61,13 @@ void AEnnieCharacter::AddExperience_Implementation(const int32 Experience) {
 
 	const auto NewExperience = OldExperience + Experience;
 	const auto NewLevel = LevelInfo->GetLevel(NewExperience); //TODO: FMath::Max(NewLevel, MaxLevel)
-
+	
 	for (int i = FMath::FloorToInt(OldLevel) + 1; i <= FMath::FloorToInt(NewLevel); ++i) {
-		MAY_ULOGW(this, TEXT("TODO: We get new level (%i)!"), i);
+		MAY_ULOGW(this, TEXT("%s got new level! (%i)!"), *GetActorNameOrLabel(), i);
+		Client_OnLevelChanged(i);
 	}
+
+	Client_OnExperienceChanged(NewLevel, Experience);
 	
 	PS->SetPlayerLevel(NewLevel);
 }

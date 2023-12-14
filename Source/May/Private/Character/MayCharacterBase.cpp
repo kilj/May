@@ -5,6 +5,7 @@
 #include "AbilitySystemComponent.h"
 #include "May.h"
 #include "Components/CapsuleComponent.h"
+#include "Utils/MayLogChannels.h"
 
 AMayCharacterBase::AMayCharacterBase() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -75,4 +76,14 @@ void AMayCharacterBase::BeginPlay() {
 }
 
 void AMayCharacterBase::InitAbilityActorInfo() {
+}
+
+void AMayCharacterBase::Client_OnLevelChanged_Implementation(const float NewLevel) {
+	MAY_ULOGW(this, TEXT("Called OnLevel changed: %f"), NewLevel);
+	OnLevelChangedDelegate.Broadcast(NewLevel);
+}
+
+void AMayCharacterBase::Client_OnExperienceChanged_Implementation(const float NewLevel, const int32 ExperienceDelta) {
+	MAY_ULOGW(this, TEXT("Called OnExperience changed: %f | +%i"), NewLevel, ExperienceDelta);
+	OnExperienceChangedDelegate.Broadcast(NewLevel, ExperienceDelta);
 }

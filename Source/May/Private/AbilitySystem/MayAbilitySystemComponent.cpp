@@ -2,7 +2,6 @@
 
 #include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/MayGameplayAbility.h"
-#include "Utils/MayLogChannels.h"
 
 void UMayAbilitySystemComponent::OnAbilityActorInfoSet() {
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &ThisClass::ClientEffectApplied);

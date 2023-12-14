@@ -16,6 +16,9 @@ class UGameplayEffect;
 class UAttributeSet;
 class UAbilitySystemComponent;
 
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnExperienceChangedSignature, const float /*NewLevel*/, const int32 /*Delta*/);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnLevelChangedSignature, const float /*NewLevel*/);
+
 UCLASS(Abstract)
 class MAY_API AMayCharacterBase : public ACharacter, public IAbilitySystemInterface, public ILevelInterface, public ICombatActorInterface {
 	GENERATED_BODY()
@@ -50,6 +53,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Weapon")
 	TObjectPtr<USkeletalMeshComponent> Weapon; //TODO: rename to current or equipped weapon?
+
+	FOnExperienceChangedSignature OnExperienceChangedDelegate;
+	FOnLevelChangedSignature OnLevelChangedDelegate;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -63,6 +69,12 @@ protected:
 	virtual void InitAbilityActorInfo();
 
 	bool bDead = false;
+	
+	UFUNCTION(Client, Reliable)
+	void Client_OnExperienceChanged(const float NewLevel, const int32 ExperienceDelta);
+	
+	UFUNCTION(Client, Reliable)
+	void Client_OnLevelChanged(const float NewLevel);
 
 private:
 	UPROPERTY(EditAnywhere, Category="CombatActor")

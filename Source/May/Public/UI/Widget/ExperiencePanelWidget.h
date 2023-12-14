@@ -6,6 +6,8 @@
 #include "MayWidget.h"
 #include "ExperiencePanelWidget.generated.h"
 
+class AMayCharacterBase;
+
 USTRUCT(BlueprintType)
 struct FExperiencePanelWidgetData {
 	GENERATED_BODY()
@@ -18,6 +20,9 @@ struct FExperiencePanelWidgetData {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UMayAttributeSet> AttributeSet = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<AMayCharacterBase> Character = nullptr;
 };
 
 /**
@@ -33,6 +38,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
 	FORCEINLINE FExperiencePanelWidgetData GetWidgetData() const { return WidgetData; };
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnExperienceChanged(const float NewLevel, const int32 ExperienceDelta);
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnLevelChanged(const float NewLevel);
 
 private:
 	UPROPERTY()
