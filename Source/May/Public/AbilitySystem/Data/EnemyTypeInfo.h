@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ScalableFloat.h"
 #include "Engine/DataAsset.h"
 #include "EnemyTypeInfo.generated.h"
 
@@ -43,6 +44,10 @@ struct FEnemyTypeDefaultInfo {
 
 	UPROPERTY(EditDefaultsOnly, Category="Defaults")
 	TArray<TSubclassOf<UGameplayAbility>> Abilities;
+
+	// Amount of experience, which will be granted to other character for killing this character. Note: fraction part of value will be ignored (e.g. 3.9 will handled as 3.0)
+	UPROPERTY(EditDefaultsOnly, Category="Defaults")
+	FScalableFloat Experience;
 };
 
 /**
