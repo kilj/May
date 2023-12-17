@@ -5,10 +5,12 @@
 #include "GameplayEffectExtension.h"
 #include "AbilitySystem/MayAbilityTypes.h"
 #include "AbilitySystem/MayGameplayTags.h"
+#include "Character/EnnieCharacter.h"
 #include "Character/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
 #include "Player/EnniePlayerController.h"
 #include "UI/Components/DamageTextComponent.h"
+#include "Utils/MayLogChannels.h"
 
 UMayAttributeSet::UMayAttributeSet() {
 	//InitHealth(50.f);
@@ -89,7 +91,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 		if (Properties.SourceCharacter && Properties.TargetCharacter && Properties.SourceCharacter != Properties.TargetCharacter) {
 			auto EnniePC = Cast<AEnniePlayerController>(Properties.SourceCharacter->GetController());
 			if (EnniePC == nullptr)
-				EnniePC = Cast<AEnniePlayerController>(Properties.TargetCharacter->GetController());
+				EnniePC = Cast<AEnniePlayerController>(Properties.TargetCharacter->GetController()); //we handle here two possible situations: when enemy deals damage to the hero and when hero deals damage to the enemy, so we check Source AND Target
 				
 			if (EnniePC) {
 				FUIDamageData DamageData;
@@ -97,6 +99,20 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				DamageData.bIsCriticalHit = EffectContext->IsCriticalHit();
 				
 				EnniePC->ShowReceivedDamage(IncomingDamageValue, Properties.TargetCharacter, DamageData);
+			}
+		}
+	}
+
+	//handle meta attribute IncomingExperience
+	if (Data.EvaluatedData.Attribute == GetIncomingExperienceAttribute()) {
+		const int32 IncomingExperienceValue = static_cast<int32>(GetIncomingExperience()); //cache
+		SetIncomingExperience(0.f);
+
+		if (IncomingExperienceValue > 0.f) {
+			MAY_ULOGW(Properties.SourceCharacter, TEXT("%s received experience: %i"), *Properties.SourceCharacter->GetActorNameOrLabel(), IncomingExperienceValue);
+
+			if (const auto Ennie = Cast<AEnnieCharacter>(Properties.SourceCharacter)) {
+				Ennie->AddExperience(IncomingExperienceValue);
 			}
 		}
 	}

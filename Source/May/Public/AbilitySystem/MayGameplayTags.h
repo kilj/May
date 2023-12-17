@@ -79,6 +79,7 @@ struct FMayGameplayTags {
 
 	//meta
 	FGameplayTag Damage;
+	FGameplayTag Experience;
 
 	//damageTypes
 	FGameplayTag DamageTypePhysical;

@@ -200,6 +200,10 @@ public:
 	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UMayAttributeSet, IncomingDamage);
 
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Meta")
+	FGameplayAttributeData IncomingExperience;
+	ATTRIBUTE_ACCESSORS(UMayAttributeSet, IncomingExperience);
+
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Properties);
 

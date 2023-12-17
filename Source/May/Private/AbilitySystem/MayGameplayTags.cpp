@@ -70,6 +70,7 @@ void FMayGameplayTags::InitNativeGameplayTags() {
 
 	//meta attributes
 	Instance.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Meta attribute for incoming damage"));
+	Instance.Experience = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Experience"), FString("Meta attribute for incoming experience"));
 
 	//damage types
 	Instance.DamageTypePhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Type.Physical"));

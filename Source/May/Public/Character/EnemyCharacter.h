@@ -18,6 +18,12 @@ class MAY_API AEnemyCharacter : public AMayCharacterBase, public IHighlightInter
 public:
 	AEnemyCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
+	EEnemyType EnemyType = EEnemyType::GoblinMelee;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
+	float Level = 1.f;
+
 	//IHighlightInterface
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
@@ -45,13 +51,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
-	EEnemyType EnemyType = EEnemyType::GoblinMelee;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Enemy Defaults")
-	float Level = 1.f;
-
 	UPROPERTY(EditAnywhere, Category="AI")
 	TObjectPtr<UBehaviorTree> BehaviorTree;
 
