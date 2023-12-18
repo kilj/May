@@ -1,7 +1,7 @@
 ﻿// Red Beat, 2023
 
 #include "Character/Data/CharacterConfig.h"
-#include "Character/MayCharacterBase.h"
+#include "..\..\..\Public\Character\MayCharacter.h"
 #include "Utils/MayLogChannels.h"
 
 FActionInfo UCharacterConfig::GetAttackInfo(const FGameplayTag& Tag) {
@@ -13,7 +13,7 @@ FActionInfo UCharacterConfig::GetAttackInfo(const FGameplayTag& Tag) {
 	return FActionInfo();
 }
 
-FVector UCharacterConfig::GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacterBase* Character) {
+FVector UCharacterConfig::GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacter* Character) {
 	FName SocketName = FName();
 	for (const auto Attack : Attacks) {
 		if (Attack.Tag.MatchesTagExact(Tag)) {

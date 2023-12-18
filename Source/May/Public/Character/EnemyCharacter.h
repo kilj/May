@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "MayCharacterBase.h"
+#include "MayCharacter.h"
 #include "AbilitySystem/Data/EnemyTypeInfo.h"
 #include "Character/Interfaces/HighlightInterface.h"
 #include "EnemyCharacter.generated.h"
@@ -12,7 +12,7 @@ struct FGameplayTag;
 enum class EEnemyType : uint8;
 
 UCLASS()
-class MAY_API AEnemyCharacter : public AMayCharacterBase, public IHighlightInterface {
+class MAY_API AEnemyCharacter : public AMayCharacter, public IHighlightInterface {
 	GENERATED_BODY()
 
 public:

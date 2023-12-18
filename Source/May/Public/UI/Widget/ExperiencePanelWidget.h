@@ -6,7 +6,7 @@
 #include "MayWidget.h"
 #include "ExperiencePanelWidget.generated.h"
 
-class AMayCharacterBase;
+class AMayCharacter;
 
 USTRUCT(BlueprintType)
 struct FExperiencePanelWidgetData {
@@ -22,7 +22,7 @@ struct FExperiencePanelWidgetData {
 	TObjectPtr<UMayAttributeSet> AttributeSet = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<AMayCharacterBase> Character = nullptr;
+	TObjectPtr<AMayCharacter> Character = nullptr;
 };
 
 /**

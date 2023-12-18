@@ -111,7 +111,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 		if (IncomingExperienceValue > 0.f) {
 			MAY_ULOGW(Properties.SourceCharacter, TEXT("%s received experience: %i"), *Properties.SourceCharacter->GetActorNameOrLabel(), IncomingExperienceValue);
 
-			if (const auto Ennie = Cast<AEnnieCharacter>(Properties.SourceCharacter)) {
+			if (const auto Ennie = Cast<AEnnieCharacter>(Properties.SourceCharacter)) { //TODO: move AddExperience to NayCharacter
 				Ennie->AddExperience(IncomingExperienceValue);
 			}
 		}

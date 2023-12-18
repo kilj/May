@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MayCharacterBase.h"
+#include "MayCharacter.h"
 #include "EnnieCharacter.generated.h"
 
 class UMayAbilitySystemComponent;
 class UMayAttributeSet;
 
 UCLASS(Blueprintable)
-class AEnnieCharacter : public AMayCharacterBase {
+class AEnnieCharacter : public AMayCharacter {
 	GENERATED_BODY()
 
 public:

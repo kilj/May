@@ -6,7 +6,7 @@
 #include "UObject/Interface.h"
 #include "CombatActorInterface.generated.h"
 
-class AMayCharacterBase;
+class AMayCharacter;
 class UCharacterConfig;
 
 // This class does not need to be modified.
@@ -38,7 +38,7 @@ public:
 	bool IsDead() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	AMayCharacterBase* GetMayCharacter();
+	AMayCharacter* GetMayCharacter();
 
 	virtual void Server_Die() = 0;
 };

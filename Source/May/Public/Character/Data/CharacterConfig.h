@@ -8,7 +8,7 @@
 #include "CharacterConfig.generated.h"
 
 class UNiagaraSystem;
-class AMayCharacterBase;
+class AMayCharacter;
 
 USTRUCT(BlueprintType)
 struct FActionInfo {
@@ -47,7 +47,7 @@ public:
 	* @return Will return socket location or character's location if can't find socket.
 	*/
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Defaults|Attacs")
-	FVector GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacterBase* Character);
+	FVector GetAttackSocketLocation(const FGameplayTag& Tag, const AMayCharacter* Character);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Defaults")
 	TMap<FGameplayTag, UNiagaraSystem*> HitReacts; //TODO: rename to HitReactEffects

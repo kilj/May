@@ -1,7 +1,7 @@
 ﻿// Red Beat, 2023
 
 #include "UI/Widget/ExperiencePanelWidget.h"
-#include "Character/MayCharacterBase.h"
+#include "Character/MayCharacter.h"
 #include "Utils/MayLogChannels.h"
 
 void UExperiencePanelWidget::InitWidget(const FExperiencePanelWidgetData Data) {
