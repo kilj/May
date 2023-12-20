@@ -11,6 +11,8 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+class AMayCharacter;
+
 USTRUCT()
 struct FEffectProperties {
 	GENERATED_BODY()
@@ -34,10 +36,10 @@ struct FEffectProperties {
 	TObjectPtr<AController> TargetController = nullptr;
 
 	UPROPERTY()
-	TObjectPtr<ACharacter> SourceCharacter = nullptr;
+	TObjectPtr<AMayCharacter> SourceCharacter = nullptr;
 
 	UPROPERTY()
-	TObjectPtr<ACharacter> TargetCharacter = nullptr;
+	TObjectPtr<AMayCharacter> TargetCharacter = nullptr;
 
 	FGameplayEffectContextHandle EffectContextHandle;
 

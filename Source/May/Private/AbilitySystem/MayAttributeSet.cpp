@@ -111,9 +111,7 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 		if (IncomingExperienceValue > 0.f) {
 			MAY_ULOGW(Properties.SourceCharacter, TEXT("%s received experience: %i"), *Properties.SourceCharacter->GetActorNameOrLabel(), IncomingExperienceValue);
 
-			if (const auto Ennie = Cast<AEnnieCharacter>(Properties.SourceCharacter)) { //TODO: move AddExperience to NayCharacter
-				Ennie->AddExperience(IncomingExperienceValue);
-			}
+			Properties.SourceCharacter->AddExperience(IncomingExperienceValue);
 		}
 	}
 }
@@ -203,14 +201,14 @@ void UMayAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData&
 			}
 		}
 		if (Properties.SourceController) {
-			Properties.SourceCharacter = Cast<ACharacter>(Properties.SourceController->GetPawn());
+			Properties.SourceCharacter = Cast<AMayCharacter>(Properties.SourceController->GetPawn());
 		}
 	}
 
 	if (Data.Target.AbilityActorInfo.IsValid() && Data.Target.AbilityActorInfo->AvatarActor.IsValid()) {
 		Properties.TargetAvatarActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
 		Properties.TargetController = Data.Target.AbilityActorInfo->PlayerController.Get();
-		Properties.TargetCharacter = Cast<ACharacter>(Properties.TargetAvatarActor);
+		Properties.TargetCharacter = Cast<AMayCharacter>(Properties.TargetAvatarActor);
 		Properties.TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Properties.TargetAvatarActor);
 	}
 }
