@@ -21,7 +21,7 @@ void AEnniePlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 void AEnniePlayerState::OnRep_Level(const float OldLevel) {
-	Level = OldLevel;
+	//MAY_ULOGW(this, TEXT("%s OnRep_Level! %f:%f"), *GetActorNameOrLabel(), Level, OldLevel);
 }
 
 UAbilitySystemComponent* AEnniePlayerState::GetAbilitySystemComponent() const {

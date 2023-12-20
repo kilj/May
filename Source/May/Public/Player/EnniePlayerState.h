@@ -34,9 +34,9 @@ public:
 	TObjectPtr<UAttributeSet> AttributeSet;
 
 	FORCEINLINE float GetPlayerLevel() const { return Level; }
-	FORCEINLINE void SetPlayerLevel(const float NewLevel) { Level = NewLevel; } //TODO: move Level to public?
+	FORCEINLINE void SetPlayerLevel(const float NewLevel) { Level = NewLevel; }
 
-private:
+protected:
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
 	float Level = 1.f;
 

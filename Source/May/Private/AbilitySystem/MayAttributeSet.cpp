@@ -81,6 +81,11 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			if (bFatal) {
 				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
 					CombatActorInterface->Server_Die();
+
+				//temp
+				// AMayCharacter* Source = Cast<AMayCharacter>(Properties.SourceAvatarActor);
+				// ILevelInterface::Execute_AddExperience(Source, 100);
+				
 			} else {
 				const FGameplayTagContainer TagContainer(FMayGameplayTags::Get().EffectsHitReact);
 				Properties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
