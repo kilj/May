@@ -9,7 +9,7 @@ void UExperiencePanelWidget::InitWidget(const FExperiencePanelWidgetData Data) {
 
 	WidgetData.Character->OnExperienceChangedDelegate.AddLambda([this](const float NewLevel, const int32 ExperienceDelta)
 	{
-		MAY_ULOGW(this, TEXT("UExperiencePanelWidget: Called OnExperience changed: %f | +%i"), NewLevel, ExperienceDelta);
+		MAY_ULOGW(this, TEXT("UExperiencePanelWidget: Called OnExperience changed: %f : +%i"), NewLevel, ExperienceDelta);
 		OnExperienceChanged(NewLevel, ExperienceDelta);
 	});
 

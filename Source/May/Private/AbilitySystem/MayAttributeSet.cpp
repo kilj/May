@@ -5,6 +5,8 @@
 #include "GameplayEffectExtension.h"
 #include "AbilitySystem/MayAbilityTypes.h"
 #include "AbilitySystem/MayGameplayTags.h"
+#include "AbilitySystem/Utils/MayAbilitySystemLibrary.h"
+#include "Character/EnemyCharacter.h"
 #include "Character/EnnieCharacter.h"
 #include "Character/Interfaces/CombatActorInterface.h"
 #include "GameFramework/Character.h"
@@ -79,12 +81,19 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 			const bool bFatal = NewHealth <= 0.f;
 			if (bFatal) {
-				if (const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor))
-					CombatActorInterface->Server_Die();
+				const auto CombatActorInterface = Cast<ICombatActorInterface>(Properties.TargetAvatarActor);
+				CombatActorInterface->Server_Die();
 
-				//temp
-				// AMayCharacter* Source = Cast<AMayCharacter>(Properties.SourceAvatarActor);
-				// ILevelInterface::Execute_AddExperience(Source, 100);
+				// getting experience value from target and added it to source experience
+				const auto Enemy = Cast<AEnemyCharacter>(Properties.TargetCharacter);
+				if (Enemy) {
+					const auto EType = UMayAbilitySystemLibrary::GetEnemyTypeInfo(GetWorld(), Enemy->EnemyType);
+					const int32 Experience = EType.Experience.GetValueAtLevel(static_cast<int>(Enemy->Level));
+
+					//TODO: handle (if needed) case when character received experience from other player or some job, interaction, etc
+					AMayCharacter* Source = Cast<AMayCharacter>(Properties.SourceAvatarActor);
+					ILevelInterface::Execute_AddExperience(Source, Experience);
+				}
 				
 			} else {
 				const FGameplayTagContainer TagContainer(FMayGameplayTags::Get().EffectsHitReact);

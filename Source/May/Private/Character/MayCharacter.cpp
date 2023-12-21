@@ -83,6 +83,6 @@ void AMayCharacter::Client_OnLevelChanged_Implementation(const float NewLevel) {
 }
 
 void AMayCharacter::Client_OnExperienceChanged_Implementation(const float NewLevel, const int32 ExperienceDelta) {
-	MAY_ULOGW(this, TEXT("Called OnExperience changed: %f | +%i"), NewLevel, ExperienceDelta);
+	MAY_ULOGW(this, TEXT("Called OnExperience changed: %f : +%i"), NewLevel, ExperienceDelta);
 	OnExperienceChangedDelegate.Broadcast(NewLevel, ExperienceDelta);
 }
