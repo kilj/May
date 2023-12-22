@@ -8,6 +8,8 @@
 #include "Engine/DataTable.h"
 #include "OverlayWidget.generated.h"
 
+class AEnnieCharacter;
+
 USTRUCT(BlueprintType)
 struct FUINotificationWidgetRow : public FTableRowBase {
 	GENERATED_BODY()
@@ -30,13 +32,16 @@ struct FOverlayWidgetData {
 	GENERATED_BODY()
 
 	FOverlayWidgetData() {}
-	FOverlayWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS) : AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	FOverlayWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS, AEnnieCharacter* C) : AbilitySystemComponent(ASC), AttributeSet(AS), OwnerPlayer(C) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UMayAbilitySystemComponent> AbilitySystemComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UMayAttributeSet> AttributeSet = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<AEnnieCharacter> OwnerPlayer = nullptr;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUINotificationWidgetRowSignature, FUINotificationWidgetRow, Row);

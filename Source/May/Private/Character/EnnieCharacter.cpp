@@ -134,7 +134,7 @@ void AEnnieCharacter::InitAbilityActorInfo() {
 		// player controller will be null on non-locally controlled client TODO: move it in some early client method
 		if (const auto PC = Cast<AEnniePlayerController>(GetController())) {
 			if (const auto HUD = Cast<AMayHUD>(PC->GetHUD())) {
-				HUD->InitOverlay(AbilitySystemComponent, AttributeSet);
+				HUD->InitOverlay(AbilitySystemComponent, AttributeSet, this);
 			}
 		}
 	}

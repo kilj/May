@@ -6,14 +6,14 @@
 #include "MayWidget.h"
 #include "ExperiencePanelWidget.generated.h"
 
-class AMayCharacter;
+class AEnnieCharacter;
 
 USTRUCT(BlueprintType)
 struct FExperiencePanelWidgetData {
 	GENERATED_BODY()
 
 	FExperiencePanelWidgetData() {}
-	FExperiencePanelWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS) : AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	FExperiencePanelWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS, AEnnieCharacter* C) : AbilitySystemComponent(ASC), AttributeSet(AS), OwnerPlayer(C) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UMayAbilitySystemComponent> AbilitySystemComponent = nullptr;
@@ -22,7 +22,7 @@ struct FExperiencePanelWidgetData {
 	TObjectPtr<UMayAttributeSet> AttributeSet = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<AMayCharacter> Character = nullptr;
+	TObjectPtr<AEnnieCharacter> OwnerPlayer = nullptr;
 };
 
 /**

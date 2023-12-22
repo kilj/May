@@ -4,6 +4,7 @@
 #include "GameFramework/HUD.h"
 #include "MayHUD.generated.h"
 
+class AEnnieCharacter;
 class UMayWidget;
 class UOverlayWidget;
 class UAttributeSet;
@@ -18,7 +19,7 @@ class MAY_API AMayHUD : public AHUD {
 	GENERATED_BODY()
 
 public:
-	void InitOverlay(UAbilitySystemComponent* ASC, UAttributeSet* AS);
+	void InitOverlay(UAbilitySystemComponent* ASC, UAttributeSet* AS, AEnnieCharacter* C);
 
 private:
 	UPROPERTY()

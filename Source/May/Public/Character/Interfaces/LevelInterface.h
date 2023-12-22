@@ -23,6 +23,8 @@ class MAY_API ILevelInterface {
 	GENERATED_BODY()
 
 public:
+
+	// Get character's level
 	virtual float GetLevel();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
