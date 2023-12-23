@@ -40,7 +40,8 @@ void UMayAbilitySystemLibrary::InitEnemyDefaultAbilities(const UObject* WorldCon
 
 FEnemyTypeDefaultInfo UMayAbilitySystemLibrary::GetEnemyTypeInfo(const UObject* WorldContextObject, const EEnemyType EnemyType) {
 	const auto MayGameMode = Cast<AMayGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
-	checkf(MayGameMode, TEXT("Trying to get game mode, but it's null. It should be accessed only from server."))
+	if (MayGameMode == nullptr)
+		return FEnemyTypeDefaultInfo();
 	
 	return MayGameMode->EnemyTypesInfo->GetEnemyTypeDefaultInfo(EnemyType);
 }

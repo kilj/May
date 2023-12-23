@@ -102,7 +102,7 @@ void AEnnieCharacter::InitDefaultAttributes(const TSubclassOf<UGameplayEffect> A
 	}
 	
 	const auto ASC = GetAbilitySystemComponent();
-	check(ASC);
+	if (ASC == nullptr) return;
 	
 	auto EffectContext = ASC->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
@@ -117,8 +117,9 @@ void AEnnieCharacter::AddStartupAbilities() {
 		return;
 	}
 
-	const auto ASC = CastChecked<UMayAbilitySystemComponent>(AbilitySystemComponent);
-	ASC->AddStartupAbilities(StartupAbilities);
+	const auto ASC = Cast<UMayAbilitySystemComponent>(AbilitySystemComponent);
+	if (ASC)
+		ASC->AddStartupAbilities(StartupAbilities);
 }
 
 void AEnnieCharacter::InitAbilityActorInfo() {
