@@ -56,11 +56,16 @@ void AEnnieCharacter::AddExperience_Implementation(const int32 Experience) {
 	const auto PS = GetPlayerState<AEnniePlayerState>();
 	check(PS);
 
+	if (LevelInfo == nullptr) {
+		MAY_ULOGE(this, TEXT("Can't add experience to %s, because LevelInfo data asset is null for this character"), *GetActorNameOrLabel());
+		return;
+	}
+
 	const auto OldLevel = PS->GetPlayerLevel();
-	const auto OldExperience = LevelInfo->GetExperience(OldLevel); //TODO: implement generic case if LevelInfo is not set
+	const auto OldExperience = LevelInfo->GetExperience(OldLevel);
 
 	const auto NewExperience = OldExperience + Experience;
-	const auto NewLevel = LevelInfo->GetLevel(NewExperience); //TODO: FMath::Max(NewLevel, MaxLevel)
+	const auto NewLevel = LevelInfo->GetLevel(NewExperience);
 	
 	for (int i = FMath::FloorToInt(OldLevel) + 1; i <= FMath::FloorToInt(NewLevel); ++i) {
 		MAY_ULOGW(this, TEXT("%s got new level! (%i)!"), *GetActorNameOrLabel(), i);

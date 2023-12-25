@@ -20,7 +20,8 @@ void UExperiencePanelWidget::InitWidget(const FExperiencePanelWidgetData Data) {
 		OnLevelChanged(NewLevel);
 	});
 
-	OnLevelChanged(WidgetData.OwnerPlayer->GetLevel()); //broadcasting initial values
+	//OnLevelChanged(WidgetData.OwnerPlayer->GetLevel()); //broadcasting initial values
+	OnExperienceChanged(WidgetData.OwnerPlayer->GetLevel(), 0); //broadcasting initial values
 
 	OnWidgetInited();
 }

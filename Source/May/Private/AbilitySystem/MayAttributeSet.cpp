@@ -92,7 +92,8 @@ void UMayAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 					//TODO: handle (if needed) case when character received experience from other player or some job, interaction, etc
 					AMayCharacter* Source = Cast<AMayCharacter>(Properties.SourceAvatarActor);
-					ILevelInterface::Execute_AddExperience(Source, Experience);
+					if (Source->Implements<ULevelInterface>())
+						ILevelInterface::Execute_AddExperience(Source, Experience);
 				}
 				
 			} else {
