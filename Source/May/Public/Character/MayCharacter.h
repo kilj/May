@@ -56,6 +56,10 @@ public:
 
 	FOnExperienceChangedSignature OnExperienceChangedDelegate;
 	FOnLevelChangedSignature OnLevelChangedDelegate;
+
+	//Events for UI //TODO: I'm not sure in this, but I don't like to change my multicast delegates to dynamic multicast and expanding its responsibility
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnLevelChanged(const float NewLevel);
 	
 protected:
 	virtual void BeginPlay() override;
