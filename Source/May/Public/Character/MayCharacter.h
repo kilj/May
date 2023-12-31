@@ -77,8 +77,8 @@ protected:
 	UFUNCTION(Client, Reliable)
 	void Client_OnExperienceChanged(const float NewLevel, const int32 ExperienceDelta);
 	
-	UFUNCTION(Client, Reliable)
-	void Client_OnLevelChanged(const float NewLevel);
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_OnLevelChanged(const float NewLevel);
 
 private:
 	UPROPERTY(EditAnywhere, Category="CombatActor")
