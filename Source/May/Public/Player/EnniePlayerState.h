@@ -36,6 +36,12 @@ public:
 	FORCEINLINE float GetPlayerLevel() const { return Level; }
 	FORCEINLINE void SetPlayerLevel(const float NewLevel) { Level = NewLevel; }
 
+	UPROPERTY(VisibleAnywhere, Replicated)
+	int32 AttributePoints = 0; //TODO: this should be used only on server
+
+	UPROPERTY(VisibleAnywhere, Replicated)
+	int32 SpellPoints = 0; //TODO: this should be used only on server
+	
 protected:
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
 	float Level = 1.f;

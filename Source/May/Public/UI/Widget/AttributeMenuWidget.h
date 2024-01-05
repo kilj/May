@@ -6,18 +6,17 @@
 #include "MayWidget.h"
 #include "AttributeMenuWidget.generated.h"
 
+class AEnniePlayerState;
+
 USTRUCT(BlueprintType)
 struct FAttributeMenuWidgetData {
 	GENERATED_BODY()
 
 	FAttributeMenuWidgetData() {}
-	FAttributeMenuWidgetData(UMayAbilitySystemComponent* ASC, UMayAttributeSet* AS) : AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	FAttributeMenuWidgetData(AEnniePlayerState* PS) : PlayerState(PS) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<UMayAbilitySystemComponent> AbilitySystemComponent = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<UMayAttributeSet> AttributeSet = nullptr;
+	TObjectPtr<AEnniePlayerState> PlayerState = nullptr;
 };
 
 /**
@@ -33,6 +32,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="May|Widget")
 	FORCEINLINE FAttributeMenuWidgetData GetWidgetData() const { return WidgetData; };
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnAttributePointsChanged(const int32 NewPoints);
+
+	UFUNCTION(BlueprintImplementableEvent, Category="May|Widget")
+	void OnSpellPointsChanged(const int32 NewPoints);
 
 private:
 	UPROPERTY()

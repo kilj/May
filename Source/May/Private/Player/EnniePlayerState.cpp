@@ -18,6 +18,8 @@ void AEnniePlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AEnniePlayerState, Level);
+	DOREPLIFETIME(AEnniePlayerState, AttributePoints);
+	DOREPLIFETIME(AEnniePlayerState, SpellPoints);
 }
 
 void AEnniePlayerState::OnRep_Level(const float OldLevel) {

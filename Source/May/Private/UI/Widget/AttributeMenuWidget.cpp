@@ -1,60 +1,66 @@
 ﻿// Red Beat, 2023
 
 #include "UI/Widget/AttributeMenuWidget.h"
+
+#include "AbilitySystem/MayAbilitySystemComponent.h"
 #include "AbilitySystem/MayAttributeSet.h"
 #include "AbilitySystem/MayGameplayTags.h"
+#include "Player/EnniePlayerState.h"
 
 void UAttributeMenuWidget::InitWidget(const FAttributeMenuWidgetData Data) {
 	WidgetData = Data;
 
-	const auto ASC = Data.AbilitySystemComponent;
-	const auto AS = Data.AttributeSet;
+	const auto ASC = Cast<UMayAbilitySystemComponent>(Data.PlayerState->GetAbilitySystemComponent());
+	const auto AS = Cast<UMayAttributeSet>(Data.PlayerState->GetAttributeSet());
 
 	//primary
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryStrength, Data.AttributeSet->GetStrengthAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryIntelligence, Data.AttributeSet->GetIntelligenceAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryResilience, Data.AttributeSet->GetResilienceAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryVigor, Data.AttributeSet->GetVigorAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryStrength, AS->GetStrengthAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryIntelligence, AS->GetIntelligenceAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryResilience, AS->GetResilienceAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesPrimaryVigor, AS->GetVigorAttribute());
 
 	//secondary
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryArmor, Data.AttributeSet->GetArmorAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryArmorPenetration, Data.AttributeSet->GetArmorPenetrationAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryBlockChance, Data.AttributeSet->GetBlockChanceAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitChance, Data.AttributeSet->GetCriticalHitChanceAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitDamage, Data.AttributeSet->GetCriticalHitDamageAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitResistance, Data.AttributeSet->GetCriticalHitResistanceAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryHealthRegeneration, Data.AttributeSet->GetHealthRegenerationAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryManaRegeneration, Data.AttributeSet->GetManaRegenerationAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxMana, Data.AttributeSet->GetMaxManaAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryArmor, AS->GetArmorAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryArmorPenetration, AS->GetArmorPenetrationAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryBlockChance, AS->GetBlockChanceAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitChance, AS->GetCriticalHitChanceAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitDamage, AS->GetCriticalHitDamageAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitResistance, AS->GetCriticalHitResistanceAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryHealthRegeneration, AS->GetHealthRegenerationAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryManaRegeneration, AS->GetManaRegenerationAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, AS->GetMaxHealthAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesSecondaryMaxMana, AS->GetMaxManaAttribute());
 
 	//resistances
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistancePhysical, Data.AttributeSet->GetResistancePhysicalAttribute());
-	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistanceMagical, Data.AttributeSet->GetResistanceMagicalAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistancePhysical, AS->GetResistancePhysicalAttribute());
+	SubscribeToAttribute(ASC, AS, FMayGameplayTags::Get().AttributesResistanceMagical, AS->GetResistanceMagicalAttribute());
 
 	//TODO: vital
 
 	//broadcasting
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesPrimaryStrength, Data.AttributeSet->GetStrengthAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesPrimaryIntelligence, Data.AttributeSet->GetIntelligenceAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesPrimaryResilience, Data.AttributeSet->GetResilienceAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesPrimaryVigor, Data.AttributeSet->GetVigorAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesPrimaryStrength, AS->GetStrengthAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesPrimaryIntelligence, AS->GetIntelligenceAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesPrimaryResilience, AS->GetResilienceAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesPrimaryVigor, AS->GetVigorAttribute());
 
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryArmor, Data.AttributeSet->GetArmorAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryArmorPenetration, Data.AttributeSet->GetArmorPenetrationAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryBlockChance, Data.AttributeSet->GetBlockChanceAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryCriticalHitChance, Data.AttributeSet->GetCriticalHitChanceAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryCriticalHitDamage, Data.AttributeSet->GetCriticalHitDamageAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryCriticalHitResistance, Data.AttributeSet->GetCriticalHitResistanceAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryHealthRegeneration, Data.AttributeSet->GetHealthRegenerationAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryManaRegeneration, Data.AttributeSet->GetManaRegenerationAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, Data.AttributeSet->GetMaxHealthAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesSecondaryMaxMana, Data.AttributeSet->GetMaxManaAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryArmor, AS->GetArmorAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryArmorPenetration, AS->GetArmorPenetrationAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryBlockChance, AS->GetBlockChanceAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitChance, AS->GetCriticalHitChanceAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitDamage, AS->GetCriticalHitDamageAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryCriticalHitResistance, AS->GetCriticalHitResistanceAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryHealthRegeneration, AS->GetHealthRegenerationAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryManaRegeneration, AS->GetManaRegenerationAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryMaxHealth, AS->GetMaxHealthAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesSecondaryMaxMana, AS->GetMaxManaAttribute());
 	
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesResistancePhysical, Data.AttributeSet->GetResistancePhysicalAttribute());
-	BroadcastAttribute(Data.AttributeSet, FMayGameplayTags::Get().AttributesResistanceMagical, Data.AttributeSet->GetResistanceMagicalAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesResistancePhysical, AS->GetResistancePhysicalAttribute());
+	BroadcastAttribute(AS, FMayGameplayTags::Get().AttributesResistanceMagical, AS->GetResistanceMagicalAttribute());
 
 	//TODO: broadcast vital
+
+	OnAttributePointsChanged(Data.PlayerState->AttributePoints);
+	OnSpellPointsChanged(Data.PlayerState->SpellPoints);
 	
 	OnWidgetInited();
 }

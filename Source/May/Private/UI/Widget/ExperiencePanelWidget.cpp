@@ -10,13 +10,13 @@ void UExperiencePanelWidget::InitWidget(const FExperiencePanelWidgetData Data) {
 
 	WidgetData.OwnerPlayer->OnExperienceChangedDelegate.AddLambda([this](const float NewLevel, const int32 ExperienceDelta)
 	{
-		MAY_ULOGW(this, TEXT("UExperiencePanelWidget: Called OnExperience changed: %f : +%i"), NewLevel, ExperienceDelta);
+		MAY_ULOG(this, TEXT("UExperiencePanelWidget: Called OnExperience changed: %f : +%i"), NewLevel, ExperienceDelta);
 		OnExperienceChanged(NewLevel, ExperienceDelta);
 	});
 
 	WidgetData.OwnerPlayer->OnLevelChangedDelegate.AddLambda([this](const float NewLevel)
 	{
-		MAY_ULOGW(this, TEXT("UExperiencePanelWidget: Called OnLevel changed: %f"), NewLevel);
+		MAY_ULOG(this, TEXT("UExperiencePanelWidget: Called OnLevel changed: %f"), NewLevel);
 		OnLevelChanged(NewLevel);
 	});
 

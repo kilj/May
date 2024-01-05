@@ -68,7 +68,7 @@ void AEnnieCharacter::AddExperience_Implementation(const int32 Experience) {
 	const auto NewLevel = LevelInfo->GetLevel(NewExperience);
 	
 	for (int i = FMath::FloorToInt(OldLevel) + 1; i <= FMath::FloorToInt(NewLevel); ++i) {
-		MAY_ULOGW(this, TEXT("%s got new level! (%i)!"), *GetActorNameOrLabel(), i);
+		MAY_ULOGW(this, TEXT("%s got level %i!"), *GetActorNameOrLabel(), i);
 		Multicast_OnLevelChanged(i);
 
 		//TODO: grant here levelup bonuses - attribute points, etc

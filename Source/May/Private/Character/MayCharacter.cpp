@@ -78,13 +78,11 @@ void AMayCharacter::InitAbilityActorInfo() {
 }
 
 void AMayCharacter::Multicast_OnLevelChanged_Implementation(const float NewLevel) {
-	MAY_ULOGW(this, TEXT("Called OnLevel changed: %f"), NewLevel);
 	OnLevelChangedDelegate.Broadcast(NewLevel);
 
 	OnLevelChanged(NewLevel); //event for UI
 }
 
 void AMayCharacter::Client_OnExperienceChanged_Implementation(const float NewLevel, const int32 ExperienceDelta) {
-	MAY_ULOGW(this, TEXT("Called OnExperience changed: %f : +%i"), NewLevel, ExperienceDelta);
 	OnExperienceChangedDelegate.Broadcast(NewLevel, ExperienceDelta);
 }
